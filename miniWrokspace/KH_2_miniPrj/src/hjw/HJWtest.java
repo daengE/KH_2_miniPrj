@@ -2,8 +2,9 @@ package hjw;
 
 public class HJWtest {
 
-	public static void main(String[] args) {
-		System.out.println("연습중_한지우");
+	public void hjw() {
+		System.out.println("한지우입니다");
+		System.out.println("메소드로 다시만들어야돼...");
 
 	}
 
