@@ -1,4 +1,4 @@
-package sar_2;
+package sar;
 
 public class hi {
 	public void hi() {
