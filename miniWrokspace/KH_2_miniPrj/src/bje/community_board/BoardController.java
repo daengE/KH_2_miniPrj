@@ -1,6 +1,10 @@
 package bje.community_board;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 import bje.Main_bje;
+import bje.menu.Menu;
 import main.Main;
 import util.InputUtil;
 
@@ -49,8 +53,38 @@ public class BoardController {
 			System.out.println("게시글 작성 실패...");
 		}
 	}
-	
-	
+
+	public void showList() {
+		
+		List<BoardVo> boardVoList = new BoardService().showList();
+		
+		System.out.println("----- 게시판 글 목록-----");
+		
+		for(int i = 0 ; i < boardVoList.size(); ++i) {
+			BoardVo temp = boardVoList.get(i);
+		
+			int no = temp.getB_no();
+			String title = temp.getTitle();
+			String writer = temp.getWriter();
+			Timestamp enrollDate = temp.getEnrollDate();
+			
+			System.out.println(no + " | " + title + " | " + writer + " | " + enrollDate);
+		}
+		
+		//상세조회 할건지 물어보기
+		//출력문, 입력받기
+		int no = new Menu().showBoardDetailMenu();
+		
+		//0번 입력받으면 ? -> 메인메뉴로 // return
+		if(no == 0) {
+			System.out.println("메인메뉴로 돌아갑니다.");
+			return;
+		}
+		
+		//글번호 받으면 ? -> 메인메뉴로 // return
+		//BoardVo x = new BoardService().showBoardDetail();
+		
+	}//showList
 	
 }//class
 

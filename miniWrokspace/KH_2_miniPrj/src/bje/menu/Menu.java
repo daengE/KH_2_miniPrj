@@ -21,9 +21,43 @@ public class Menu {
 			System.out.println("4. 게시글 목록 조회");
 		}
 		
+		System.out.println("9. 프로그램 종료");
 		
 		return InputUtil.getInt();	//사용자가 숫자말고 다른거 입력할 시 조치방법 작성필요
-		
 	}//showMenu
 	
+	/*
+	 * 게시판 상세조회 관련 메뉴
+	 */
+	public int showBoardDetailMenu() {
+		System.out.println("조회할 글 번호 (0번은 메인메뉴) : ");
+		return InputUtil.getInt();
+	}
+	
+	
+	
+	
+	
+	
+	
 }//class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -39,7 +39,7 @@ public class Main_bje {
 				break;
 			case 4:
 				/*게시판 리스트 조회*/
-				
+				new BoardController().showList();
 				//게시글 선택
 				
 				//댓글 작성
@@ -47,6 +47,10 @@ public class Main_bje {
 				
 				//댓글 조회
 				break;	
+			case 9:
+				/*프로그램 종료*/
+				System.out.println("프로그램을 종료합니다.");
+				return ;
 			}//switch
 			
 		}//while
