@@ -5,7 +5,6 @@ public class AdVo {
 	public AdVo() {
 		
 	}
-
 	
 	public AdVo(String ad_no, String post_type, String ad_adopt, String animal, String type, String city, String gender,
 			String age, String kill, String shelter, String address, String feature, String nt) {
@@ -57,6 +56,7 @@ public class AdVo {
 	private String ad_phone;
 	private String ad_date;
 	private String m_no;
+	
 	public String getAd_no() {
 		return ad_no;
 	}
@@ -159,7 +159,7 @@ public class AdVo {
 	public void setAd_phone(String ad_phone) {
 		this.ad_phone = ad_phone;
 	}
-	public String getAd_date() {
+	public String String() {
 		return ad_date;
 	}
 	public void setAd_date(String ad_date) {
@@ -173,9 +173,9 @@ public class AdVo {
 	}
 	@Override
 	public String toString() {
-		return "AdVo [ad_no=" + ad_no + ", post_type=" + post_type + ", ad_adopt=" + ad_adopt + ", animal=" + animal
-				+ ", type=" + type + ", city=" + city + ", gender=" + gender + ", age=" + age + ", kill=" + kill
-				+ ", shelter=" + shelter + ", address=" + address + ", feature=" + feature + ", nt=" + nt + "]";
+		return  ad_no + "| post_type=" + post_type + ", 입양여부 : " + ad_adopt + ", 축종 : " + animal
+				+ ", 세부 종류 : " + type + ", 지역 : " + city + ", 성별 : " + gender + ", 나이 : " + age + ", 안락사 일정 : " + kill
+				+ ", 보호소명 : " + shelter + ", 보호소 주소 : " + address + ", 특이 사항 : " + feature + ", 중성화 여부 : " + nt + "";
 	}
 	
 	
