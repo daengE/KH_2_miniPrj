@@ -1,10 +1,7 @@
 package lcs.member;
 
 import lcs.Main_lcs;
-import lcs.member.MemberDao;
-import lcs.member.MemberService;
-import lcs.member.MemberVo;
-import util.InputUtil;
+import mini.util.InputUtil;
 
 public class MemberController {
 	/*

@@ -1,8 +1,8 @@
 package lcs.application;
 
-import java.sql.Connection;
+import static mini.common.JDBCTemplate.*;
 
-import static common.JDBCTemplate.*;
+import java.sql.Connection;
 
 public class ApplicationService {
 

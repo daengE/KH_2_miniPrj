@@ -2,9 +2,7 @@ package lcs.member;
 
 import java.sql.Connection;
 
-import lcs.member.MemberDao;
-import lcs.member.MemberVo;
-import common.JDBCTemplate;
+import mini.common.JDBCTemplate;
 
 public class MemberService {
 

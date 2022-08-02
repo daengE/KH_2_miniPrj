@@ -1,7 +1,7 @@
 package lcs.application;
 
 import lcs.Main_lcs;
-import util.InputUtil;
+import mini.util.InputUtil;
 
 public class ApplicationController {
 	
