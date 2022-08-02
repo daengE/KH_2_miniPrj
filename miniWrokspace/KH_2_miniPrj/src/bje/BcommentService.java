@@ -1,6 +1,6 @@
 package bje;
 
-import static common.JDBCTemplate.*;
+import static mini.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 

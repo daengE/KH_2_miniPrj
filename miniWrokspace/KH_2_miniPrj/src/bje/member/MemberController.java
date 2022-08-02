@@ -1,8 +1,7 @@
 package bje.member;
 
 import bje.Main_bje;
-import main.Main;
-import util.InputUtil;
+import mini.util.InputUtil;
 
 public class MemberController {
 
