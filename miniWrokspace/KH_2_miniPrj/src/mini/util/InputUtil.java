@@ -1,4 +1,4 @@
-package util;
+package mini.util;
 
 import java.util.Scanner;
 
@@ -14,31 +14,3 @@ public class InputUtil {
 	}//getInt
 	
 }//class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

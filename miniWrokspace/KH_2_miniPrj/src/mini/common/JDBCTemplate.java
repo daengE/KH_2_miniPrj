@@ -1,4 +1,4 @@
-package common;
+package mini.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
