@@ -1,14 +1,12 @@
 package sar.Ad_Board;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import common.JDBCTemplate;
+import mini.common.JDBCTemplate;
+import mini.util.InputUtil;
 import sar.Util.AdVo;
-import sar.Util.JDBCTemplate_ad;
-import util.InputUtil;
 
 public class Adandoned {
 
