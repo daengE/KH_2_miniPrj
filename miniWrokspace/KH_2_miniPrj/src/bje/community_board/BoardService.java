@@ -3,6 +3,9 @@ package bje.community_board;
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.List;
+
+import common.JDBCTemplate;
 
 public class BoardService {
 
@@ -51,6 +54,25 @@ public class BoardService {
 		return result;
 		
 	}//write
+
+	
+	public List<BoardVo> showList() {
+		
+		Connection conn = null;
+		List<BoardVo> boardVoList = null;
+		
+		try{
+			conn = JDBCTemplate.getConnection();
+			boardVoList = new BoardDao().showList(conn);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		
+		return boardVoList;
+	}
 	
 }//class
 
