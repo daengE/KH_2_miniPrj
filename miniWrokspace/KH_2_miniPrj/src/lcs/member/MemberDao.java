@@ -4,8 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import lcs.member.MemberVo;
-import common.JDBCTemplate;
+import mini.common.JDBCTemplate;
 
 public class MemberDao {
 	public MemberVo login(String inputId, String inputPwd) throws Exception {
