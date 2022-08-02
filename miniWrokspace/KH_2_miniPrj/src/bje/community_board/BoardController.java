@@ -1,8 +1,8 @@
 package bje.community_board;
 
 import bje.Main_bje;
-import bje.util.InputUtil;
 import main.Main;
+import util.InputUtil;
 
 public class BoardController {
 

@@ -1,6 +1,6 @@
 package bje.community_board;
 
-import static bje.common.JDBCTemplate.*;
+import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
 

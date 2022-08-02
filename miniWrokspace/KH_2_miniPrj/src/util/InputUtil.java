@@ -1,4 +1,4 @@
-package bje.util;
+package util;
 
 import java.util.Scanner;
 

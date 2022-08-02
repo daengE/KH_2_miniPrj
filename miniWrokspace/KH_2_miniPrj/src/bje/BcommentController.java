@@ -2,7 +2,7 @@ package bje;
 
 import bje.community_board.BoardService;
 import bje.community_board.BoardVo;
-import bje.util.InputUtil;
+import util.InputUtil;
 
 public class BcommentController {
 

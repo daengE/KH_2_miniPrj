@@ -1,6 +1,6 @@
 package lcs.menu;
 
-import lcs.util.InputUtil;
+import util.InputUtil;
 
 public class Menu {
 	

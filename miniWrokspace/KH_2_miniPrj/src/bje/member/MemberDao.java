@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import bje.common.JDBCTemplate;
+import common.JDBCTemplate;
 
 public class MemberDao {
 
