@@ -3,7 +3,7 @@ package bje;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import common.JDBCTemplate;
+import mini.common.JDBCTemplate;
 
 public class BcommentDao {
 

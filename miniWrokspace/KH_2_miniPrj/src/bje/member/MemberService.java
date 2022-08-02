@@ -2,7 +2,7 @@ package bje.member;
 
 import java.sql.Connection;
 
-import common.JDBCTemplate;
+import mini.common.JDBCTemplate;
 
 public class MemberService {
 

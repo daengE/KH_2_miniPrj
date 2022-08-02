@@ -1,8 +1,6 @@
 package bje;
 
-import bje.community_board.BoardService;
-import bje.community_board.BoardVo;
-import util.InputUtil;
+import mini.util.InputUtil;
 
 public class BcommentController {
 

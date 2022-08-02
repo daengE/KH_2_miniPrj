@@ -1,11 +1,11 @@
 package bje.community_board;
 
-import static common.JDBCTemplate.*;
+import static mini.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
 
-import common.JDBCTemplate;
+import mini.common.JDBCTemplate;
 
 public class BoardService {
 

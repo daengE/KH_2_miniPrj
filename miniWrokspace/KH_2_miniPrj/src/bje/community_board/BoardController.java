@@ -5,8 +5,8 @@ import java.util.List;
 
 import bje.Main_bje;
 import bje.menu.Menu;
-import main.Main;
-import util.InputUtil;
+import mini.main.Main;
+import mini.util.InputUtil;
 
 public class BoardController {
 
