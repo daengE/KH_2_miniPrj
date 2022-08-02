@@ -13,7 +13,7 @@ public class JDBCTemplate {
 		
 		String driver = "oracle.jdbc.driver.OracleDriver";
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String id = "C##MINIPRJ_2";
+		String id = "C##MINIPRJ_02";
 		String pwd = "MINIPRJ";
 		
 		Class.forName(driver);
