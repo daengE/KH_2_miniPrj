@@ -1,11 +1,13 @@
 package lcs.application;
 
-public class Application_Vo {
+import java.sql.Date;
+
+public class ApplicationVo {
 	
-	public Application_Vo() {
+	public ApplicationVo() {
 		
 	}
-	public Application_Vo(String no, String userNo, String atcName, String animalType, String phone, String aplyDate,
+	public ApplicationVo(String no, String userNo, String atcName, String animalType, String phone, String aplyDate,
 			String psbDate, String postType) {
 		super();
 		this.no = no;
