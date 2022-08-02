@@ -1,10 +1,9 @@
 package sar.Main;
 
+import mini.util.InputUtil;
 import sar.Ad_Board.Adandoned;
-import sar.Member.MemberController_ad;
 import sar.Member.MemberVo_ad;
 import sar.Util.JDBCTemplate_ad;
-import util.InputUtil;
 
 public class Main {
 
