@@ -7,7 +7,7 @@ public class ApplicationVo {
 	public ApplicationVo() {
 		
 	}
-	public ApplicationVo(String no, String userNo, String atcName, String animalType, String phone, String aplyDate,
+	public ApplicationVo(String no, int userNo, String atcName, String animalType, String phone, String aplyDate,
 			String psbDate, String postType) {
 		super();
 		this.no = no;
@@ -21,7 +21,7 @@ public class ApplicationVo {
 	}
 	
 	private String no;
-	private String userNo;
+	private int userNo;
 	private String atcName;
 	private String animalType;
 	private String phone;
@@ -34,10 +34,10 @@ public class ApplicationVo {
 	public void setNo(String no) {
 		this.no = no;
 	}
-	public String getUserNo() {
+	public int getUserNo() {
 		return userNo;
 	}
-	public void setUserNo(String userNo) {
+	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
 	public String getAtcName() {

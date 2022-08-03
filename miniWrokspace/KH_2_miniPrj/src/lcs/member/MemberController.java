@@ -1,19 +1,15 @@
 package lcs.member;
 
-import lcs.Main_lcs;
+import mini.main.Main;
+import mini.member.MemberDao;
+import mini.member.MemberService;
+import mini.member.MemberVo;
 import mini.util.InputUtil;
 
 public class MemberController {
-	/*
-	 * 로그인
-	 * 
-	 * 아이디 , 비번 입력받기
-	 * 입력받은 데이터로 디비 조회
-	 * 조회 결과에 따라 로직 처리
-	 */
-	public void login() {
+public void login() {
 		
-		if(Main_lcs.loginMember != null) {
+		if(Main.loginMember != null) {
 			//이미 로그인 O
 			System.out.println("이미 로그인 되어있습니다.");
 			return;
@@ -30,8 +26,7 @@ public class MemberController {
 			if(vo != null) {
 				//로그인 성공
 				System.out.println("로그인 성공 !\n\n");
-				Main_lcs.loginMember = vo;
-				System.out.println("멤버에 들어갔어요");
+				Main.loginMember = vo;
 			}else {
 				//로그인 실패
 				System.out.println("로그인 실패 !\n\n");
@@ -44,21 +39,10 @@ public class MemberController {
 		
 	}//login
 	
-	/*
-	 * 회원가입
-	 * 
-	 * 데이터 입력받기
-	 * - 아이디 유효성 검사
-	 * - 비밀번호 유효성 검사
-	 * - 아이디 중복 검사
-	 * 
-	 * DB 에 insert
-	 * 
-	 * insert 결과에 따라 다음 작업 진행
-	 */
+	
 	public void join() {
 		System.out.println("----- 회원가입 -----");
-		System.out.println("아이디 : ");
+		System.out.print("아이디 : ");
 		String id = InputUtil.sc.nextLine();
 		System.out.print("비밀번호 : ");
 		String pwd = InputUtil.sc.nextLine();
@@ -79,8 +63,9 @@ public class MemberController {
 		if(result == 1) {
 			System.out.println("회원가입 성공 !");
 		}else {
+			
 			System.out.println("[ERROR:" + result + "] 회원가입 실패 ...");
 		}
-		
-	}//join
+	}
+
 }

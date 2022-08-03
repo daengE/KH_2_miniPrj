@@ -31,12 +31,16 @@ public class Main {
 //				회원가입();
 				break;
 			case 3:
+//				애림님 - 유기동물
 				break;
 			case 4:
+//				찬선님 - 동물훈련소 조회 및 신청
 				break;
 			case 5:
+//				찬선님 - 동물훈련팁
 				break;
 			case 6:
+//				재은님 - 커뮤니티
 				break;
 			case 7:
 				new NotiController().handleNotiMenu();

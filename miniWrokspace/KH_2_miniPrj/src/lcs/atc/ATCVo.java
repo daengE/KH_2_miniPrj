@@ -1,12 +1,12 @@
 package lcs.atc;
 
-public class ATC_Vo {
+public class ATCVo {
 	
-	public ATC_Vo() {
+	public ATCVo() {
 		
 	}
 	
-	public ATC_Vo(String no, String name, String call, String skill, String loc, String animal, String city) {
+	public ATCVo(int no, String name, String call, String skill, String loc, String animal, String city) {
 		super();
 		this.no = no;
 		this.name = name;
@@ -17,17 +17,18 @@ public class ATC_Vo {
 		this.city = city;
 	}
 	
-	private String no;
+	private int no;
 	private String name;
 	private String call;
 	private String skill;
 	private String loc;
 	private String animal;
 	private String city;
-	public String getNo() {
+	
+	public int getNo() {
 		return no;
 	}
-	public void setNo(String no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 	public String getName() {
