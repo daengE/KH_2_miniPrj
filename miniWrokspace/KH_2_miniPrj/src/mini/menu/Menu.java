@@ -26,8 +26,6 @@ public class Menu {
 
 	}
 
-
-	// 량우 공지 메뉴 메소드....
 	public int ShowNotiMenu() {
 
 		int input = 0;
