@@ -33,6 +33,11 @@ public class Menu {
 		return InputUtil.getInt();
 	}
 	
+	public String showBcommentMenu() {
+		System.out.println("\n댓글을 작성하시겠습니까? (0번은 메인메뉴) Y or N");
+		return InputUtil.sc.nextLine();
+	}
+	
 	
 	
 	

@@ -1,5 +1,5 @@
 package krw.qnaboard;
 
-public class QnaBoardVo {
+public class AnswerVo {
 
 }

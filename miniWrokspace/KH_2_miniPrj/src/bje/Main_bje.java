@@ -1,6 +1,7 @@
 package bje;
 
 import bje.community_board.BoardController;
+import bje.community_board.BoardVo;
 import bje.member.MemberController;
 import bje.member.MemberVo;
 import bje.menu.Menu;
@@ -8,7 +9,8 @@ import bje.menu.Menu;
 public class Main_bje {
 
 	public static MemberVo loginMember;
-	public static BcommentVo bcomment;
+//	public static BcommentVo bcomment;
+	public static BoardVo boardvovo;
 	
 	/*
 	 * 회원
@@ -43,7 +45,7 @@ public class Main_bje {
 				//게시글 선택
 				
 				//댓글 작성
-				new BcommentController().write();
+//				new BcommentController().write();
 				
 				//댓글 조회
 				break;	

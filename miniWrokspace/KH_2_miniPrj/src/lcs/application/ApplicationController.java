@@ -36,7 +36,7 @@ public class ApplicationController {
 		String psbDate = InputUtil.sc.nextLine();
 		
 		ApplicationVo aplyVo = new ApplicationVo();
-		aplyVo.setNo(Main_lcs.loginMember.getNo());
+		aplyVo.setUserNo(Main_lcs.loginMember.getNo());
 		aplyVo.setAtcName(atcNAme);
 		aplyVo.setAnimalType(animalType);
 		aplyVo.setPhone(phone);
