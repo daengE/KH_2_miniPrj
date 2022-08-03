@@ -1,4 +1,4 @@
-package krw.notificationboard;
+package krw.qnaboard;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -7,83 +7,70 @@ import mini.main.Main;
 import mini.menu.Menu;
 import mini.util.InputUtil;
 
-public class NotiController {
+public class QnaController {
 
-	public void handleNotiMenu() {
+	public void handleQnaMenu() {
 
 		// 메뉴 보여주기
-		int inputNot = new Menu().ShowNotiMenu();
+		int inputNot = new Menu().ShowQnaMenu();
 
 		switch (inputNot) {
 		case 1:
-			listUpNoti();
+			// qna 리스트업
+			listUpQna();
 			break;
 		case 2:
-			writeNoti();
+			// qna 질문 작성
+			writeQna();
 			break;
 		case 3:
-			updateNoti();
-			break;
-		case 4:
-			deleteNoti();
-			break;
+
+			// qna 질문 답변
+
 		}
 
 	}
 
 	// 게시글 리스트업
-	public void listUpNoti() {
+	public void listUpQna() {
 		// DAO를 통해 VO를 받아와서
-		List<NotiVo> notiBoardList = new NotiService().listUpNoti();
+		List<QnaVo> qnaBoardList = new QnaService().listUpQna();
 
 		// VO를 토대로 리스트업 !!
-		System.out.println("===== 공지사항 게시판 =====");
+		System.out.println("===== QnA 게시판 =====");
 
 		// 게시판 목록에 나올 필드들 뽑아오기
 
-		for (int i = 0; i < notiBoardList.size(); ++i) {
+		for (int i = 0; i < qnaBoardList.size(); ++i) {
 
-			NotiVo notiVo = notiBoardList.get(i);
+			QnaVo qnaVo = qnaBoardList.get(i);
 
-			int notiNo = notiVo.getNotiNo();
-			String title = notiVo.getTitle();
-			String writer = notiVo.getWriter();
-			Timestamp enrollDate = notiVo.getEnrollDate();
+			int qnaNo = qnaVo.getQnaNo();
+			String title = qnaVo.getTitle();
+			String writer = qnaVo.getWriter();
+			Timestamp enrollDate = qnaVo.getEnrollDate();
 
-			System.out.println(notiNo + "|" + title + "|" + writer + "|" + enrollDate);
+			System.out.println(qnaNo + "|" + title + "|" + writer + "|" + enrollDate);
 
 		}
-		
-		//상세조회
-		//출력문, 입력받기
-//		int num = new Menu().showNotiDetailMenu();
-//		
-//		// 0번 입력 받으면 메인메뉴로 return
-//		if(num ==0) {
-//			System.out.println("메인메뉴로 돌아갑니다.");
-//			return;
-//		}
-		
-	
-		
 
 	}
 
 	// 게시글 작성
-	public void writeNoti() {
+	public void writeQna() {
 		// 로그인 확인
 		if (Main.loginMember == null) {
 			System.out.println("로그인을 먼저 해주세요.");
 			return;
 		}
 
-		// 권한 확인 //이게 스트링이던가..
-		if (Main.loginMember.getNo() != 99999) {
-			System.out.println("권한이 없습니다.");
-			return;
-		}
+		// 권한 확인
+//			if (Main.loginMember.getNo() != 99999 ) {
+//				System.out.println("권한이 없습니다.");
+//				return;
+//			}
 		// 커넥트
-		System.out.println("===== 공지사항 게시글 작성 =====");
+		System.out.println("===== QnA 게시글 작성 =====");
 
 		System.out.println("제목 : ");
 		String title = InputUtil.sc.nextLine();
@@ -94,16 +81,15 @@ public class NotiController {
 		String writer = Main.loginMember.getNick();
 
 		// 데이터 뭉치기
-		
-		NotiVo vo = new NotiVo();
+
+		QnaVo vo = new QnaVo();
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setMemberNo(memberNo);
 		vo.setWriter(writer);
-		
 
 		// DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
-		int result = new NotiService().writeNoti(vo);
+		int result = new QnaService().writeQna(vo);
 
 		// insert 결과에 따라 로직 처리
 		if (result == 1) {
@@ -115,10 +101,8 @@ public class NotiController {
 		}
 	}
 
-
-
 	// 게시글 수정, 게시글 상세보기를 통해 하던지..
-	public void updateNoti() {
+	public void updateQna() {
 
 		// DAO를 통해 UPDATE
 
@@ -127,7 +111,7 @@ public class NotiController {
 	}
 
 	// 게시글 삭제, 게시글 상세보기를 통해 하던지..
-	public void deleteNoti() {
+	public void deleteQna() {
 		// DAO를 통해 DELETE
 
 		// DELETE 후 결과조회!!
