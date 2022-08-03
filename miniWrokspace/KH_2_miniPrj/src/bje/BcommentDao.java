@@ -16,7 +16,7 @@ public class BcommentDao {
 	 * 
 	 * DB에 insert (DAO)
 	 */
-	public int write(BcommentVo vo, Connection conn) throws Exception {
+	public int write(BcommentVo vocom, Connection conn) throws Exception {
 		
 		//커넥션 준비
 		
@@ -30,7 +30,7 @@ public class BcommentDao {
 			
 			//SQL 객체에 담기 및 완성(물음표 채우기)
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getContent());
+			pstmt.setString(1, vocom.getContent());
 			
 			//SQL 실행 및 결과 저장
 			result = pstmt.executeUpdate();

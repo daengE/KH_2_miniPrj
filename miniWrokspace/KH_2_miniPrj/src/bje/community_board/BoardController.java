@@ -3,6 +3,9 @@ package bje.community_board;
 import java.sql.Timestamp;
 import java.util.List;
 
+import bje.BcommentController;
+import bje.BcommentService;
+import bje.BcommentVo;
 import bje.Main_bje;
 import bje.menu.Menu;
 import mini.main.Main;
@@ -73,16 +76,64 @@ public class BoardController {
 		
 		//상세조회 할건지 물어보기
 		//출력문, 입력받기
-		int no = new Menu().showBoardDetailMenu();
+		int num = new Menu().showBoardDetailMenu();
 		
 		//0번 입력받으면 ? -> 메인메뉴로 // return
-		if(no == 0) {
+		if(num == 0) {
 			System.out.println("메인메뉴로 돌아갑니다.");
 			return;
 		}
 		
-		//글번호 받으면 ? -> 메인메뉴로 // return
-		//BoardVo x = new BoardService().showBoardDetail();
+		//글번호 받으면 ? -> 해당 글 상세조회 //새로운 service 호출
+		BoardVo vo = new BoardService().showDetailByNo(num);
+		
+		//실행결과(게시글 객체) 화면에 보여주기
+		System.out.println("\n----- 게시글 상세조회 -----");
+		System.out.print("제목 : " + vo.getTitle() + " | ");
+		System.out.print("작성자 : " + vo.getWriter() + " | ");
+		System.out.print("작성일 : " + vo.getEnrollDate());
+		System.out.println();//줄바꿈
+		System.out.println("내용 : " + vo.getContent());
+		
+		
+//		BcommentVo vocom = new BcommentService().showDetailByNo(num);
+		
+		Main_bje.boardvovo = vo;
+		
+		String comment = new Menu().showBcommentMenu();
+		
+		//'Y'라고 하면 해당 글에 댓글 작성
+//		Main_bje.bcomment.setB_no(Main_bje.boardvovo.getB_no());
+		if(comment.equals("0")) {
+			System.out.println("메인메뉴로 돌아갑니다.");
+			return;
+		}
+
+		//댓글쓴다고 하면 ? ->
+		if(comment.equals("Y")) {
+//		BoardVo BoVo = new BoardVo();
+			System.out.println("도대체가모르겠다콷");
+			new BcommentController().write();
+		}
+		
+		else {
+			return;
+		}
+		
+//		BcommentVo vocom = null ;
+//		
+//		//DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
+//		int result = new BcommentService().write(vocom);
+//		
+//		if(result == 1) {
+//			//글 작성 성공
+//			System.out.println("댓글 작성 성공 !");
+//		}else {
+//			//글 작성 실패
+//			System.out.println("댓글 작성 실패...");
+//		}
+		
+		
 		
 	}//showList
 	
