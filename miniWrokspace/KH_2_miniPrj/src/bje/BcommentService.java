@@ -15,10 +15,10 @@ public class BcommentService {
 	 * 
 	 * DB에 insert (DAO)
 	 */
-	public int write(BcommentVo vo) {
+	public int write(BcommentVo vocom) {
 
 		//비지니스 로직 (내용 1글자 이상인지)
-		if(vo.getContent().length() < 1) {
+		if(vocom.getContent().length() < 1) {
 			//내용이 비어있음. 다음단계 진행 X
 			return -1;
 		}
@@ -28,7 +28,7 @@ public class BcommentService {
 		
 		try {
 			conn = getConnection();
-			result = new BcommentDao().write(vo, conn);
+			result = new BcommentDao().write(vocom, conn);
 			
 			if(result == 1) {
 				commit(conn);
@@ -44,7 +44,46 @@ public class BcommentService {
 		}
 		
 		return result;
-		
 	}//write
+
+	
+//	public BcommentVo writeComment(String com) {
+//		
+//		Connection conn = null;
+//		BcommentVo vo = null;
+//		
+//		try {
+//			conn= getConnection();
+//			vo = new BcommentDao().
+//			
+//			
+//		} catch() {
+//			
+//		} finally {
+//			
+//		}
+//		
+//		
+//		
+//		return vo;
+//		
+//	}
+	
 	
 }//class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
