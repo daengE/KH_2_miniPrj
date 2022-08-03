@@ -12,6 +12,9 @@ public class Adandoned {
 
 	public AdVo list() throws Exception {
 		
+		System.out.println("====[유기동물 게시판]====");
+		System.out.println("====[전체 글 조회]====");
+		
 		Connection conn = JDBCTemplate.getConnection();
 		
 		String sql = "SELECT AD_NO, AD_ADOPT, AD_ANIMAL, AD_TYPE, AD_CITY, AD_KILL, AD_GENDER, AD_AGE FROM ADANDONED_BOARD";

@@ -24,7 +24,6 @@ public class AdVo {
 		this.nt = nt;
 	}
 
-
 	public AdVo(String ap_no, String adpot, String ad_name, String ad_phone, String ad_date, String m_no) {
 		super();
 		this.ap_no = ap_no;
@@ -34,7 +33,6 @@ public class AdVo {
 		this.ad_date = ad_date;
 		this.m_no = m_no;
 	}
-
 
 	private String ad_no;
 	private String post_type;
@@ -156,7 +154,7 @@ public class AdVo {
 	public String getAd_phone() {
 		return ad_phone;
 	}
-	public void setAd_phone(String ad_phone) {
+	public void setAd_phone() {
 		this.ad_phone = ad_phone;
 	}
 	public String String() {
