@@ -6,7 +6,7 @@ public class MemberVo {
 		
 	}
 	
-	public MemberVo(String no, String id, String pwd, String pwd2, String nick) {
+	public MemberVo(int no, String id, String pwd, String pwd2, String nick) {
 		this.no = no;
 		this.id = id;
 		this.pwd = pwd;
@@ -14,7 +14,7 @@ public class MemberVo {
 		this.nick = nick;
 	}
 	
-	private String no;
+	private int no;
 	private String id;
 	private String pwd;
 	private String pwd2;
@@ -28,11 +28,11 @@ public class MemberVo {
 		this.pwd2 = pwd2;
 	}
 
-	public String getNo() {
+	public int getNo() {
 		return no;
 	}
 
-	public void setNo(String no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 

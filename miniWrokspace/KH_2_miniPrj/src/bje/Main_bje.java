@@ -42,12 +42,11 @@ public class Main_bje {
 			case 4:
 				/*게시판 리스트 조회*/
 				new BoardController().showList();
-				//게시글 선택
 				
-				//댓글 작성
-//				new BcommentController().write();
+				/*이어서 선택한 글 + 댓글 모두 조회*/
+				new BcommentController().showCommentList();
 				
-				//댓글 조회
+				
 				break;	
 			case 9:
 				/*프로그램 종료*/

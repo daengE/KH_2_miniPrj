@@ -3,6 +3,11 @@ package bje;
 import static mini.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.List;
+
+import bje.community_board.BoardDao;
+import bje.community_board.BoardVo;
+import mini.common.JDBCTemplate;
 
 public class BcommentService {
 
@@ -45,6 +50,24 @@ public class BcommentService {
 		
 		return result;
 	}//write
+
+	public List<BcommentVo> showList() {
+		
+		Connection conn = null;
+		List<BcommentVo> BcommentVoList = null;
+		
+		try{
+			conn = JDBCTemplate.getConnection();
+			BcommentVoList = new BcommentDao().showList(conn);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		
+		return BcommentVoList;
+	}//showList
 
 	
 //	public BcommentVo writeComment(String com) {

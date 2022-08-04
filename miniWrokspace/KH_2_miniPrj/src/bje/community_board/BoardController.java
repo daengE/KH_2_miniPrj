@@ -37,13 +37,13 @@ public class BoardController {
 		System.out.print("내용 : ");
 		String content = InputUtil.sc.nextLine();
 		
-		String memberNo = Main_bje.loginMember.getNo();
+		int memberNo = Main_bje.loginMember.getNo();
 		
 		//데이터 뭉치기
 		BoardVo vo = new BoardVo();
 		vo.setTitle(title);
 		vo.setContent(content);
-		vo.setWriter(memberNo);
+		vo.setM_no(memberNo);
 		
 		//DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
 		int result = new BoardService().write(vo);
@@ -95,9 +95,6 @@ public class BoardController {
 		System.out.println();//줄바꿈
 		System.out.println("내용 : " + vo.getContent());
 		
-		
-//		BcommentVo vocom = new BcommentService().showDetailByNo(num);
-		
 		Main_bje.boardvovo = vo;
 		
 		String comment = new Menu().showBcommentMenu();
@@ -111,28 +108,12 @@ public class BoardController {
 
 		//댓글쓴다고 하면 ? ->
 		if(comment.equals("Y")) {
-//		BoardVo BoVo = new BoardVo();
-			System.out.println("도대체가모르겠다콷");
 			new BcommentController().write();
 		}
 		
 		else {
 			return;
 		}
-		
-//		BcommentVo vocom = null ;
-//		
-//		//DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
-//		int result = new BcommentService().write(vocom);
-//		
-//		if(result == 1) {
-//			//글 작성 성공
-//			System.out.println("댓글 작성 성공 !");
-//		}else {
-//			//글 작성 실패
-//			System.out.println("댓글 작성 실패...");
-//		}
-		
 		
 		
 	}//showList
