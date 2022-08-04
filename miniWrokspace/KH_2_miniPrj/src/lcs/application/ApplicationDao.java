@@ -18,7 +18,7 @@ public class ApplicationDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, aplyVo.getNo());
+			pstmt.setInt(1, aplyVo.getUserNo());
 			pstmt.setString(2, aplyVo.getAtcName());
 			pstmt.setString(3, aplyVo.getAnimalType());
 			pstmt.setString(4, aplyVo.getPhone());

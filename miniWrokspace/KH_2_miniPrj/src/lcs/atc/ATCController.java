@@ -2,6 +2,7 @@ package lcs.atc;
 
 import java.util.List;
 
+import lcs.application.ApplicationController;
 import lcs.menu.Menu;
 import mini.util.InputUtil;
 
@@ -47,6 +48,17 @@ public class ATCController {
 				System.out.println("훈련소 신청가능 동물 :::"+ atcvo.getAnimal());
 				
 				
+				//훈련소 신청하시겠습니까? 
+				
+				String input = new lcs.menu.Menu().showATCAply();
+				if(input.equalsIgnoreCase("Y")) {
+					
+					new ApplicationController().write(atcvo);
+				}
+				else if(input.equalsIgnoreCase("N")) {
+					System.out.println("훈련소 목록으로 돌아갑니다.");
+					showATCList();
+				}
 			}
 		}
 		
