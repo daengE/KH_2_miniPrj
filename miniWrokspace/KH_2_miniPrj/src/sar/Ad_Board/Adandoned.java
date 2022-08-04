@@ -27,7 +27,7 @@ public class Adandoned {
 		
 		while(rs.next()) {
 			
-			String ad_no = rs.getString("AD_NO");
+			int ad_no = rs.getInt("AD_NO");
 			String adopt = rs.getString("AD_ADOPT");
 			String animal = rs.getString("AD_ANIMAL");
 			String type = rs.getString("AD_TYPE");
@@ -74,7 +74,7 @@ public class Adandoned {
 		
 		if(rs.next())	
 		{
-			String ad_no = rs.getString("AD_NO");
+			int ad_no = rs.getInt("AD_NO");
 			String adopt = rs.getString("AD_ADOPT");
 			String animal = rs.getString("AD_ANIMAL");
 			String type = rs.getString("AD_TYPE");
@@ -115,9 +115,9 @@ public class Adandoned {
 			System.out.println(vo.getAddress());
 			System.out.println("특이사항 : " +vo.getFeature());
 			System.out.print("중성화여부 : " +vo.getNt());
-
+			mini.main.Main.selected = vo;
 		}
-		
+//		return vo;
 	}
 	
 	public void search() throws Exception {
@@ -140,7 +140,7 @@ public class Adandoned {
 		System.out.println("입양유무 / 축종 / 세부종류 / 지역 / 안락사일정 / 성별 / 나이 ");
 
 		while(rs.next()) {
-			String ad_no = rs.getString("AD_NO");
+			int ad_no = rs.getInt("AD_NO");
 			String adopt = rs.getString("AD_ADOPT");
 			String animal = rs.getString("AD_ANIMAL");
 			String type = rs.getString("AD_TYPE");
