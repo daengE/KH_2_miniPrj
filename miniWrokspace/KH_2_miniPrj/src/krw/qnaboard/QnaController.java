@@ -12,7 +12,7 @@ public class QnaController {
 	public void handleQnaMenu() {
 
 		// 메뉴 보여주기
-		int inputNot = new Menu().ShowQnaMenu();
+		int inputNot = new Menu().showQnaMenu();
 
 		switch (inputNot) {
 		case 1:
@@ -101,7 +101,7 @@ public class QnaController {
 		}
 	}
 
-	// 게시글 수정, 게시글 상세보기를 통해 하던지..
+	//게시글 수정, 게시글 상세보기를 통해 하던지..
 	public void updateQna() {
 
 		// DAO를 통해 UPDATE

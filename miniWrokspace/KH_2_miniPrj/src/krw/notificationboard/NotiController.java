@@ -12,7 +12,7 @@ public class NotiController {
 	public void handleNotiMenu() {
 
 		// 메뉴 보여주기
-		int inputNot = new Menu().ShowNotiMenu();
+		int inputNot = new Menu().showNotiMenu();
 
 		switch (inputNot) {
 		case 1:

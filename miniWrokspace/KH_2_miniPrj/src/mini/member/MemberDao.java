@@ -3,9 +3,13 @@ package mini.member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import mini.common.JDBCTemplate;
+import mini.main.Main;
 
 public class MemberDao {
 	
@@ -61,7 +65,7 @@ public class MemberDao {
 			vo.setDisaled(disabled);
 			vo.setMbRight(mbRight);
 
-			System.out.println(vo); //객체확인용
+//			System.out.println(vo); //객체 저장 확인용
 			
 		}
 		
@@ -69,7 +73,7 @@ public class MemberDao {
 	}
 
 	
-	public int join(MemberVo vo, Connection conn) throws Exception {
+	public int join(MemberVo vo, MemberPetVo petVo, Connection conn) throws Exception {
 		//DB insert
 		
 		int result = 0;
@@ -94,6 +98,24 @@ public class MemberDao {
 			//SQL 실행 및 결과 저장
 			result = pstmt.executeUpdate();
 			
+			//펫 SQL (null 아닐때)
+			if(petVo != null) {
+				//SQL 준비
+				String petSql = "INSERT INTO ANIMAL \r\n"
+						+ "VALUES(MEMBER_SEQ.CURRVAL, ?, ?, ?, ?)";
+				
+				//SQL 객체 만들기
+				pstmt = conn.prepareStatement(petSql);
+				pstmt.setString(1, petVo.getType());
+				pstmt.setString(2, petVo.getName());
+				pstmt.setString(3, petVo.getBirth());
+				pstmt.setString(4, petVo.getGender());
+				
+				//SQL 실행
+				pstmt.executeUpdate();
+			
+			}
+			
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -102,6 +124,56 @@ public class MemberDao {
 		
 		return result;
 	}//method
+
+
+	public List<MemberPetVo> showMyPet(Connection conn) throws Exception {
+		
+		String sql = "SELECT * FROM ANIMAL WHERE USER_NO = ?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<MemberPetVo> myPetList = new ArrayList<MemberPetVo>();
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Main.loginMember.getNo());
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				int memberNo = rs.getInt("USER_NO");
+				String aniType = rs.getString("ANI_TYPE");
+				String aniGender = rs.getString("ANI_GENDER");
+				String aniName = rs.getString("ANI_NAME");
+				String aniBirth = rs.getString("ANI_BIRTH");
+				
+				MemberPetVo petVo = new MemberPetVo();
+				
+				petVo.setMemberNo(memberNo);
+				petVo.setType(aniType);
+				petVo.setGender(aniGender);
+				petVo.setName(aniName);
+				petVo.setBirth(aniBirth);
+				
+				//담은 객체 리스트에 넣기
+				
+				myPetList.add(petVo);
+				
+//				System.out.println(petVo); //객체확인
+				
+			}
+			
+			
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rs);
+		}
+		
+		
+		return myPetList;
+	}
+	
 
 }//class
 
