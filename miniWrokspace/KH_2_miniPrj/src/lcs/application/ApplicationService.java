@@ -7,10 +7,7 @@ import java.sql.Connection;
 public class ApplicationService {
 
 	public int write(ApplicationVo aplyVo) {
-		
-		if(aplyVo.getAtcName().length() < 1)
-		return -1;
-		
+	
 		if(aplyVo.getAnimalType().length() < 1)
 		return -2;
 		

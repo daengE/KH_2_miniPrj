@@ -9,7 +9,7 @@ public class ApplicationVo {
 	}
 	public ApplicationVo(String no, int userNo, String atcName, String animalType, String phone, String aplyDate,
 			String psbDate, String postType) {
-		super();
+		
 		this.no = no;
 		this.userNo = userNo;
 		this.atcName = atcName;
