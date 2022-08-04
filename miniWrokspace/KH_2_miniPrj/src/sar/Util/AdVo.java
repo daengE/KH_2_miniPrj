@@ -6,7 +6,7 @@ public class AdVo {
 		
 	}
 	
-	public AdVo(String ad_no, String post_type, String ad_adopt, String animal, String type, String city, String gender,
+	public AdVo(int ad_no, String post_type, String ad_adopt, String animal, String type, String city, String gender,
 			String age, String kill, String shelter, String address, String feature, String nt) {
 		this.ad_no = ad_no;
 		this.post_type = post_type;
@@ -23,7 +23,7 @@ public class AdVo {
 		this.nt = nt;
 	}
 
-	public AdVo(String ap_no, String adpot, String ad_name, String ad_phone, String ad_date, String m_no) {
+	public AdVo(String ap_no, String adpot, String ad_name, String ad_phone, String ad_date, int m_no) {
 		super();
 		this.ap_no = ap_no;
 		this.adpot = adpot;
@@ -33,7 +33,7 @@ public class AdVo {
 		this.m_no = m_no;
 	}
 
-	private String ad_no;
+	private int ad_no;
 	private String post_type;
 	private String ad_adopt ;
 	private String animal;
@@ -52,12 +52,12 @@ public class AdVo {
 	private String ad_name;
 	private String ad_phone;
 	private String ad_date;
-	private String m_no;
+	private int m_no;
 	
-	public String getAd_no() {
+	public int getAd_no() {
 		return ad_no;
 	}
-	public void setAd_no(String ad_no) {
+	public void setAd_no(int ad_no) {
 		this.ad_no = ad_no;
 	}
 	public String getPost_type() {
@@ -156,16 +156,16 @@ public class AdVo {
 	public void setAd_phone(String ad_phone) {
 		this.ad_phone = ad_phone;
 	}
-	public String String() {
+	public String getAd_date() {
 		return ad_date;
 	}
 	public void setAd_date(String ad_date) {
 		this.ad_date = ad_date;
 	}
-	public String getM_no() {
+	public int getM_no() {
 		return m_no;
 	}
-	public void setM_no(String m_no) {
+	public void setM_no(int m_no) {
 		this.m_no = m_no;
 	}
 	@Override

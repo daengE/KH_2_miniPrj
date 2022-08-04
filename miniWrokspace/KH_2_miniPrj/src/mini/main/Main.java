@@ -5,10 +5,14 @@ import krw.qnaboard.QnaController;
 import mini.member.MemberController;
 import mini.member.MemberVo;
 import mini.menu.Menu;
+import sar.Ad_Board.Adandoned;
+import sar.Util.AdVo;
 
 public class Main {
 
 	public static MemberVo loginMember;
+	public static AdVo selected;
+	
 
 	public static void main(String[] args) {
 
@@ -42,8 +46,21 @@ public class Main {
 					new MemberController().myPage();
 				}
 				break;
+				
 			case 3:
-//				애림님 - 유기동물
+				if(loginMember == null) {
+				new MemberController().join();
+				}else {
+					try {
+						new Adandoned().list();
+						menu.showMenu1();
+						menu.showMenu2();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+			}
+				
+				
 				break;
 			case 4:
 //				찬선님 - 동물훈련소 조회 및 신청
