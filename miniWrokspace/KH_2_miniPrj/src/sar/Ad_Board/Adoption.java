@@ -36,7 +36,7 @@ public class Adoption {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getAd_adopt());
 			pstmt.setString(2, vo.getAd_name());
-			pstmt.setString(3, vo.setAd_phone());
+			pstmt.setString(3, vo.getAd_phone());
 			
 			int result = pstmt.executeUpdate();
 			

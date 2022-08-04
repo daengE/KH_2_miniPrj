@@ -154,7 +154,7 @@ public class AdVo {
 	public String getAd_phone() {
 		return ad_phone;
 	}
-	public void setAd_phone() {
+	public void setAd_phone(String ad_phone) {
 		this.ad_phone = ad_phone;
 	}
 	public String String() {
