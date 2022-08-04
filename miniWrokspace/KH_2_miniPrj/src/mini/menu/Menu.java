@@ -65,5 +65,11 @@ public class Menu {
 		}
 		return input;
 	}
+	
+	public int showNotiContentMenu() {
+		System.out.println("조회할 글 번호(0번은 메인메뉴) : ");
+		
+		return InputUtil.getInt();
+	}
 
 }

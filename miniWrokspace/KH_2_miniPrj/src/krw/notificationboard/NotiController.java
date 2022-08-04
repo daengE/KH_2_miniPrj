@@ -56,16 +56,30 @@ public class NotiController {
 		
 		//상세조회
 		//출력문, 입력받기
-//		int num = new Menu().showNotiDetailMenu();
-//		
-//		// 0번 입력 받으면 메인메뉴로 return
-//		if(num ==0) {
-//			System.out.println("메인메뉴로 돌아갑니다.");
-//			return;
-//		}
+		int num = new Menu().showNotiContentMenu();
 		
-	
+		// 0번 입력 받으면 메인메뉴로 return
+		if(num ==0) {
+			System.out.println("메인메뉴로 돌아갑니다.");
+			return;
+		}
 		
+		//글번호 받기
+		NotiVo vo = new NotiService().showNotiContentByNo(num);
+
+		//잘못된 글번호
+		if(vo == null) {
+			System.out.println("게시글이 없습니다.");
+			return;
+		}
+		
+		//실행 결과 보여주기
+		System.out.println("===== 공지사항 상세조회 =====");
+		System.out.println("제목 : " + vo.getTitle());
+		System.out.println("작성자 : "+ vo.getWriter());
+		System.out.println("작성일 : "+ vo.getEnrollDate());
+		System.out.println();
+		System.out.println("내용 : " + vo.getContent());
 
 	}
 
