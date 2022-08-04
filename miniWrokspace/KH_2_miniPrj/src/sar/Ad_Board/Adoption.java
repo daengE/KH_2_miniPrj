@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 import mini.common.JDBCTemplate;
 import mini.util.InputUtil;
+import sar.Main.Main;
 import sar.Util.AdVo;
 
 public class Adoption {
@@ -42,7 +43,7 @@ public class Adoption {
 			
 			if(result == 1) {
 				System.out.println("신청서 작성 완료!");
-				new Adoption().AdoptOk(); 
+				new Adoption().AdoptOk(Main.loginMember.getNo()); 
 				conn.commit();
 			}else {
 				System.out.println("신청서 작성 실패...");
@@ -62,10 +63,35 @@ public class Adoption {
 		
 	}
 
-	private void AdoptOk() {
+	private void AdoptOk(int no) throws Exception {
 		
-		String sql = "UPDATE ADANDONED_BOARD SET AD_MT = 'Y'";
-
+		Connection conn = JDBCTemplate.getConnection();
+		PreparedStatement pstmt = null;
+		
+		String sql = "UPDATE ADANDONED_BOARD SET AD_MT = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "Y");
+			
+			int result = pstmt.executeUpdate();
+			
+			if(result == 1) {
+				System.out.println("입양 업뎃완료!");
+				conn.commit();
+			}else {
+				System.out.println("입양 업뎃실패");
+				conn.rollback();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			conn.rollback();
+		
+		}finally {
+			JDBCTemplate.close(conn);
+			JDBCTemplate.close(pstmt);
+		}
 	}
 	
 }
