@@ -38,6 +38,11 @@ public class Menu {
 		return InputUtil.sc.nextLine();
 	}
 	
+//	public String showMainMenu() {
+//		System.out.println("\n사이트 맨 처음으로 돌아가시겠습니까? (0번은 메인메뉴) Y or N");
+//		return InputUtil.sc.nextLine();
+//	}
+	
 	
 	
 	

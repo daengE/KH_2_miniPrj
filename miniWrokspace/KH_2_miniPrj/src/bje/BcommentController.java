@@ -1,5 +1,10 @@
 package bje;
 
+import java.sql.Timestamp;
+import java.util.List;
+
+import bje.community_board.BoardService;
+import bje.community_board.BoardVo;
 import mini.util.InputUtil;
 
 public class BcommentController {
@@ -43,11 +48,27 @@ public class BcommentController {
 		if(result == 1) {
 			//댓글 작성 성공
 			System.out.println("댓글 작성 성공 !");
-			System.out.println("ㅅㅂ");
 		}else {
 			//댓글 작성 실패
 			System.out.println("댓글 작성 실패...");
 		}
+	}//write
+	
+	public void showCommentList() {
+		List<BcommentVo> BcommentVoList = new BcommentService().showList();
+		
+		System.out.println("+++++ 댓글 목록 +++++");
+		
+		for(int i = 0 ; i < BcommentVoList.size(); ++i) {
+			BcommentVo temp = BcommentVoList.get(i);
+		
+			int no = temp.getB_no();
+			String comcontents = temp.getContent();
+			String nick = temp.getWriter();
+			Timestamp comenrolldate = temp.getEnrollDate();
+			
+			System.out.println(no + " | " + comcontents + " | " + nick + " | " + comenrolldate);
+		}		
 	}
 	
 }//class

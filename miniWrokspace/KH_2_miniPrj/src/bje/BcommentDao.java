@@ -2,7 +2,13 @@ package bje;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
+import bje.community_board.BoardVo;
 import mini.common.JDBCTemplate;
 
 public class BcommentDao {
@@ -42,6 +48,49 @@ public class BcommentDao {
 		return result;
 		
 	}//write
+
+	public List<BcommentVo> showList(Connection conn) throws Exception {
+		//CONN 준비
+		
+		//SQL 준비
+		String sql = "SELECT B_NO , COM_NICK , COM_CONTENTS , COM_ENROLL_DATE FROM BCOMMENT";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<BcommentVo> BcommentVoList = new ArrayList<BcommentVo>();	
+		
+		try {
+			//SQL 담을 객체 준비 및 SQL 완성
+			pstmt = conn.prepareStatement(sql);
+			
+			//SQL 실행 및 결과 저장
+			rs = pstmt.executeQuery();
+			
+			//커서 내리고, 칼럼별로 읽어오기, 객체로 ㄱ만들기   << 반복
+			// rs.next, rs.getXXX("칼럼명"), vo.setXXX
+			
+			while(rs.next()) {
+				int no = rs.getInt("B_NO");
+				String nick = rs.getString("COM_NICK");
+				Timestamp comenrolldate = rs.getTimestamp("COM_ENROLL_DATE");
+				String comcontents = rs.getString("COM_CONTENTS");
+				
+				BcommentVo vo = new BcommentVo();
+				vo.setB_no(no);
+				vo.setWriter(nick);
+				vo.setEnrollDate(comenrolldate);
+				vo.setContent(comcontents);
+				
+				BcommentVoList.add(vo);
+			}
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		//SQL 실행 결과 리턴
+		return BcommentVoList;
+	}//showList
 	
 }//class
 

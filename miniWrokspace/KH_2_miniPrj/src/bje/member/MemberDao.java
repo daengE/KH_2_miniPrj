@@ -28,7 +28,7 @@ public class MemberDao {
 		MemberVo vo = null;
 		
 		if(rs.next()) {
-			String no = rs.getString("M_NO");
+			int no = rs.getInt("M_NO");
 			String id = rs.getString("M_ID");
 			String nick = rs.getString("M_NICK");
 			
