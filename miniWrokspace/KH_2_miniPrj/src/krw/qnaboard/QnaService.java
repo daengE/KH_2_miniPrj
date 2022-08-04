@@ -20,7 +20,6 @@ public class QnaService {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(conn);
-			;
 		}
 		
 		return QnaBoardList;

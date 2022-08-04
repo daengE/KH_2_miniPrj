@@ -22,7 +22,7 @@ public class Main {
 
 		while (true) {
 
-			int input = menu.ShowMenu();
+			int input = menu.showMenu();
 
 			switch (input) {
 
@@ -37,7 +37,6 @@ public class Main {
 			case 2:
 				if(loginMember == null) {
 					new MemberController().join();
-					//TODO 회원가입 유효성 검사 - service
 				}else {
 					//TODO 마이페이지();
 					new MemberController().myPage();
@@ -57,7 +56,7 @@ public class Main {
 				break;
 			case 7:
 				new NotiController().handleNotiMenu();
-				//TODO 공지 삭제, 공지 수정
+				//TODO 공지 삭제(게시글 리스트에서), 공지 수정(게시글 들어가서)
 				break;
 			case 8:
 				new QnaController().handleQnaMenu();

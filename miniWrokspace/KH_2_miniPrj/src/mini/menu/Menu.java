@@ -5,7 +5,7 @@ import mini.util.InputUtil;
 
 public class Menu {
 
-	public int ShowMenu() {
+	public int showMenu() {
 
 		if (Main.loginMember == null) {
 			System.out.println("1. 로그인");
@@ -26,7 +26,7 @@ public class Menu {
 
 	}
 
-	public int ShowNotiMenu() {
+	public int showNotiMenu() {
 
 		int input = 0;
 		while (true) {
@@ -46,7 +46,7 @@ public class Menu {
 		return input;
 	}
 
-	public int ShowQnaMenu() {
+	public int showQnaMenu() {
 
 		int input = 0;
 		while (true) {
@@ -70,6 +70,30 @@ public class Menu {
 		System.out.println("조회할 글 번호(0번은 메인메뉴) : ");
 		
 		return InputUtil.getInt();
+	}
+
+	public int showMyPageMenu() {
+		
+		int input = 0;
+		
+		while (true) {
+			System.out.println("1. 내 정보 보기");
+			System.out.println("2. 내가 작성한 글");
+			System.out.println("3. 나의 관심 글");
+			System.out.println("4. 내 반려동물 보기");
+			System.out.println("5. 탈퇴하기");
+			
+			input = InputUtil.getInt();
+
+			if (1 == input || 2 == input || 3 == input || 4 == input || 5 == input) {
+				break;
+			} else {
+				System.out.println("잘못 입력 하셨습니다..!");
+			}
+		}
+		
+		return input;
+		
 	}
 
 }
