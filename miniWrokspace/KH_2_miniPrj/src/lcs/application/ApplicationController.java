@@ -11,11 +11,6 @@ public class ApplicationController {
 		
 		System.out.println("훈련소 입소 신청서를 작성해주세요");
 		
-		if(mini.main.Main.loginMember == null) {
-			System.out.println("로그인 먼저 해주세요");
-			return; //다음 진행 하면 안되니까 return 
-		}
-		
 		//회원번호로 닉네임 받고 닉네임님 작성해주세요.
 		
 		
