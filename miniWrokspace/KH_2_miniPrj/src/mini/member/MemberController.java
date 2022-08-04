@@ -149,27 +149,29 @@ public class MemberController {
 	}
 
 	public void myPage() {
-		// TODO Auto-generated method stub
+
 		System.out.println("마이페이지 아직 완성 안됨..");
 		// myPage 메뉴 출력
 		int result = new Menu().showMyPageMenu();
 		switch (result) {
 		case 1:
 			System.out.println(Main.loginMember);
+			System.out.println("보는 방식은 좀더 다듬을 예정... ㅅㄱ");
 			break;
 		case 2:
+			// TODO
 			// 내가 작성한글 조회
 			// 게시판 선택 해서 글번호만 조회 할지
 			// 모두 조회하고 게시판, 글 번호 조회 할지
 			break;
 		case 3:
+			// TODO
 			// 나의 관심글 조회
 			// 게시판 선택 해서 글번호만 조회 할지
 			// 모두 조회하고 게시판, 글 번호 조회 할지
 			break;
 		case 4:
-			// 내 반려동물 보기
-			// Main.loginMember 의 회원 번호 받아서 반려동물 테이블에서 조회
+			// TODO 반려동물 보는거 완료, 보고 수정 하기 (추가, 삭제)
 			List<MemberPetVo> myPetList = new MemberService().showMyPet();
 
 			System.out.println("===== 내 반려동물 List =====");
@@ -187,17 +189,46 @@ public class MemberController {
 					String name = petVo.getName();
 					String birth = petVo.getBirth();
 
-					System.out.println(i+1 + ". " + "타입 : " + type + " |성별 : " + gender + " |이름 : " + name + " |생일 : " + birth);
+					System.out.println(
+							i + 1 + ". " + "타입 : " + type + " |성별 : " + gender + " |이름 : " + name + " |생일 : " + birth);
 				}
 			}
+			// 반려동물 추가, 삭제
+			int petInput = myPetMenu();
+			if (1 == petInput) {
+				// 반려동물 추가 하는 메소드
+				//TODO
+				System.out.println("반려동물 추가 메소드 만들거임...");
+
+			} else if (2 == petInput) {
+				System.out.println("반려동물 삭제 메소드 만들거임...");
+
+			} else {
+				System.out.println("잘못 입력 하셨습니다.");
+			}
+
 			break;
 		case 5:
-			// 탈퇴 하기
+			// 대충 유저의 disabled 칼럼을 n으로 바꾸는 고런...... 고런..... 메소드를 만들거다
+			System.out.println("대충.. 탈퇴하는 메소드..");
 			break;
 		default:
-			System.out.println("잘 못 입력 하셨 습니다.");
+			System.out.println("잘못 입력 하셨습니다.");
 			break;
 		}
+
+	}
+
+	private int myPetMenu() {
+
+		int petInput = 0;
+
+		System.out.println("1. 내 반려동물 추가하기");
+		System.out.println("2. 내 반려동물 삭제하기");
+
+		petInput = InputUtil.getInt();
+
+		return petInput;
 
 	}
 

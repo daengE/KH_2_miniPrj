@@ -53,7 +53,31 @@ public class QnaController {
 			System.out.println(qnaNo + "|" + title + "|" + writer + "|" + enrollDate);
 
 		}
+		int num = showQnaContentMenu();
+		
+		if(num ==0) {
+			System.out.println("메인메뉴로 돌아갑니다.");
+			return;
+		}
+		System.out.println("게시글 타입을 입력해 주세요.(Q,A)");
+		String type = InputUtil.sc.nextLine();
+		
+		
+		//글번호랑 타입 받기
+		QnaVo vo = new QnaService().showQnaContenByNo(num, type);
+		
+		if(vo == null) {
+			System.out.println("게시글이 없습니다.");
+			return;
+		}
 
+	}
+
+	private int showQnaContentMenu() {
+		// TODO 메뉴로 옮길거야..
+		int input = InputUtil.getInt();
+		System.out.println("글 번호를 입력해 주세요 (0번은 메인메뉴로 돌아갑니다)");
+		return input;
 	}
 
 	// 게시글 작성
