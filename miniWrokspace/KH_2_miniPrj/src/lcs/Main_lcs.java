@@ -2,7 +2,6 @@ package lcs;
 
 
 import lcs.atc.ATCController;
-import lcs.atc.ATCVo;
 import lcs.menu.Menu;
 import mini.member.MemberController;
 import mini.util.InputUtil;
@@ -43,7 +42,16 @@ public class Main_lcs {
 					break;
 				case 4:
 //					동물 보호소 보여주고 보호소 들어가서 입소신청을 할 수 있음
-					new ATCController().showATCList();
+					int selectATCMenu = new Menu().showATCSelectMenu();
+					//동물보호소 전체를 보여준다.
+					if(selectATCMenu == 1) {
+						new ATCController().showATCList();						
+					}
+					//지역별 동물 보호소를 보여준다.
+					else if(selectATCMenu == 2) {
+						
+						new ATCController().showCityATCList();
+					}
 					break;
 				case 9:
 //					
