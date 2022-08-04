@@ -1,8 +1,7 @@
 package sar.Main;
 
-import bje.member.MemberController;
+import mini.member.MemberController;
 import mini.member.MemberVo;
-import mini.menu.showMenu;
 import mini.util.InputUtil;
 import sar.Ad_Board.Adandoned;
 import sar.Ad_Board.Adoption;
@@ -56,7 +55,9 @@ public class Main {
 					e.printStackTrace();
 				}
 			}			
-			
+		
+//		while(true) 
+		
 			int num2 = menu.showMenu2();
 			
 			switch(num2) {
@@ -68,28 +69,38 @@ public class Main {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+			
 			case 1 : 
 				try {
 					new Adandoned().list();
+					break;
 				} catch (Exception e) {
 					System.out.println("유기동물 게시판 접속 오류!");
 					e.printStackTrace();
 				}
-//				continue;
+//				break;
 				
 			case 2 : 
 				if(Main.loginMember != null) {
-			System.out.println("먼저 로그인을 해주세요");}
-				else {
-					new Adoption().apply(no);
+				System.out.println("먼저 로그인을 해주세요");
+				new MemberController().login();
+				}else {
+					try {
+						new Adoption().apply(Main.loginMember.getNo());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			continue;
+				break;
 			
-		}//while
 		
 		
-	}
-	}
-}
+			}
+			}//while2
+		
+	}//main
+}//class
+
+
+
 

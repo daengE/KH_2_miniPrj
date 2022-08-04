@@ -8,7 +8,6 @@ public class AdVo {
 	
 	public AdVo(String ad_no, String post_type, String ad_adopt, String animal, String type, String city, String gender,
 			String age, String kill, String shelter, String address, String feature, String nt) {
-		super();
 		this.ad_no = ad_no;
 		this.post_type = post_type;
 		this.ad_adopt = ad_adopt;

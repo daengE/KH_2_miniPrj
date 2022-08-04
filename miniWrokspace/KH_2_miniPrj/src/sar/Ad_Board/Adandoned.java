@@ -12,7 +12,7 @@ public class Adandoned {
 
 	public AdVo list() throws Exception {
 		
-		System.out.println("====[유기동물 게시판]====");
+		System.out.println("\n\n====[유기동물 게시판]====");
 		System.out.println("====[전체 글 조회]====");
 		
 		Connection conn = JDBCTemplate.getConnection();
@@ -21,12 +21,12 @@ public class Adandoned {
 				
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
-		
 		AdVo vo = null;
 		
 		System.out.println(" 입양유무 / 축종 / 세부종류 / 지역 / 안락사일정 / 성별 / 나이 ");
-
+		
 		while(rs.next()) {
+			
 			String ad_no = rs.getString("AD_NO");
 			String adopt = rs.getString("AD_ADOPT");
 			String animal = rs.getString("AD_ANIMAL");
