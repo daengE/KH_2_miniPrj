@@ -77,13 +77,19 @@ public class MemberDao {
 		
 		try {
 			//SQL 준비
-			String sql = "INSERT INTO MEMBER(M_NO, M_ID, M_PWD, M_NICK) VALUES(SEQ_MEMBER_NO.NEXTVAL , ?, ?, ?)";
+			String sql = "INSERT INTO MEMBER(M_NO, M_ID, M_PWD, M_NAME, M_NICK, M_EMAIL, M_BIRTH, M_ADDRESS, M_CELL)\n"
+					+ " VALUES(MEMBER_SEQ.NEXTVAL , ?, ?, ?, ?, ? ,?, ?, ?)";
 			
 			//SQL 담을 객체 만들기
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getPwd());
-			pstmt.setString(3, vo.getNick());
+			pstmt.setString(3, vo.getName());
+			pstmt.setString(4, vo.getNick());
+			pstmt.setString(5, vo.getEmail());
+			pstmt.setString(6, vo.getBirth());
+			pstmt.setString(7, vo.getAddress());
+			pstmt.setString(8, vo.getCell());
 			
 			//SQL 실행 및 결과 저장
 			result = pstmt.executeUpdate();

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.util.List;
 
 import mini.common.JDBCTemplate;
-import mini.main.Main;
 
 public class NotiService {
 
@@ -57,12 +56,29 @@ public class NotiService {
 			}
 
 		} catch (Exception e) {
-			
+
 		} finally {
 			JDBCTemplate.close(conn);
 		}
 		return result;
 
+	}
+
+	public NotiVo showNotiContentByNo(int num) {
+
+		Connection conn = null;
+		NotiVo vo = null;
+
+		try {
+			conn = JDBCTemplate.getConnection();
+			vo = new NotiDao().showNotiContentByNo(conn, num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+
+		return vo;
 	}
 
 }

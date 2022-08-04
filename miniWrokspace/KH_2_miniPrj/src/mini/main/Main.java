@@ -36,9 +36,11 @@ public class Main {
 				break;
 			case 2:
 				if(loginMember == null) {
-//					회원가입();
+					new MemberController().join();
+					//TODO 회원가입 유효성 검사 - service
 				}else {
-//					마이페이지();
+					//TODO 마이페이지();
+					new MemberController().myPage();
 				}
 				break;
 			case 3:
@@ -55,15 +57,17 @@ public class Main {
 				break;
 			case 7:
 				new NotiController().handleNotiMenu();
+				//TODO 공지 삭제, 공지 수정
 				break;
 			case 8:
 				new QnaController().handleQnaMenu();
+				//TODO 질문 글 들어가서 답변하기(답변 할 때 정해진 포멧)
 				break;
 			case 9:
 				System.out.println("시스템을 종료 합니다...!");
 				return;
 			case 0:
-//				관리자할까말까();
+				//TODO 관리자할까말까();
 				System.out.println("잘못 입력 하셨군요..!!");
 				break;
 			default:

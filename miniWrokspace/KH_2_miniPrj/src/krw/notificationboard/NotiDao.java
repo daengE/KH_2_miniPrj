@@ -106,5 +106,74 @@ public class NotiDao {
 		return result;
 
 	}
+
+	public NotiVo showNotiContentByNo(Connection conn, int num) throws Exception {
+		String sql = "SELECT NO_NO, M_NO, NO_NICK, NO_TITLE, NO_CONTENT, NO_ENROLL_DATE\n"
+				+ ", NO_MODIFY_DATE, NO_DELETE_DATE, NO_DELETE_YN\n"
+				+ " FROM NOTIFICATION_BOARD\n"
+				+ " WHERE NO_NO = ? AND NO_DELETE_YN = 'N'";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		NotiVo vo = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  num);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int no = rs.getInt("NO_NO");
+				int memberNo = rs.getInt("M_NO");
+				String writer = rs.getString("NO_NICK");
+				String title = rs.getString("NO_TITLE");
+				String content = rs.getString("NO_CONTENT");
+				Timestamp enrollDate = rs.getTimestamp("NO_ENROLL_DATE");
+				Timestamp modifyDate= rs.getTimestamp("NO_MODIFY_DATE");
+				Timestamp deleteDate = rs.getTimestamp("NO_DELETE_DATE");
+				String usable = rs.getString("NO_DELETE_YN");
+				
+				vo = new NotiVo();
+				vo.setNotiNo(no);
+				vo.setMemberNo(memberNo);
+				vo.setWriter(writer);
+				vo.setTitle(title);
+				vo.setContent(content);
+				vo.setEnrollDate(enrollDate);
+				vo.setModifyDate(modifyDate);
+				vo.setDeleteDate(deleteDate);
+				vo.setUsable(usable);
+				
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+			
+		}
+		return vo;
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
