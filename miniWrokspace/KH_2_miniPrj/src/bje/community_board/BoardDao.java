@@ -16,195 +16,193 @@ import mini.common.JDBCTemplate;
 
 public class BoardDao {
 
-	/*
-	 * 게시글 작성
-	 * 
-	 * 데이터 받기 (컨트롤러)
-	 * 
-	 * 비지니스 로직 (서비스)
-	 * 
-	 * DB에 insert (DAO)
-	 */
-	public int write(BoardVo vo, Connection conn) throws Exception {
-		
-		//커넥션 준비
-		
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		try {
-			
-			//SQL 작성
-			String sql = "INSERT INTO COMMUNITY_BOARD (B_NO, M_NO, POST_TYPE, B_TAG, B_TITLE, B_CONTENTS, B_ENROLL_DATE, B_NICK, B_DELETE_YN, B_MODIFY, B_MDATE) "
-					+ "		VALUES(SEQ_COMMUNITY_BOARD_B_NO.NEXTVAL, 1 , 'CB' , '[자유]' , ? , ? , DEFAULT, '누굴까' , 'N' , 'N' , DEFAULT)";
-			
-			//SQL 객체에 담기 및 완성(물음표 채우기)
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getTitle());
-			pstmt.setString(2, vo.getContent());
-			
-			//SQL 실행 및 결과 저장
-			result = pstmt.executeUpdate();
-			
-		} finally{
-			JDBCTemplate.close(pstmt);
-		}
-		
-		return result;
-		
-	}//write
+   /*
+    * 게시글 작성
+    * 
+    * 데이터 받기 (컨트롤러)
+    * 
+    * 비지니스 로직 (서비스)
+    * 
+    * DB에 insert (DAO)
+    */
+   public int write(BoardVo vo, Connection conn) throws Exception {
+      
+      //커넥션 준비
+      
+      int result = 0;
+      PreparedStatement pstmt = null;
+      
+      try {
+         
+         //SQL 작성
+         String sql = "INSERT INTO COMMUNITY_BOARD (B_NO, M_NO, POST_TYPE, B_TAG, B_TITLE, B_CONTENTS, B_ENROLL_DATE, B_NICK, B_DELETE_YN, B_MODIFY, B_MDATE) "
+               + "      VALUES(SEQ_COMMUNITY_BOARD_B_NO.NEXTVAL, 1 , 'CB' , '[자유]' , ? , ? , DEFAULT, '누굴까' , 'N' , 'N' , DEFAULT)";
+         
+         //SQL 객체에 담기 및 완성(물음표 채우기)
+         pstmt = conn.prepareStatement(sql);
+         pstmt.setString(1, vo.getTitle());
+         pstmt.setString(2, vo.getContent());
+         
+         //SQL 실행 및 결과 저장
+         result = pstmt.executeUpdate();
+         
+      } finally{
+         JDBCTemplate.close(pstmt);
+      }
+      
+      return result;
+      
+   }//write
 
-	public List<BoardVo> showList(Connection conn) throws Exception {
-		//CONN 준비
-		
-		//SQL 준비
-		String sql = "SELECT B_NO , B_TITLE , B_CONTENTS , B_NICK , B_ENROLL_DATE FROM COMMUNITY_BOARD WHERE B_DELETE_YN = 'N' ORDER BY B_ENROLL_DATE DESC";
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<BoardVo> boardVoList = new ArrayList<BoardVo>();	
-		
-		try {
-			//SQL 담을 객체 준비 및 SQL 완성
-			pstmt = conn.prepareStatement(sql);
-			
-			//SQL 실행 및 결과 저장
-			rs = pstmt.executeQuery();
-			
-			//커서 내리고, 칼럼별로 읽어오기, 객체로 ㄱ만들기   << 반복
-			// rs.next, rs.getXXX("칼럼명"), vo.setXXX
-			
-			while(rs.next()) {
-				int no = rs.getInt("B_NO");
-				String title = rs.getString("B_TITLE");
-				Timestamp enrollDate = rs.getTimestamp("B_ENROLL_DATE");
-				String writer = rs.getString("B_NICK");
-				
-				BoardVo vo = new BoardVo();
-				vo.setB_no(no);
-				vo.setTitle(title);
-				vo.setEnrollDate(enrollDate);
-				vo.setWriter(writer);
-				
-				boardVoList.add(vo);
-			}
-		} finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(pstmt);
-		}
-		
-		//SQL 실행 결과 리턴
-		return boardVoList;
-	}//showList
+   public List<BoardVo> showList(Connection conn) throws Exception {
+      //CONN 준비
+      
+      //SQL 준비
+      String sql = "SELECT B_NO , B_TITLE , B_CONTENTS , B_NICK , B_ENROLL_DATE FROM COMMUNITY_BOARD WHERE B_DELETE_YN = 'N' ORDER BY B_ENROLL_DATE DESC";
+      
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      List<BoardVo> boardVoList = new ArrayList<BoardVo>();   
+      
+      try {
+         //SQL 담을 객체 준비 및 SQL 완성
+         pstmt = conn.prepareStatement(sql);
+         
+         //SQL 실행 및 결과 저장
+         rs = pstmt.executeQuery();
+         
+         //커서 내리고, 칼럼별로 읽어오기, 객체로 ㄱ만들기   << 반복
+         // rs.next, rs.getXXX("칼럼명"), vo.setXXX
+         
+         while(rs.next()) {
+            int no = rs.getInt("B_NO");
+            String title = rs.getString("B_TITLE");
+            Timestamp enrollDate = rs.getTimestamp("B_ENROLL_DATE");
+            String writer = rs.getString("B_NICK");
+            
+            BoardVo vo = new BoardVo();
+            vo.setB_no(no);
+            vo.setTitle(title);
+            vo.setEnrollDate(enrollDate);
+            vo.setWriter(writer);
+            
+            boardVoList.add(vo);
+         }
+      } finally {
+         JDBCTemplate.close(rs);
+         JDBCTemplate.close(pstmt);
+      }
+      
+      //SQL 실행 결과 리턴
+      return boardVoList;
+   }//showList
 
-	//망하며 이걸로
-//	public BoardVo showDetailByNo(Connection conn, int num) throws Exception {
-//		//connection 준비
-//		
-//		//SQL 준비
-//		String sql = "SELECT B_NO , B_TITLE , B_CONTENTS , B_NICK , B_ENROLL_DATE FROM COMMUNITY_BOARD WHERE B_NO = ?";
-//		
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		BoardVo vo = null;
-//		
-//		try {
-//			//SQL 객체에 담기 및 쿼리 완성하기
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, num);
-//			
-//			//SQL 실행 및 결과 저장
-//			rs = pstmt.executeQuery();
-//			
-//			//ResultSet -> 자바객체
-//			if(rs.next()) {
-//				int no = rs.getInt("B_NO");
-//				String title = rs.getString("B_TITLE");
-//				String content = rs.getString("B_CONTENTS");
-//				String nick = rs.getString("B_NICK");
-//				Timestamp enrollDate = rs.getTimestamp("B_ENROLL_DATE");
-//				
-//				vo = new BoardVo();
-//				vo.setB_no(no);
-//				vo.setTitle(title);
-//				vo.setContent(content);
-//				vo.setWriter(nick);
-//				vo.setEnrollDate(enrollDate);
-//			}
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//			throw e;
-//		}finally {
-//			mini.common.JDBCTemplate.close(pstmt);
-//			mini.common.JDBCTemplate.close(rs);
-//		}
-//		
-//		//실행결과(자바객체) 리턴
-//		return vo;
-//	}
-	
-	
-	public BoardVo showDetailByNo(Connection conn, int num) throws Exception {
-		//connection 준비
-		
-		//SQL 준비
-		String sql = "SELECT C.B_NO , C.B_TITLE , C.B_CONTENTS , C.B_NICK , C.B_ENROLL_DATE ,"
-				+ " B.COM_NICK , B.COM_NO , B.COM_CONTENTS , B.COM_ENROLL_DATE "
-				+ "FROM COMMUNITY_BOARD C JOIN BCOMMENT B ON C.B_NO = B.B_NO WHERE B.B_NO = ?";
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		BoardVo vo = null;
-		BcommentVo vocom = null;
-		
-		try {
-			//SQL 객체에 담기 및 쿼리 완성하기
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, num);
-			
-			//SQL 실행 및 결과 저장
-			rs = pstmt.executeQuery();
-			
-			//ResultSet -> 자바객체
-			if(rs.next()) {
-				int b_no = rs.getInt("C.B_NO");
-				String b_title = rs.getString("C.B_TITLE");
-				String b_contents = rs.getString("C.B_CONTENTS");
-				String b_nick = rs.getString("C.B_NICK");
-				Timestamp b_enrollDate = rs.getTimestamp("C.B_ENROLL_DATE");
-				String c_nick = rs.getString("B.COM_NICK");
-				int c_no = rs.getInt("B.COM_NO");
-				String c_contents = rs.getString("B.COM_CONTENTS");
-				Timestamp c_enrollDate = rs.getTimestamp("B.COM_ENROLL_DATE");
-				
-				vo = new BoardVo();
-				vocom = new BcommentVo();
-				vo.setB_no(b_no);
-				vo.setTitle(b_title);
-				vo.setContent(b_contents);
-				vo.setWriter(b_nick);
-				vo.setEnrollDate(b_enrollDate);
-				vocom.setWriter(c_nick);
-				vocom.setCom_no(c_no);
-				vocom.setContent(c_contents);
-				vocom.setEnrollDate(c_enrollDate);
-				
-			}
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			throw e;
-		}finally {
-			mini.common.JDBCTemplate.close(pstmt);
-			mini.common.JDBCTemplate.close(rs);
-		}
-		
-		//실행결과(자바객체) 리턴
-		return vo;
-	}
-	
+   public BoardVo showDetailByNo(Connection conn, int num) throws Exception {
+      //connection 준비
+      
+      //SQL 준비
+      String sql = "SELECT B_NO , B_TITLE , B_CONTENTS , B_NICK , B_ENROLL_DATE FROM COMMUNITY_BOARD WHERE B_NO = ?";
+      
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      BoardVo vo = null;
+      
+      try {
+         //SQL 객체에 담기 및 쿼리 완성하기
+         pstmt = conn.prepareStatement(sql);
+         pstmt.setInt(1, num);
+         
+         //SQL 실행 및 결과 저장
+         rs = pstmt.executeQuery();
+         
+         //ResultSet -> 자바객체
+         if(rs.next()) {
+            int no = rs.getInt("B_NO");
+            String title = rs.getString("B_TITLE");
+            String content = rs.getString("B_CONTENTS");
+            String nick = rs.getString("B_NICK");
+            Timestamp enrollDate = rs.getTimestamp("B_ENROLL_DATE");
+            
+            vo = new BoardVo();
+            vo.setB_no(no);
+            vo.setTitle(title);
+            vo.setContent(content);
+            vo.setWriter(nick);
+            vo.setEnrollDate(enrollDate);
+         }
+      }catch(Exception e) {
+         e.printStackTrace();
+         throw e;
+      }finally {
+         mini.common.JDBCTemplate.close(pstmt);
+         mini.common.JDBCTemplate.close(rs);
+      }
+      
+      //실행결과(자바객체) 리턴
+      return vo;
+   }
+   
+   //망했어지워
+//   public BoardVo showDetailByNo(Connection conn, int num) throws Exception {
+//      //connection 준비
+//      
+//      //SQL 준비
+//      String sql = "SELECT C.B_NO , C.B_TITLE , C.B_CONTENTS , C.B_NICK , C.B_ENROLL_DATE ,"
+//            + " B.COM_NICK , B.COM_NO , B.COM_CONTENTS , B.COM_ENROLL_DATE "
+//            + "FROM COMMUNITY_BOARD C JOIN BCOMMENT B ON C.B_NO = B.B_NO WHERE B.B_NO = ?";
+//      
+//      PreparedStatement pstmt = null;
+//      ResultSet rs = null;
+//      BoardVo vo = null;
+//      BcommentVo vocom = null;
+//      
+//      try {
+//         //SQL 객체에 담기 및 쿼리 완성하기
+//         pstmt = conn.prepareStatement(sql);
+//         pstmt.setInt(1, num);
+//         
+//         //SQL 실행 및 결과 저장
+//         rs = pstmt.executeQuery();
+//         
+//         //ResultSet -> 자바객체
+//         if(rs.next()) {
+//            int b_no = rs.getInt("C.B_NO");
+//            String b_title = rs.getString("C.B_TITLE");
+//            String b_contents = rs.getString("C.B_CONTENTS");
+//            String b_nick = rs.getString("C.B_NICK");
+//            Timestamp b_enrollDate = rs.getTimestamp("C.B_ENROLL_DATE");
+//            String c_nick = rs.getString("B.COM_NICK");
+//            int c_no = rs.getInt("B.COM_NO");
+//            String c_contents = rs.getString("B.COM_CONTENTS");
+//            Timestamp c_enrollDate = rs.getTimestamp("B.COM_ENROLL_DATE");
+//            
+//            vo = new BoardVo();
+//            vocom = new BcommentVo();
+//            vo.setB_no(b_no);
+//            vo.setTitle(b_title);
+//            vo.setContent(b_contents);
+//            vo.setWriter(b_nick);
+//            vo.setEnrollDate(b_enrollDate);
+//            vocom.setWriter(c_nick);
+//            vocom.setCom_no(c_no);
+//            vocom.setContent(c_contents);
+//            vocom.setEnrollDate(c_enrollDate);
+//            
+//         }
+//         
+//      }catch(Exception e) {
+//         e.printStackTrace();
+//         throw e;
+//      }finally {
+//         mini.common.JDBCTemplate.close(pstmt);
+//         mini.common.JDBCTemplate.close(rs);
+//      }
+//      
+//      //실행결과(자바객체) 리턴
+//      return vo;
+//   }
+   
 }//class
-
 
 
 
