@@ -80,6 +80,18 @@ public class NotiController {
 		System.out.println("작성일 : "+ vo.getEnrollDate());
 		System.out.println();
 		System.out.println("내용 : " + vo.getContent());
+		
+		//TODO
+		//상세조회후 글 리스트로 갈지, 수정을 할지, 삭제를 할지 선택.. 하는 메뉴.. 대충..! 
+		//상세조회 메뉴 출력 하고 숫자 받아오기
+		
+		// 대충 상세조회 메소드();
+		
+		//입력에 따라 수정(제목, 내용 정도만...), 삭제(글 삭제 칼럽 업데이트)
+		
+		// 대충 입력 받아 수정하고, 삭제 하는 반복문 .... if든 switch든..
+		
+		//3은 메인메뉴로 가기..
 
 	}
 

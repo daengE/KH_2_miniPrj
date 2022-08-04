@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import krw.notificationboard.NotiVo;
 import mini.common.JDBCTemplate;
 
 public class QnaDao {
@@ -15,11 +16,9 @@ public class QnaDao {
 
 		// sql 준비
 		String sql = "SELECT QNA_NO, M_NO, QNA_TYPE, Q_NICK, Q_TITLE, Q_CONTENT, Q_ENROLL_DATE\r\n"
-				+ "FROM QNA_BOARD\r\n"
-				+ "UNION \r\n"
+				+ "FROM QNA_BOARD\r\n" + "UNION \r\n"
 				+ "SELECT QNA_NO, M_NO_ADMIN, QNA_TYPE, A_NICK, A_TITLE, A_CONTENT, A_ENROLL_DATE\r\n"
-				+ "FROM ANSWER_BOARD\r\n"
-				+ "ORDER BY QNA_NO DESC, QNA_TYPE DESC";
+				+ "FROM ANSWER_BOARD\r\n" + "ORDER BY QNA_NO DESC, QNA_TYPE DESC";
 
 		// sql 담을 객체 준비 및 sql 완성
 		PreparedStatement pstmt = null;
@@ -82,6 +81,16 @@ public class QnaDao {
 
 	}
 
+	/*
+	 * 
+	 * 개시글 상세조회
+	 * 
+	 */
+
+//	public QnaVo showQnaDetailByNo(Connection conn, int num)
+
+	// SQL
+
 	public int writeQna(QnaVo vo, Connection conn) {
 
 		int result = 0;
@@ -111,5 +120,64 @@ public class QnaDao {
 		return result;
 
 	}
-	
+
+	public QnaVo showQnaContentByNo(Connection conn, int num, String type) throws Exception {
+
+		String sql = "SELECT QNA_NO, M_NO, QNA_TYPE, Q_NICK, Q_TITLE, Q_CONTENT, Q_ENROLL_DATE\r\n"
+				+ "FROM QNA_BOARD\r\n"
+				+ "WHERE QNA_TYPE = ? AND QNA_NO = ? \r\n"
+				+ "UNION \r\n"
+				+ "SELECT QNA_NO, M_NO_ADMIN, QNA_TYPE, A_NICK, A_TITLE, A_CONTENT, A_ENROLL_DATE\r\n"
+				+ "FROM ANSWER_BOARD\r\n"
+				+ "WHERE QNA_TYPE = ? AND QNA_NO = ? \r\n"
+				+ "ORDER BY QNA_NO DESC, QNA_TYPE DESC";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		QnaVo vo = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, type);
+			pstmt.setInt(2, num);
+			pstmt.setString(3, type);
+			pstmt.setInt(4, num);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				// TODO-first
+				// 대충 rs.get 칼럼으로 데이터 받아와서
+				int no = rs.getInt("QNA_NO");
+				int memberNo = rs.getInt("M_NO");
+				String qnaType = rs.getString("QNA_TYPE");
+				String writer = rs.getString("Q_NICK");
+				String title = rs.getString("Q_TITLE");
+				String content = rs.getString("Q_CONTENT");
+				Timestamp enrollDate = rs.getTimestamp("Q_ENROLL_DATE");
+
+				vo = new QnaVo();
+
+				// 객체에 넣고
+				vo.setQnaNo(no);
+				vo.setMemberNo(memberNo);
+				vo.setType(qnaType);
+				vo.setWriter(writer);
+				vo.setTitle(title);
+				vo.setContent(content);
+				vo.setEnrollDate(enrollDate);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return vo;
+	}
+
 }
