@@ -40,8 +40,12 @@ public class ATCController {
 				ATCVo atcvo = new ATCService().showDetailByNo(num);
 				
 				System.out.println("--------------게시글 상세조회--------------");
-				System.out.println("훈련소 이름 :::" + atcvo.getName());
-				System.out.println("훈련소 위치 :::" + atcvo.getLoc());
+				System.out.println("훈련소 이  름 :::" + atcvo.getName());
+				System.out.println("훈련소 전화번호 :::" + atcvo.getCall());
+				System.out.println("훈련소 위   치 :::" + atcvo.getLoc());
+				System.out.println("훈련소 주력스킬 :::" + atcvo.getSkill());
+				System.out.println("훈련소 신청가능 동물 :::"+ atcvo.getAnimal());
+				
 				
 			}
 		}
