@@ -81,6 +81,7 @@ public class Adoption {
 			
 			int result = pstmt.executeUpdate();
 			System.out.println(result);
+			
 			if(result >= 1) {
 				System.out.println("입양 업뎃완료!");
 				System.out.println("입양 신청 후 철회가 불가능합니다");
@@ -91,25 +92,27 @@ public class Adoption {
 				if(num2 == 1) {
 					System.out.println("입양 신청이 완료되었습니다.");
 					conn.commit();
-				}else {
-					System.out.println("돌아가실 메뉴를 선택하세요");
-					System.out.println("1. 유기동물 게시판");
-					System.out.println("2. 처음으로 돌아가기");
-					System.out.println("3. 프로그램 종료");
-					conn.rollback();
 					
-					int num3 = InputUtil.getInt();
-					if(num3 == 1) {
-						new Adandoned().list();
-					}else if(num3 == 2) {
-						new Menu().showMenu();
-					}else if(num3 == 3) {
-						System.out.println("시스템을 종료 합니다...!");
-					}
+				}else {conn.rollback();
+					
 				}
 			}else {
-				System.out.println("입양 업뎃실패");
+				System.out.println("입양 업뎃안해");
 				conn.rollback();
+			}
+			
+			System.out.println("돌아가실 메뉴를 선택하세요");
+			System.out.println("1. 유기동물 게시판");
+			System.out.println("2. 처음으로 돌아가기");
+			System.out.println("3. 프로그램 종료");
+			
+			int num3 = InputUtil.getInt();
+			if(num3 == 1) {
+				new Adandoned().list();
+			}else if(num3 == 2) {
+				new Menu().showMenu();
+			}else if(num3 == 3) {
+				System.out.println("시스템을 종료 합니다...!");
 			}
 			
 		} catch (Exception e) {
