@@ -28,6 +28,7 @@ public class PSController {
 		}	
 			
 			//상세조회
+		while(true){
 			int num = InputUtil.getInt();
 			
 			if(num == 0) {
@@ -41,15 +42,14 @@ public class PSController {
 				System.out.println("문제점 :::" + selectpsvo.getQ());
 				System.out.println("해결법 :::" + selectpsvo.getA());
 				System.out.println();
-		
+			}
 		}
 		
 	}
 
 	public String connectATC() {
 		System.out.println();
-		System.out.print("문제행동을 고칠 수 있는 보호소를 추천드릴까요? -Y / N 작성해주세요");
-		
+		System.out.print("문제행동을 고칠 수 있는 보호소를 추천드릴까요? ( Y / N 답변 부탁드립니다.)");
 		
 		return InputUtil.sc.nextLine();
 	}
