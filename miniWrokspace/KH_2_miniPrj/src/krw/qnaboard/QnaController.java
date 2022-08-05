@@ -9,6 +9,8 @@ import mini.util.InputUtil;
 
 public class QnaController {
 
+	private int adminInput;
+
 	public void handleQnaMenu() {
 
 		// 메뉴 보여주기
@@ -16,16 +18,15 @@ public class QnaController {
 
 		switch (inputNot) {
 		case 1:
-			// qna 리스트업
 			listUpQna();
 			break;
 		case 2:
-			// qna 질문 작성
 			writeQna();
 			break;
 		case 3:
-
 			// qna 질문 답변
+			// 글번호 받고
+			// 답변 등록 하고 !
 
 		}
 
@@ -54,29 +55,42 @@ public class QnaController {
 
 		}
 		int num = showQnaContentMenu();
-		
-		if(num ==0) {
+
+		if (num == 0) {
 			System.out.println("메인메뉴로 돌아갑니다.");
 			return;
 		}
 		System.out.println("게시글 타입을 입력해 주세요.(Q,A)");
 		String type = InputUtil.sc.nextLine();
-		
-		
-		//글번호랑 타입 받기
+
+		// 글번호랑 타입 받기
 		QnaVo vo = new QnaService().showQnaContenByNo(num, type);
-		
-		if(vo == null) {
+
+		if (vo != null) {
+			System.out.println(vo.getQnaNo() + "|" + "제목 : " + vo.getTitle() + "|" + "작성 시간 : " + vo.getEnrollDate());
+			System.out.println("작성자 : " + vo.getWriter());
+			System.out.println("내용 : " + vo.getContent());
+		} else {
 			System.out.println("게시글이 없습니다.");
 			return;
+
+		}
+		
+		if (vo.getType().equals("A") && Main.loginMember.getMbRight() == 1) {
+			System.out.println("1. 답변 등록하기");
+			System.out.println("2. 메인 메뉴로");
+			adminInput = InputUtil.getInt();
+			if(adminInput == 1) {
+				//TODO 답변등록하는 메소드();
+			}
 		}
 
 	}
 
 	private int showQnaContentMenu() {
 		// TODO 메뉴로 옮길거야..
-		int input = InputUtil.getInt();
 		System.out.println("글 번호를 입력해 주세요 (0번은 메인메뉴로 돌아갑니다)");
+		int input = InputUtil.getInt();
 		return input;
 	}
 
@@ -123,22 +137,5 @@ public class QnaController {
 			// 글 작성 실패
 			System.out.println("게시글 작성 실패...!");
 		}
-	}
-
-	//게시글 수정, 게시글 상세보기를 통해 하던지..
-	public void updateQna() {
-
-		// DAO를 통해 UPDATE
-
-		// UPDATE 후 결과조회!!
-
-	}
-
-	// 게시글 삭제, 게시글 상세보기를 통해 하던지..
-	public void deleteQna() {
-		// DAO를 통해 DELETE
-
-		// DELETE 후 결과조회!!
-
 	}
 }

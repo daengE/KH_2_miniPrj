@@ -4,6 +4,7 @@ import java.util.List;
 
 import mini.main.Main;
 import mini.menu.Menu;
+import mini.mypage.MyPage;
 import mini.util.InputUtil;
 
 public class MemberController {
@@ -152,11 +153,16 @@ public class MemberController {
 
 		System.out.println("마이페이지 아직 완성 안됨..");
 		// myPage 메뉴 출력
+		MyPage mp = new MyPage();
 		int result = new Menu().showMyPageMenu();
 		switch (result) {
 		case 1:
-			System.out.println(Main.loginMember);
-			System.out.println("보는 방식은 좀더 다듬을 예정... ㅅㄱ");
+			mp.showMyInfo();
+			//수정하기
+			mp.updateMyInfo();
+			//번호 받아오고
+			//받아온번호를 보내서 DAO 바로바로.. ~ update
+			
 			break;
 		case 2:
 			// TODO
@@ -172,45 +178,12 @@ public class MemberController {
 			break;
 		case 4:
 			// TODO 반려동물 보는거 완료, 보고 수정 하기 (추가, 삭제)
-			List<MemberPetVo> myPetList = new MemberService().showMyPet();
-
-			System.out.println("===== 내 반려동물 List =====");
-
-			if (myPetList.size() == 0) {
-				System.out.println("등록된 나의 반려동물이 없습니다.");
-			} else {
-				for (int i = 0; i < myPetList.size(); ++i) {
-
-					MemberPetVo petVo = myPetList.get(i);
-
-					int memberNo = petVo.getMemberNo();
-					String type = petVo.getType();
-					String gender = petVo.getGender();
-					String name = petVo.getName();
-					String birth = petVo.getBirth();
-
-					System.out.println(
-							i + 1 + ". " + "타입 : " + type + " |성별 : " + gender + " |이름 : " + name + " |생일 : " + birth);
-				}
-			}
-			// 반려동물 추가, 삭제
-			int petInput = myPetMenu();
-			if (1 == petInput) {
-				// 반려동물 추가 하는 메소드
-				//TODO
-				System.out.println("반려동물 추가 메소드 만들거임...");
-
-			} else if (2 == petInput) {
-				System.out.println("반려동물 삭제 메소드 만들거임...");
-
-			} else {
-				System.out.println("잘못 입력 하셨습니다.");
-			}
+			mp.showMyPet();
 
 			break;
 		case 5:
 			// 대충 유저의 disabled 칼럼을 n으로 바꾸는 고런...... 고런..... 메소드를 만들거다
-			System.out.println("대충.. 탈퇴하는 메소드..");
+			withdraw();
 			break;
 		default:
 			System.out.println("잘못 입력 하셨습니다.");
@@ -219,17 +192,57 @@ public class MemberController {
 
 	}
 
-	private int myPetMenu() {
-
-		int petInput = 0;
-
-		System.out.println("1. 내 반려동물 추가하기");
-		System.out.println("2. 내 반려동물 삭제하기");
-
-		petInput = InputUtil.getInt();
-
-		return petInput;
-
+	public void withdraw() {
+		
+		System.out.println("정보 다사라지는데.. 진짜 탈퇴할래?(y/n)");
+		String input = InputUtil.sc.nextLine();
+		int cnt = 0;
+		
+		if("y".equals(input)) {
+			//비번받고 확인하는 메소드
+			
+			while(cnt != 3) {
+			System.out.println("비밀번호를 입력 해주세요.");
+			String pwd2 = InputUtil.sc.nextLine();
+			
+			if(pwd2.equals(Main.loginMember.getPwd())) {
+				
+				//탈퇴하는메소드!!
+//				new MemberDao().withdraw();
+				//TODO
+				System.out.println("DAO가서 탈퇴하는 메소드 쓸거임");
+				
+			}else {
+				System.out.println("비밀번호가 일치하지 않습니다.");
+				cnt++;
+				if(cnt == 3) {
+					System.out.println("비밀번호를 3번 틀렸습니다. 메인메뉴로 돌아갑니다.");
+				}
+			}
+			}
+		}else if("n".equals(input)) {
+			return;
+		}else {
+			System.out.println("잘못 입력 했습니다..!");
+		}
 	}
-
 }// class
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
