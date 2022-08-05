@@ -39,7 +39,7 @@ public class ApplicationController {
 		String phone = InputUtil.sc.nextLine();
 		System.out.println();
 		
-		System.out.println("\n 입소가능한 날짜를 알려주세요(형식 예 : 220802");
+		System.out.println("\n 입소가능한 날짜를 알려주세요(형식 예 : 220802)");
 		System.out.print("입소가능일자 : ");
 		String psbDate = InputUtil.sc.nextLine();
 		System.out.println();

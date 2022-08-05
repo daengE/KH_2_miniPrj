@@ -4,6 +4,7 @@ import java.util.List;
 
 import lcs.application.ApplicationController;
 import lcs.menu.LcsMenu;
+import lcs.ps.PSController;
 import mini.util.InputUtil;
 
 public class ATCController {
@@ -129,6 +130,7 @@ public class ATCController {
 	}
 
 	public void sum() {
+		//
 		int selectATCMenu = new LcsMenu().showATCSelectMenu();
 		//동물보호소 전체를 보여준다.
 		if(selectATCMenu == 1) {
@@ -138,6 +140,12 @@ public class ATCController {
 		else if(selectATCMenu == 2) {
 			
 			new ATCController().showCityATCList();
+		}
+		else if(selectATCMenu == 0) {
+			
+			System.out.println();
+			System.out.println("문제행동목록을 보여드립니다.");
+			 new PSController().showPSList();
 		}
 		
 		
