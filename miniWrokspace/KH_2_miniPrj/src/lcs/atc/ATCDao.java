@@ -13,7 +13,7 @@ public class ATCDao {
 
 	public List<ATCVo> showATCList(Connection conn) throws Exception {
 		
-		String sql = "SELECT ATC_NO, ATC_NAME, ATC_CALL, ATC_SKILL, ATC_LOC, ATC_ANIMALS, ATC_CITY FROM ATC";
+		String sql = "SELECT ATC_NO, ATC_NAME, ATC_CALL, ATC_SKILL, ATC_LOC, ATC_ANIMALS, ATC_CITY FROM ATC ORDER BY ATC_NO";
 				
 		
 		PreparedStatement pstmt = null;
@@ -111,7 +111,8 @@ public class ATCDao {
 
 	public List<ATCVo> showCityATCList(String cityName, Connection conn) throws Exception {
 		
-		String sql = "SELECT ATC_NO, ATC_NAME, ATC_CALL, ATC_SKILL, ATC_LOC, ATC_ANIMALS, ATC_CITY FROM ATC WHERE ATC_CITY = ?";
+		String sql = "SELECT ATC_NO, ATC_NAME, ATC_CALL, ATC_SKILL, ATC_LOC, ATC_ANIMALS, ATC_CITY "
+				+ "FROM ATC WHERE ATC_CITY = ? ORDER BY ATC_NO";
 		
 		List<ATCVo> ATCVoList = new ArrayList<ATCVo>();	
 		

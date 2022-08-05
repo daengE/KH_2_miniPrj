@@ -3,6 +3,7 @@ package lcs;
 
 import lcs.atc.ATCController;
 import lcs.menu.Menu;
+import lcs.ps.PSController;
 import mini.member.MemberController;
 import mini.util.InputUtil;
 
@@ -36,11 +37,12 @@ public class Main_lcs {
 				case 2:
 				
 					break;
-				case 3:
+				case 4:
 					/*동물 훈련팁 */
+					new PSController().showPSList();
 					
 					break;
-				case 4:
+				case 5:
 //					동물 보호소 보여주고 보호소 들어가서 입소신청을 할 수 있음
 					int selectATCMenu = new Menu().showATCSelectMenu();
 					//동물보호소 전체를 보여준다.
