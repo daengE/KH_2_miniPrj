@@ -3,7 +3,7 @@ package lcs.atc;
 import java.util.List;
 
 import lcs.application.ApplicationController;
-import lcs.menu.Menu;
+import lcs.menu.LcsMenu;
 import mini.util.InputUtil;
 
 public class ATCController {
@@ -33,7 +33,7 @@ public class ATCController {
 		}
 			//상세조회 할건지 물어보기
 			//출력문, 입력받기
-			int num = new Menu().showATCDetailMenu();
+			int num = new LcsMenu().showATCDetailMenu();
 			if(num == 0) {
 				System.out.println();
 				System.out.println("이전 메뉴로 돌아갑니다.");
@@ -52,7 +52,7 @@ public class ATCController {
 				
 				//훈련소 신청하시겠습니까? 
 				
-				String input = new lcs.menu.Menu().showATCAply();
+				String input = new lcs.menu.LcsMenu().showATCAply();
 				
 				if(input.equalsIgnoreCase("Y")) {
 					
@@ -71,7 +71,7 @@ public class ATCController {
 		int writeCity = 10;
 		do {
 			
-			writeCity = new Menu().showCityMenu();
+			writeCity = new LcsMenu().showCityMenu();
 			if(writeCity > 7) {
 				System.out.println("번호를 잘못 선택하셨습니다. 재입력 부탁드립니다.");
 			}
@@ -101,7 +101,7 @@ public class ATCController {
 		}
 			//상세조회 할건지 물어보기
 			//출력문, 입력받기
-			int num = new Menu().showATCDetailMenu();
+			int num = new LcsMenu().showATCDetailMenu();
 			if(num == 0) {
 				return;
 			}
@@ -117,7 +117,7 @@ public class ATCController {
 			}
 			//훈련소 신청하시겠습니까? 
 			
-			String input = new lcs.menu.Menu().showATCAply();
+			String input = new lcs.menu.LcsMenu().showATCAply();
 			if(input.equalsIgnoreCase("Y")) {
 				
 				new ApplicationController().write(atcvo);
@@ -129,7 +129,7 @@ public class ATCController {
 	}
 
 	public void sum() {
-		int selectATCMenu = new Menu().showATCSelectMenu();
+		int selectATCMenu = new LcsMenu().showATCSelectMenu();
 		//동물보호소 전체를 보여준다.
 		if(selectATCMenu == 1) {
 			new ATCController().showATCList();						

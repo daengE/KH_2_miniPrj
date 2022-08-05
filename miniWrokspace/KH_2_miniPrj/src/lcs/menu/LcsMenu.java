@@ -5,7 +5,7 @@ import lcs.atc.ATCController;
 import mini.main.Main;
 import mini.util.InputUtil;
 
-public class Menu {
+public class LcsMenu {
 	
 	
 	public int showMenu() {

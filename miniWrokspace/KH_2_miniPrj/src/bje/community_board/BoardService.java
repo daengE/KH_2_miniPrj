@@ -98,8 +98,7 @@ public class BoardService {
       return vo;
    }
    
-//	public void search(){
-//		
+//	public void selectTag() {
 //
 //		System.out.print("게시판 태그를 입력하세요 : ");
 //		String search = InputUtil.sc.nextLine();
@@ -108,7 +107,7 @@ public class BoardService {
 //		BoardVo vo = null;
 //		ResultSet rs = null;
 //		
-//		String sql = "SELECT AD_NO, AD_ADOPT, AD_ANIMAL, AD_TYPE, AD_CITY, AD_KILL, AD_GENDER, AD_AGE FROM ADANDONED_BOARD WHERE AD_CITY = ?";
+//		String sql = "SELECT B_TAG, B_NO , B_TITLE , B_CONTENTS , B_NICK , B_ENROLL_DATE FROM COMMUNITY_BOARD WHERE B_TAG = ?";
 //				
 //		PreparedStatement pstmt;
 //		try {
@@ -122,9 +121,12 @@ public class BoardService {
 //			
 //			rs = pstmt.executeQuery();
 //			
-//			System.out.println("입양유무 / 축종 / 세부종류 / 지역 / 안락사일정 / 성별 / 나이 ");
+//			System.out.println("글 태그 / 글번호 / 제목 / 내용 / 닉네임 / 작성일자");
 //
 //			while(rs.next()) {
+//				String b_tag = rs.get
+//				
+//				
 //				int ad_no = rs.getInt("AD_NO");
 //				String adopt = rs.getString("AD_ADOPT");
 //				String animal = rs.getString("AD_ANIMAL");

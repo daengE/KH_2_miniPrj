@@ -2,7 +2,7 @@ package lcs;
 
 
 import lcs.atc.ATCController;
-import lcs.menu.Menu;
+import lcs.menu.LcsMenu;
 import lcs.ps.PSController;
 import mini.member.MemberController;
 import mini.util.InputUtil;
@@ -16,7 +16,7 @@ public class Main_lcs {
 			
 			System.out.println("===== 환영합니다 =====");
 			
-			Menu menu = new Menu();
+			LcsMenu menu = new LcsMenu();
 			
 			while(true) {
 				//메뉴 보여주기
@@ -49,7 +49,7 @@ public class Main_lcs {
 				case 5:
 					
 				   //동물 보호소를 전체볼래? 지역별로 볼래?
-					int selectATCMenu = new Menu().showATCSelectMenu();
+					int selectATCMenu = new LcsMenu().showATCSelectMenu();
 					
 					//동물보호소 전체를 보여준다.
 					if(selectATCMenu == 1) {

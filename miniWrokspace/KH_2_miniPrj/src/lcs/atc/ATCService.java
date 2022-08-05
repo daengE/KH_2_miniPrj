@@ -3,7 +3,7 @@ package lcs.atc;
 import java.sql.Connection;
 import java.util.List;
 
-import lcs.menu.Menu;
+import lcs.menu.LcsMenu;
 import mini.common.JDBCTemplate;
 
 public class ATCService {
