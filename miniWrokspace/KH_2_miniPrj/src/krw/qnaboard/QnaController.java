@@ -91,7 +91,7 @@ public class QnaController {
 
 		// 출력후 메뉴(질문 답변 타입에 따라, 회원 권한에 따라..)
 
-		if (vo.getType().equals("A") || Main.loginMember.getMbRight() == 0) {
+		if (Main.loginMember == null || vo.getType().equals("A") || Main.loginMember.getMbRight() == 0) {
 			System.out.println("1. 게시글로 가기");
 			System.out.println("0. 메인 메뉴로");
 			int input = InputUtil.getInt();
@@ -108,16 +108,30 @@ public class QnaController {
 			if (adminInput == 1) {
 				listUpQna();
 			} else if (adminInput == 2) {
-				System.out.println("대충.. 답변등록하는 메소드");
 				System.out.print("제목 : ");
 				String title = InputUtil.sc.nextLine();
 				System.out.print("내용 : ");
 				String content = InputUtil.sc.nextLine();
-				//
 				
-//				QnaVo qnaVo = new QnaVo();
+				
+				QnaVo qnaVo = new QnaVo();
+				
+				qnaVo.setQnaNo(vo.getQnaNo());
+				qnaVo.setMemberNo(Main.loginMember.getNo());
+				qnaVo.setType("A");
+				qnaVo.setWriter(Main.loginMember.getNick());
+				qnaVo.setTitle(title);
+				qnaVo.setContent(content);
 //				
-//				new QnaService().replyQna(vo.getQnaNo());
+				int result = new QnaService().replyQna(qnaVo);
+				
+				if(result == 1) {
+					System.out.println("답변이 작성 되었습니다.");
+				}else {
+					System.out.println("답변 작성 실패..");
+				}
+				
+				
 			} else {
 				return;
 			}
@@ -142,11 +156,6 @@ public class QnaController {
 			return;
 		}
 
-		// 권한 확인
-//			if (Main.loginMember.getNo() != 99999 ) {
-//				System.out.println("권한이 없습니다.");
-//				return;
-//			}
 		// 커넥트
 		System.out.println("===== QnA 게시글 작성 =====");
 
