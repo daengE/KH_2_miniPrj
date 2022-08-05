@@ -48,8 +48,8 @@ public class PSController {
 
 	public String connectATC() {
 		System.out.println();
-		System.out.println("문제행동을 고칠 수 있는 보호소를 추천드릴까요?");
-		System.out.println("Y / N 작성해주세요.");
+		System.out.print("문제행동을 고칠 수 있는 보호소를 추천드릴까요? -Y / N 작성해주세요");
+		
 		
 		return InputUtil.sc.nextLine();
 	}
