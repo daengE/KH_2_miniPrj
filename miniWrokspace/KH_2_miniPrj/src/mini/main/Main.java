@@ -1,5 +1,6 @@
 package mini.main;
 
+import bje.community_board.BoardController;
 import krw.notificationboard.NotiController;
 import krw.qnaboard.QnaController;
 import mini.member.MemberController;
@@ -73,7 +74,13 @@ public class Main {
 				break;
 
 			case 6:
-//				재은님 - 커뮤니티
+				if (loginMember == null) {
+					new MemberController().join();
+				} else {
+					new BoardController().showList();
+//					menu.showMenu6();
+//					menu.showMenu2();
+				}
 				break;
 			case 7:
 				new NotiController().handleNotiMenu();
