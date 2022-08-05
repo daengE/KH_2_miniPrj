@@ -142,66 +142,6 @@ public class BoardDao {
       return vo;
    }
    
-   //망했어지워
-//   public BoardVo showDetailByNo(Connection conn, int num) throws Exception {
-//      //connection 준비
-//      
-//      //SQL 준비
-//      String sql = "SELECT C.B_NO , C.B_TITLE , C.B_CONTENTS , C.B_NICK , C.B_ENROLL_DATE ,"
-//            + " B.COM_NICK , B.COM_NO , B.COM_CONTENTS , B.COM_ENROLL_DATE "
-//            + "FROM COMMUNITY_BOARD C JOIN BCOMMENT B ON C.B_NO = B.B_NO WHERE B.B_NO = ?";
-//      
-//      PreparedStatement pstmt = null;
-//      ResultSet rs = null;
-//      BoardVo vo = null;
-//      BcommentVo vocom = null;
-//      
-//      try {
-//         //SQL 객체에 담기 및 쿼리 완성하기
-//         pstmt = conn.prepareStatement(sql);
-//         pstmt.setInt(1, num);
-//         
-//         //SQL 실행 및 결과 저장
-//         rs = pstmt.executeQuery();
-//         
-//         //ResultSet -> 자바객체
-//         if(rs.next()) {
-//            int b_no = rs.getInt("C.B_NO");
-//            String b_title = rs.getString("C.B_TITLE");
-//            String b_contents = rs.getString("C.B_CONTENTS");
-//            String b_nick = rs.getString("C.B_NICK");
-//            Timestamp b_enrollDate = rs.getTimestamp("C.B_ENROLL_DATE");
-//            String c_nick = rs.getString("B.COM_NICK");
-//            int c_no = rs.getInt("B.COM_NO");
-//            String c_contents = rs.getString("B.COM_CONTENTS");
-//            Timestamp c_enrollDate = rs.getTimestamp("B.COM_ENROLL_DATE");
-//            
-//            vo = new BoardVo();
-//            vocom = new BcommentVo();
-//            vo.setB_no(b_no);
-//            vo.setTitle(b_title);
-//            vo.setContent(b_contents);
-//            vo.setWriter(b_nick);
-//            vo.setEnrollDate(b_enrollDate);
-//            vocom.setWriter(c_nick);
-//            vocom.setCom_no(c_no);
-//            vocom.setContent(c_contents);
-//            vocom.setEnrollDate(c_enrollDate);
-//            
-//         }
-//         
-//      }catch(Exception e) {
-//         e.printStackTrace();
-//         throw e;
-//      }finally {
-//         mini.common.JDBCTemplate.close(pstmt);
-//         mini.common.JDBCTemplate.close(rs);
-//      }
-//      
-//      //실행결과(자바객체) 리턴
-//      return vo;
-//   }
-   
 }//class
 
 
