@@ -20,7 +20,7 @@ public class BcommentService {
     * 
     * DB에 insert (DAO)
     */
-   public int write(BcommentVo vocom) {
+   public int write(BcommentVo vocom, int num) {
 
       //비지니스 로직 (내용 1글자 이상인지)
       if(vocom.getContent().length() < 1) {
@@ -33,7 +33,7 @@ public class BcommentService {
       
       try {
          conn = getConnection();
-         result = new BcommentDao().write(vocom, conn);
+         result = new BcommentDao().write(vocom, conn, num);
          
          if(result == 1) {
             commit(conn);

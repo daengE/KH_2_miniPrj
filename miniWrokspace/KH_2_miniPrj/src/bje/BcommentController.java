@@ -18,7 +18,7 @@ public class BcommentController {
     * 
     * DB에 insert (DAO)
     */
-   public void write() {//여기! 디폴트 아닌것들 모두 작성받는것으로 수정해야함
+   public void write(int num) {//여기! 디폴트 아닌것들 모두 작성받는것으로 수정해야함
       
 //      무시!!!!!!!!      
 //      //글 선택했는지 체크
@@ -42,7 +42,7 @@ public class BcommentController {
       vo.setContent(content);
       
       //DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
-      int result = new BcommentService().write(vo);
+      int result = new BcommentService().write(vo, num);
       
       //insert 결과에 따라 로직 처리
       if(result == 1) {

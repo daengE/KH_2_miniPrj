@@ -5,20 +5,33 @@ import mini.util.InputUtil;
 
 public class Menu {
 
-   public int showMenu() {
-      
-      if(Main_bje.loginMember != null) {
-         //로그인 상태
-         System.out.println(Main_bje.loginMember.getNick() + " 님 환영합니다.");
-         System.out.println("3. 게시판글 작성");
-         System.out.println("4. 게시글 목록 조회");;
-      }else {
-         //로그인 X
-         System.out.println("1. 로그인");
-         System.out.println("2. 회원가입");
-         System.out.println("3. 게시판글 작성");
-         System.out.println("4. 게시글 목록 조회");
-      }
+   public int showMenu6() {
+	      
+	      if(Main_bje.loginMember != null) {
+	         //로그인 상태
+	         System.out.println(Main_bje.loginMember.getNick() + " 님 환영합니다.");
+	         System.out.println("1. 게시판글 작성");
+	         System.out.println("2. 게시글 목록 조회");;
+	      }else {
+	         //로그인 X
+	    	  System.out.println("로그인 먼저 해주세요");
+		      //다음 진행 하면 안되니까 return
+	      }
+	
+//   public int showMenu() {
+//      
+//      if(Main_bje.loginMember != null) {
+//         //로그인 상태
+//         System.out.println(Main_bje.loginMember.getNick() + " 님 환영합니다.");
+//         System.out.println("3. 게시판글 작성");
+//         System.out.println("4. 게시글 목록 조회");;
+//      }else {
+//         //로그인 X
+//         System.out.println("1. 로그인");
+//         System.out.println("2. 회원가입");
+//         System.out.println("3. 게시판글 작성");
+//         System.out.println("4. 게시글 목록 조회");
+//      }
       
       System.out.println("9. 프로그램 종료");
       
@@ -38,15 +51,6 @@ public class Menu {
 	   return InputUtil.getInt();
    }
    
-//   public String showBcommentMenu() {
-//      System.out.println("\n댓글을 작성하시겠습니까? (0번은 메인메뉴) Y or N");
-//      return InputUtil.sc.nextLine();
-//   }
-   
-//   public String showMainMenu() {
-//      System.out.println("\n사이트 맨 처음으로 돌아가시겠습니까? (0번은 메인메뉴) Y or N");
-//      return InputUtil.sc.nextLine();
-//   }
    
    
    
