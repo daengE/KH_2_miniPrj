@@ -2,9 +2,6 @@ package lcs.ps;
 
 import java.util.List;
 
-import lcs.atc.ATCService;
-import lcs.atc.ATCVo;
-import lcs.menu.Menu;
 import mini.util.InputUtil;
 
 public class PSController {
@@ -43,11 +40,19 @@ public class PSController {
 				System.out.println("--------------문제점 상세조회--------------");
 				System.out.println("문제점 :::" + selectpsvo.getQ());
 				System.out.println("해결법 :::" + selectpsvo.getA());
-				
-			
-				
+				System.out.println();
+		
 		}
 		
 	}
+
+	public String connectATC() {
+		System.out.println();
+		System.out.println("문제행동을 고칠 수 있는 보호소를 추천드릴까요?");
+		System.out.println("Y / N 작성해주세요.");
+		
+		return InputUtil.sc.nextLine();
 	}
+	
+}
 

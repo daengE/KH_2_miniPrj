@@ -35,7 +35,8 @@ public class ATCController {
 			//출력문, 입력받기
 			int num = new Menu().showATCDetailMenu();
 			if(num == 0) {
-				System.out.println("\n 메인메뉴로 돌아갑니다.");
+				System.out.println();
+				System.out.println("이전 메뉴로 돌아갑니다.");
 				return;
 			}
 			else {
@@ -58,7 +59,8 @@ public class ATCController {
 					new ApplicationController().write(atcvo);
 				}
 				else if(input.equalsIgnoreCase("N")) {
-					System.out.println("\n 훈련소 목록으로 돌아갑니다.");
+					System.out.println();
+					System.out.println("이전 선택으로 돌아갑니다.");
 					showATCList();
 					
 				}
@@ -101,7 +103,6 @@ public class ATCController {
 			//출력문, 입력받기
 			int num = new Menu().showATCDetailMenu();
 			if(num == 0) {
-				System.out.println("\n 메인메뉴로 돌아갑니다.");
 				return;
 			}
 			else {
@@ -125,6 +126,21 @@ public class ATCController {
 				System.out.println("\n 훈련소 목록으로 돌아갑니다.");
 				showCityATCList();
 			}
+	}
+
+	public void sum() {
+		int selectATCMenu = new Menu().showATCSelectMenu();
+		//동물보호소 전체를 보여준다.
+		if(selectATCMenu == 1) {
+			new ATCController().showATCList();						
+		}
+		//지역별 동물 보호소를 보여준다.
+		else if(selectATCMenu == 2) {
+			
+			new ATCController().showCityATCList();
+		}
+		
+		
 	}	
 	
 	
