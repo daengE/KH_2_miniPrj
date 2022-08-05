@@ -18,8 +18,6 @@ public class Main_lcs {
 			
 			Menu menu = new Menu();
 			
-			
-			
 			while(true) {
 				//메뉴 보여주기
 				int input = menu.showMenu();
@@ -38,22 +36,37 @@ public class Main_lcs {
 				
 					break;
 				case 4:
-					/*동물 훈련팁 */
+					/*동물문제 & 해결 보여준다*/
 					new PSController().showPSList();
 					
+					//문제행동을 고칠 수 있는 보호소를 보여주는지 물어본다.
+					String connect = new PSController().connectATC();
+					
+					//Y라고 하면 동물훈련소 메소드 그대로 실행
+					new ATCController().sum();
 					break;
+			
 				case 5:
-//					동물 보호소 보여주고 보호소 들어가서 입소신청을 할 수 있음
+					
+				   //동물 보호소를 전체볼래? 지역별로 볼래?
 					int selectATCMenu = new Menu().showATCSelectMenu();
+					
 					//동물보호소 전체를 보여준다.
 					if(selectATCMenu == 1) {
 						new ATCController().showATCList();						
 					}
+					
 					//지역별 동물 보호소를 보여준다.
 					else if(selectATCMenu == 2) {
 						
 						new ATCController().showCityATCList();
 					}
+					else {
+						System.out.println();
+						System.out.println("메인메뉴로 돌아갑니다.");
+						continue;
+					}
+					
 					break;
 				case 9:
 //					

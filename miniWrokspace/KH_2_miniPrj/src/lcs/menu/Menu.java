@@ -29,11 +29,14 @@ public class Menu {
 	}
 	
 	public int showATCDetailMenu() {
-		System.out.println("\n \n 상세 조회할 글 번호를 입력해주세요 (0. 메인메뉴로 돌아가기) ::");
+		System.out.println();
+		System.out.print ("상세 조회할 글 번호를 입력해주세요 (0. 메인메뉴로 돌아가기) ::");
 		return InputUtil.getInt();
 	}
 
 	public int showATCSelectMenu() {
+		System.out.println();
+		System.out.println("0. 메인메뉴로 돌아가기");
 		System.out.println("1. 모든 동물 보호소 보기");
 		System.out.println("2. 지역별 동물 보호소 보기");
 		
@@ -51,7 +54,8 @@ public class Menu {
 	}
 
 	public int showCityMenu() {
-		System.out.println("\n \n 원하시는 지역을 선택해 주세요");
+		System.out.println();
+		System.out.println("원하시는 지역을 선택해 주세요");
 		System.out.println("1. 서울시");
 		System.out.println("2. 경기도");
 		System.out.println("3. 강원도");
