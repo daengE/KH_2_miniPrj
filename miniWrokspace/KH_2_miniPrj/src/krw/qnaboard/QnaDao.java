@@ -107,9 +107,14 @@ public class QnaDao {
 			pstmt.setString(2, vo.getWriter());
 			pstmt.setString(3, vo.getTitle());
 			pstmt.setString(4, vo.getContent());
+			
+			System.out.println(vo);
+			
 
 			// sql 실행 및 결과 저장
 			result = pstmt.executeUpdate();
+			
+			System.out.println(result);
 
 		} catch (Exception e) {
 
@@ -178,6 +183,35 @@ public class QnaDao {
 		}
 
 		return vo;
+	}
+
+	public int replyQna(QnaVo qnaVo, Connection conn) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		try {
+			// sql 작성
+			String sql = "INSERT INTO ANSWER_BOARD(QNA_NO, M_NO_ADMIN, A_NICK, A_TITLE, A_CONTENT) VALUES(?, ?, ?, ?, ?)";
+
+			// sql 객체에 담기
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qnaVo.getQnaNo());
+			pstmt.setInt(2, qnaVo.getMemberNo());
+			pstmt.setString(3, qnaVo.getWriter());
+			pstmt.setString(4, qnaVo.getTitle());
+			pstmt.setString(5, qnaVo.getContent());
+
+			// sql 실행 및 결과 저장
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
 	}
 
 }
