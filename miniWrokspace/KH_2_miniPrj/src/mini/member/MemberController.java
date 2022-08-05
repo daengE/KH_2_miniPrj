@@ -11,11 +11,11 @@ public class MemberController {
 
 	public void login() {
 
-		if (Main.loginMember != null) {
-			// 이미 로그인 O
-			System.out.println("이미 로그인 되어있습니다.");
-			return;
-		}
+//		if (Main.loginMember != null) {
+//			// 이미 로그인 O
+//			System.out.println("이미 로그인 되어있습니다.");
+//			return;
+//		}
 
 		System.out.println("----- 로그인 -----");
 		System.out.print("아이디 : ");
@@ -25,16 +25,19 @@ public class MemberController {
 
 		try {
 			MemberVo vo = new MemberDao().login(id, pwd);
-			if (vo != null) {
+			if (vo != null && vo.getDisaled() == 0) {
 				// 로그인 성공
 				System.out.println("로그인 성공 !\n\n");
 				System.out.println("========================");
 				System.out.println(vo.getNick() + "님 환영합니다 !!");
 				System.out.println("========================\n\n");
 				Main.loginMember = vo;
+			} else if (vo != null && vo.getDisaled() == 1) {
+				// 로그인 실패(탈퇴한회원)
+				System.out.println("탈퇴한 회원입니다.");
 			} else {
 				// 로그인 실패
-				System.out.println("로그인 실패 !\n\n");
+				System.out.println("아이디와 비밀번호를 확인하세요..! !\n\n");
 			}
 		} catch (Exception e) {
 			// 로그인 실패
@@ -85,7 +88,7 @@ public class MemberController {
 			String petYn = InputUtil.sc.nextLine();
 
 			if (petYn.equals("y")) {
-				// 반려동물 정보입력받고
+				// 반려동물 정보 입력 받기
 				System.out.println("== 반려동물 축종을 선택하세요 ==");
 				System.out.println("1. 개 2. 고양이 3. 기타");
 				int aniInput = InputUtil.getInt();
@@ -121,7 +124,6 @@ public class MemberController {
 			} else if (petYn.equals("n")) {
 				break;
 			} else {
-				// 잘못 입력 했을경우 TODO
 				System.out.println("잘못 입력하셨습니다.");
 			}
 
@@ -141,7 +143,6 @@ public class MemberController {
 
 		int result = new MemberService().join(vo, petVo);
 
-		// 실행 결과에 따른 응답
 		if (result == 1) {
 			System.out.println("회원가입 성공 !");
 		} else {
@@ -157,12 +158,11 @@ public class MemberController {
 		int result = new Menu().showMyPageMenu();
 		switch (result) {
 		case 1:
+			// 정보보기
 			mp.showMyInfo();
-			//수정하기
+			// 수정하기
 			mp.updateMyInfo();
-			//번호 받아오고
-			//받아온번호를 보내서 DAO 바로바로.. ~ update
-			
+
 			break;
 		case 2:
 			// TODO
@@ -182,7 +182,6 @@ public class MemberController {
 
 			break;
 		case 5:
-			// 대충 유저의 disabled 칼럼을 n으로 바꾸는 고런...... 고런..... 메소드를 만들거다
 			withdraw();
 			break;
 		default:
@@ -193,56 +192,42 @@ public class MemberController {
 	}
 
 	public void withdraw() {
-		
+
 		System.out.println("정보 다사라지는데.. 진짜 탈퇴할래?(y/n)");
 		String input = InputUtil.sc.nextLine();
 		int cnt = 0;
-		
-		if("y".equals(input)) {
-			//비번받고 확인하는 메소드
-			
-			while(cnt != 3) {
-			System.out.println("비밀번호를 입력 해주세요.");
-			String pwd2 = InputUtil.sc.nextLine();
-			
-			if(pwd2.equals(Main.loginMember.getPwd())) {
-				
-				//탈퇴하는메소드!!
-//				new MemberDao().withdraw();
-				//TODO
-				System.out.println("DAO가서 탈퇴하는 메소드 쓸거임");
-				
-			}else {
-				System.out.println("비밀번호가 일치하지 않습니다.");
-				cnt++;
-				if(cnt == 3) {
-					System.out.println("비밀번호를 3번 틀렸습니다. 메인메뉴로 돌아갑니다.");
+		String pwdInput = null;
+
+		if ("y".equals(input)) {
+			// 비번받고 확인하는 메소드
+
+			while (cnt != 3) {
+				System.out.println("비밀번호를 입력 해주세요.");
+				pwdInput = InputUtil.sc.nextLine();
+
+				if (pwdInput.equals(Main.loginMember.getPwd())) {
+
+					try {
+						new MemberDao().withdraw();
+						Main.loginMember = null;
+						cnt = 3;
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+
+				} else {
+					System.out.println("비밀번호가 일치하지 않습니다.");
+					cnt++;
+					if (cnt == 3) {
+						System.out.println("비밀번호를 3번 틀렸습니다. 메인메뉴로 돌아갑니다.");
+					}
 				}
+
 			}
-			}
-		}else if("n".equals(input)) {
+		} else if ("n".equals(input)) {
 			return;
-		}else {
+		} else {
 			System.out.println("잘못 입력 했습니다..!");
 		}
 	}
 }// class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

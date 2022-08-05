@@ -81,4 +81,8 @@ public class QnaService {
 		return vo;
 	}
 
+	public void replyQna(int qnaNo) {
+		
+	}
+
 }
