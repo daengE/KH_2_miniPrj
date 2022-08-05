@@ -13,6 +13,10 @@ public class Menu {
 		if (Main.loginMember == null) {
 			System.out.println("1. 로그인");
 			System.out.println("2. 회원가입");
+			System.out.println("3. 유기동물 게시판 조회");
+			System.out.println("4. 찬선님");
+			System.out.println("5. 화이팅");
+			System.out.println("6. 커뮤니티 게시판 조회");
 			System.out.println("7. 공지사항 게시판");
 			System.out.println("8. QnA 게시판");
 			System.out.println("9. 프로그램 종료");
@@ -20,6 +24,9 @@ public class Menu {
 			System.out.println("1. 로그아웃");
 			System.out.println("2. 마이페이지");
 			System.out.println("3. 유기동물 게시판 조회");
+			System.out.println("4. 찬선님");
+			System.out.println("5. 화이팅");
+			System.out.println("6. 커뮤니티 게시판 조회");
 			System.out.println("7. 공지사항 게시판");
 			System.out.println("8. QnA 게시판");
 			System.out.println("9. 프로그램 종료");
@@ -159,18 +166,25 @@ public class Menu {
 		
 	}//showMenu2
 	
-//	   public int showMenu6() {
-//	         
-//	         if(Main_bje.loginMember != null) {
-//	            //로그인 상태
-//	            System.out.println(Main_bje.loginMember.getNick() + " 님 환영합니다.");
-//	            System.out.println("1. 게시판글 작성");
-//	            System.out.println("2. 게시글 목록 조회");;
-//	         }else {
-//	            //로그인 X
-//	            System.out.println("로그인 먼저 해주세요");
-//	            //다음 진행 하면 안되니까 return
-//	         }
-//}
+   public void showMenu6() {
+         
+		System.out.println("\n\n0. 태그별 검색");
+		System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====" );
+		System.out.print( " : " );
+		
+		int num = InputUtil.getInt();
+		
+		if(num == 0) {
+			System.out.println("\n\n==== 태그별 검색 ====");
+			System.out.println(" 후원요청 | 자랑 | 질문 | 자유 | 뉴스데스크 ");
+		
+				new Adandoned().search();
+				showMenu1();
+			
+		}else 
+				{new Adandoned().detail(num);
+			
+		}		
+   }//showMenu6
 
 }
