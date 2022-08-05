@@ -112,18 +112,12 @@ public class Menu {
 			System.out.println("\n\n==== 지역별 검색 ====");
 			System.out.println(" 서울 | 경기도 | 경상도 | 전라도 | 제주도 | 충청도 | 강원도 ");
 		
-			try {
 				new Adandoned().search();
 				showMenu1();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else {
-			try {
-				new Adandoned().detail(num);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			
+		}else 
+				{new Adandoned().detail(num);
+			
 		}		
 //		InputUtil.sc.nextLine();
 //		return InputUtil.getInt();
@@ -152,37 +146,31 @@ public class Menu {
 			}
 		
 		case 1 : 
-			try {
 				new Adandoned().list();
 				showMenu1();
 				continue;
-			} catch (Exception e) {
-				System.out.println("유기동물 게시판 접속 오류!");
-				e.printStackTrace();
-			}
-//			continue;
 			
 		case 2 : 
-			try {
-				new Adoption().apply(Main.loginMember.getNo());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-//			if(Main.loginMember != null) {
-//				System.out.println("먼저 로그인을 해주세요");
-//				new MemberController().login();
-//			}else {
-//				try {
-//					new Adoption().apply(Main.loginMember.getNo());
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//			break;
-	}//switch
+			new Adoption().apply(Main.loginMember.getNo());
+
+		}//switch
 		return InputUtil.getInt();	
 		}//while
 		
 	}//showMenu2
-}
+	
+//	   public int showMenu6() {
+//	         
+//	         if(Main_bje.loginMember != null) {
+//	            //로그인 상태
+//	            System.out.println(Main_bje.loginMember.getNick() + " 님 환영합니다.");
+//	            System.out.println("1. 게시판글 작성");
+//	            System.out.println("2. 게시글 목록 조회");;
+//	         }else {
+//	            //로그인 X
+//	            System.out.println("로그인 먼저 해주세요");
+//	            //다음 진행 하면 안되니까 return
+//	         }
+//}
 
+}
