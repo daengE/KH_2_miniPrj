@@ -137,7 +137,6 @@ public class Adandoned {
 	}
 	
 	public void search(){
-		
 
 		System.out.print("지역명을 입력하세요 : ");
 //		JDBCTemplate_ad.sc.nextLine();
@@ -158,6 +157,75 @@ public class Adandoned {
 			}
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,search);
+			
+			rs = pstmt.executeQuery();
+			
+			System.out.println("입양유무 / 축종 / 세부종류 / 지역 / 안락사일정 / 성별 / 나이 ");
+
+			while(rs.next()) {
+				int ad_no = rs.getInt("AD_NO");
+				String adopt = rs.getString("AD_ADOPT");
+				String animal = rs.getString("AD_ANIMAL");
+				String type = rs.getString("AD_TYPE");
+				String city = rs.getString("AD_CITY");
+				String kill = rs.getString("AD_KILL");
+				String gender = rs.getString("AD_GENDER");
+				String age = rs.getString("AD_AGE");
+				
+				vo = new AdVo();
+				vo.setAd_no(ad_no);
+				vo.setAd_adopt(adopt);
+				vo.setAnimal(animal);
+				vo.setType(type);
+				vo.setCity(city);
+				vo.setKill(kill);
+				vo.setGender(gender);
+				vo.setAge(age);
+				
+				System.out.print(vo.getAd_no() + "| ");
+				System.out.print(vo.getAd_adopt() + " / ");
+				System.out.print(vo.getAnimal() + " / ");
+				System.out.print(vo.getType()+" / ");
+				System.out.print(vo.getCity()+" / ");
+				System.out.print(vo.getKill()+" / ");
+				System.out.print(vo.getGender()+" / ");
+				System.out.println(vo.getAge());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+	         JDBCTemplate.close(rs);
+//	         JDBCTemplate.close(pstmt);
+	      }
+	}
+	
+	public void ADOPT_YN(){
+		
+		System.out.print("1. 입양된 동물 조회하기 : ");
+		System.out.print("2. 입양되지 않은 동물 조회하기 : ");
+		
+		int search = InputUtil.getInt();
+		if(search == 1) {
+			System.out.println();
+		}else {
+			
+		}
+		
+		Connection conn = null;
+		AdVo vo = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT AD_NO, AD_ADOPT, AD_ANIMAL, AD_TYPE, AD_CITY, AD_KILL, AD_GENDER, AD_AGE FROM ADANDONED_BOARD WHERE AD_ADOPT = ?";
+				
+		PreparedStatement pstmt;
+		try {
+			try {
+				conn = JDBCTemplate.getConnection();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,search);//int
 			
 			rs = pstmt.executeQuery();
 			
