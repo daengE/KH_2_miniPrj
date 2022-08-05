@@ -22,49 +22,6 @@ public class MyPage {
 		System.out.println("폰번호 : " + Main.loginMember.getCell());
 		System.out.println("가입일자 : " + Main.loginMember.getCreateDate());
 		System.out.println("\n");
-
-	}
-
-	public void showMyPet() {
-		List<MemberPetVo> myPetList = new MemberService().showMyPet();
-
-		System.out.println("===== 내 반려동물 List =====");
-
-		if (myPetList.size() == 0) {
-			System.out.println("등록된 나의 반려동물이 없습니다.");
-		} else {
-			for (int i = 0; i < myPetList.size(); ++i) {
-
-				MemberPetVo petVo = myPetList.get(i);
-
-				int memberNo = petVo.getMemberNo();
-				String type = petVo.getType();
-				String gender = petVo.getGender();
-				String name = petVo.getName();
-				String birth = petVo.getBirth();
-
-				System.out.println(
-						i + 1 + ". " + "타입 : " + type + " |성별 : " + gender + " |이름 : " + name + " |생일 : " + birth);
-			}
-		}
-		// 반려동물 추가, 삭제
-		while (true) {
-			int petInput = new MyPageMenu().showMyPetMenu();
-			if (1 == petInput) {
-				// 반려동물 추가 하는 메소드
-				// TODO
-				System.out.println("반려동물 추가 메소드 만들거임...");
-				return;
-			} else if (2 == petInput) {
-				System.out.println("반려동물 삭제 메소드 만들거임...");
-				return;
-			} else if (0 == petInput) {
-				System.out.println("메인메뉴로 돌아갑니다.");
-				return;
-			} else {
-				System.out.println("잘못 입력 하셨습니다.");
-			}
-		}
 	}
 
 	public void updateMyInfo() {
@@ -106,6 +63,112 @@ public class MyPage {
 
 	}
 
+	public void showMyPet() {
+		List<MemberPetVo> myPetList = new MemberService().showMyPet();
 
+		System.out.println("===== 내 반려동물 List =====");
+
+		if (myPetList.size() == 0) {
+			System.out.println("등록된 나의 반려동물이 없습니다.");
+		} else {
+			for (int i = 0; i < myPetList.size(); ++i) {
+
+				MemberPetVo petVo = myPetList.get(i);
+
+				int memberNo = petVo.getMemberNo();
+				String type = petVo.getType();
+				String gender = petVo.getGender();
+				String name = petVo.getName();
+				String birth = petVo.getBirth();
+
+				System.out.println(
+						i + 1 + ". " + "타입 : " + type + " |성별 : " + gender + " |이름 : " + name + " |생일 : " + birth);
+			}
+		}
+		// 반려동물 추가, 삭제
+		while (true) {
+			int petInput = new MyPageMenu().showMyPetMenu();
+			if (1 == petInput) {
+				// 반려동물 추가 하는 메소드
+				// TODO
+				System.out.println("반려동물 추가 메소드 만들거임...");
+				new MyPage().addMyPet();
+				return;
+			} else if (2 == petInput) {
+				System.out.println("반려동물 삭제 메소드 만들거임...");
+				new MyPage().deleteMyPet();
+				return;
+			} else if (0 == petInput) {
+				System.out.println("메인메뉴로 돌아갑니다.");
+				return;
+			} else {
+				System.out.println("잘못 입력 하셨습니다.");
+			}
+		}
+	}
+
+	private void addMyPet() {
+
+		MemberPetVo petVo = new MemberPetVo();
+
+		// 반려동물 정보입력받고
+		System.out.println("== 반려동물 축종을 선택하세요 ==");
+		System.out.println("1. 개 2. 고양이 3. 기타");
+		int aniInput = InputUtil.getInt();
+		String aniType = null;
+		if (aniInput == 1) {
+			aniType = "개";
+		} else if (aniInput == 2) {
+			aniType = "고양이";
+		} else {
+			aniType = "기타";
+		}
+		System.out.println("반려동물 성별을 선택 하세요 : ");
+		System.out.println("1. 남 2. 여");
+		String aniGender = null;
+		int genderInput = InputUtil.getInt();
+		if (genderInput == 1) {
+			aniGender = "남";
+		} else if (genderInput == 2) {
+			aniGender = "여";
+		}
+		System.out.println("반려동물 이름 : ");
+		String aniName = InputUtil.sc.nextLine();
+		System.out.println("반려동물 생일 : ");
+		String aniBirth = InputUtil.sc.nextLine();
+
+		// 반려동물 객체에 담기
+		petVo = new MemberPetVo();
+		petVo.setType(aniType);
+		petVo.setGender(aniGender);
+		petVo.setName(aniName);
+		petVo.setBirth(aniBirth);
+
+		int result = new MemberService().join(petVo);
+
+		if (result == 1) {
+			System.out.println("반려동물 등록 성공..!");
+		} else {
+			System.out.println("실패...");
+		}
+
+	}
+
+	private void deleteMyPet() {
+		// 이름 입력 받아 서비스로 보내고 유효성 확인
+		System.out.println("삭제할 반려동물의 이름을 입력하세요.");
+		String petName = InputUtil.sc.nextLine();
+		
+		int result = new MemberService().deleteMyPet(petName);
+		
+		if(result > 0) {
+			System.out.println("반려동물 삭제 성공");
+		}else {
+			System.out.println("해당 이름의 반려동물이 없습니다.");
+		}
+
+		// 서비스에서 커넥트하고 DAO에서 DELETE
+
+	}
 
 }

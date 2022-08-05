@@ -3,6 +3,7 @@ package krw.qnaboard;
 import java.sql.Timestamp;
 import java.util.List;
 
+import krw.notificationboard.NotiService;
 import mini.main.Main;
 import mini.menu.Menu;
 import mini.util.InputUtil;
@@ -50,8 +51,11 @@ public class QnaController {
 			String title = qnaVo.getTitle();
 			String writer = qnaVo.getWriter();
 			Timestamp enrollDate = qnaVo.getEnrollDate();
-
-			System.out.println(qnaNo + "|" + title + "|" + writer + "|" + enrollDate);
+			if (qnaVo.getType().equals("Q")) {
+				System.out.println(qnaNo + "|" + title + "|" + writer + "|" + enrollDate);
+			} else {
+				System.out.println("( ˙▿˙ )" + title + "|" + writer + "|" + enrollDate);
+			}
 
 		}
 		int num = showQnaContentMenu();
@@ -60,12 +64,21 @@ public class QnaController {
 			System.out.println("메인메뉴로 돌아갑니다.");
 			return;
 		}
-		System.out.println("게시글 타입을 입력해 주세요.(Q,A)");
-		String type = InputUtil.sc.nextLine();
+		// 게시글 상세보기
+		System.out.println("게시글 타입을 선택해주세요.");
+		System.out.println("1. 질문 2. 답변");
+		int typeInput = InputUtil.getInt();
+		String type = null;
+		if (typeInput == 1) {
+			type = "Q";
+		} else {
+			type = "A";
+		}
 
-		// 글번호랑 타입 받기
+		// 글번호랑 타입 전달후 객체 받기
 		QnaVo vo = new QnaService().showQnaContenByNo(num, type);
 
+		// 객체 통해 상세글 출력
 		if (vo != null) {
 			System.out.println(vo.getQnaNo() + "|" + "제목 : " + vo.getTitle() + "|" + "작성 시간 : " + vo.getEnrollDate());
 			System.out.println("작성자 : " + vo.getWriter());
@@ -75,14 +88,41 @@ public class QnaController {
 			return;
 
 		}
-		
-		if (vo.getType().equals("A") && Main.loginMember.getMbRight() == 1) {
-			System.out.println("1. 답변 등록하기");
-			System.out.println("2. 메인 메뉴로");
-			adminInput = InputUtil.getInt();
-			if(adminInput == 1) {
-				//TODO 답변등록하는 메소드();
+
+		// 출력후 메뉴(질문 답변 타입에 따라, 회원 권한에 따라..)
+
+		if (vo.getType().equals("A") || Main.loginMember.getMbRight() == 0) {
+			System.out.println("1. 게시글로 가기");
+			System.out.println("0. 메인 메뉴로");
+			int input = InputUtil.getInt();
+			if (input == 1) {
+				listUpQna();
+			} else {
+				return;
 			}
+		} else if (vo.getType().equals("Q") && Main.loginMember.getMbRight() == 1) {
+			System.out.println("1. 게시글로 가기");
+			System.out.println("2. 답변 등록하기");
+			System.out.println("0. 메인 메뉴로");
+			adminInput = InputUtil.getInt();
+			if (adminInput == 1) {
+				listUpQna();
+			} else if (adminInput == 2) {
+				System.out.println("대충.. 답변등록하는 메소드");
+				System.out.print("제목 : ");
+				String title = InputUtil.sc.nextLine();
+				System.out.print("내용 : ");
+				String content = InputUtil.sc.nextLine();
+				//
+				
+//				QnaVo qnaVo = new QnaVo();
+//				
+//				new QnaService().replyQna(vo.getQnaNo());
+			} else {
+				return;
+			}
+		} else {
+			return;
 		}
 
 	}

@@ -75,7 +75,7 @@ public class QnaDao {
 
 		}
 
-		System.out.println(QnaBoardList.size());
+//		System.out.println(QnaBoardList.size()); 리스트사이즈 확인용
 
 		return QnaBoardList;
 

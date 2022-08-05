@@ -20,7 +20,7 @@ public class MemberDao {
 		Connection conn = JDBCTemplate.getConnection();
 
 		// SQL 작성
-		String sql = "SELECT * FROM MEMBER WHERE M_ID = ? AND M_PWD = ? AND DISABLED = 0";
+		String sql = "SELECT * FROM MEMBER WHERE M_ID = ? AND M_PWD = ?";
 
 		// SQL 객체에 담기
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -36,6 +36,7 @@ public class MemberDao {
 
 			int no = rs.getInt("M_NO");
 			String id = rs.getString("M_ID");
+			String pwd = rs.getString("M_PWD");
 			String name = rs.getString("M_NAME");
 			String nick = rs.getString("M_NICK");
 			String email = rs.getString("M_EMAIL");
@@ -53,6 +54,7 @@ public class MemberDao {
 			vo = new MemberVo();
 			vo.setNo(no);
 			vo.setId(id);
+			vo.setPwd(pwd);
 			vo.setName(name);
 			vo.setNick(nick);
 			vo.setEmail(email);
@@ -213,6 +215,96 @@ public class MemberDao {
 			JDBCTemplate.close(pstmt);
 		}
 
+	}
+
+	public void withdraw() throws Exception {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		// 업데이트 sql 문
+		String sql = "UPDATE MEMBER SET DISABLED = 1 WHERE M_NO = ? ";
+
+		try {
+			conn = JDBCTemplate.getConnection();
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, Main.loginMember.getNo());
+
+			int result = pstmt.executeUpdate();
+//			System.out.println(result); 결과 확인용
+
+			if (result == 1) {
+				JDBCTemplate.commit(conn);
+				System.out.println("탈퇴 되었습니다.");
+
+			} else {
+				JDBCTemplate.rollback(conn);
+				System.out.println("탈퇴 실패..!");
+			}
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			JDBCTemplate.close(conn);
+			JDBCTemplate.close(pstmt);
+		}
+
+	}
+
+	public int join(MemberPetVo petVo, Connection conn) throws Exception {
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		try {
+			// SQL 준비
+			String petSql = "INSERT INTO ANIMAL \r\n" + "VALUES(?, ?, ?, ?, ?)";
+
+//			System.out.println(Main.loginMember.getNo());
+//			System.out.println(petVo); 전달 확인
+
+			// SQL 객체 만들기
+			pstmt = conn.prepareStatement(petSql);
+			pstmt.setInt(1, Main.loginMember.getNo());
+			pstmt.setString(2, petVo.getType());
+			pstmt.setString(3, petVo.getName());
+			pstmt.setString(4, petVo.getBirth());
+			pstmt.setString(5, petVo.getGender());
+
+			// SQL 실행
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+	}
+
+	public int deleteMyPet(String petName, Connection conn) throws Exception {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			String sql ="DELETE FROM ANIMAL WHERE ANI_NAME = ? AND USER_NO = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, petName);
+			pstmt.setInt(2, Main.loginMember.getNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			throw e;
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 
 }// class
