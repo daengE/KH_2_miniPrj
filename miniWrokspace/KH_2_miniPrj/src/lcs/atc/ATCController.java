@@ -15,10 +15,6 @@ public class ATCController {
 		
 		System.out.println("==== 동물 훈련소 목록 ====");
 		
-		if(mini.main.Main.loginMember == null) {
-			System.out.println("로그인 먼저 해주세요");
-			return; //다음 진행 하면 안되니까 return 
-		}
 		
 		for(int i = 0 ; i < ATCVoList.size(); ++i) {
 			ATCVo atcvo = ATCVoList.get(i);
@@ -64,12 +60,24 @@ public class ATCController {
 				else if(input.equalsIgnoreCase("N")) {
 					System.out.println("\n 훈련소 목록으로 돌아갑니다.");
 					showATCList();
+					
 				}
 			}
 		}
 
 	public void showCityATCList() {
-		int writeCity = new Menu().showCityMenu();
+		int writeCity = 10;
+		do {
+			
+			writeCity = new Menu().showCityMenu();
+			if(writeCity > 7) {
+				System.out.println("번호를 잘못 선택하셨습니다. 재입력 부탁드립니다.");
+			}
+		}
+		while(writeCity > 7);
+			
+		
+		
 		
 		List<ATCVo> ATCVoList = new ATCService().showCityATCList(writeCity);
 		ATCVo atcvo = null;

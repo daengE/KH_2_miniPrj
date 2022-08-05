@@ -2,6 +2,7 @@ package lcs.menu;
 
 import lcs.application.ApplicationController;
 import lcs.atc.ATCController;
+import mini.main.Main;
 import mini.util.InputUtil;
 
 public class Menu {
@@ -10,23 +11,35 @@ public class Menu {
 	public int showMenu() {
 		
 		
-		System.out.println("임찬선 - 동물훈련팁 부분입니다.");
+		if (Main.loginMember == null) {
+			
+			System.out.println("1. 로그인");
+		}
 		
-		System.out.println("1. 로그인");
-		System.out.println("3. 동물훈련 팁");
-		System.out.println("4. 동물훈련소 보기");
+		else {
+		System.out.println("4. 동물훈련 팁");
+		System.out.println("5. 동물훈련소 보기");
 		System.out.println("5. 맨 처음 메뉴로 돌아가기");
 		System.out.println("9. 맨 처음 메뉴로 돌아가기");
 		
+		}
 		return InputUtil.getInt();
 		
+			
 	}
 	
 	public int showATCDetailMenu() {
-		System.out.println("\n \n 조회할 글 번호를 입력해주세요 (0번은 메인메뉴) : ");
+		System.out.println("\n \n 상세 조회할 글 번호를 입력해주세요 (0. 메인메뉴로 돌아가기) ::");
 		return InputUtil.getInt();
 	}
 
+	public int showATCSelectMenu() {
+		System.out.println("1. 모든 동물 보호소 보기");
+		System.out.println("2. 지역별 동물 보호소 보기");
+		
+		return InputUtil.getInt();
+	}
+	
 	public String showATCAply() {
 		
 		
@@ -35,12 +48,6 @@ public class Menu {
 		
 		return InputUtil.sc.nextLine();
 
-	}
-	public int showATCSelectMenu() {
-		System.out.println("1. 모든 동물 보호소 보기");
-		System.out.println("2. 지역별 동물 보호소 보기");
-		
-		return InputUtil.getInt();
 	}
 
 	public int showCityMenu() {
@@ -55,6 +62,9 @@ public class Menu {
 
 		return InputUtil.getInt();
 	}
+
+	
+
 	
 	
 }

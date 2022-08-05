@@ -27,7 +27,6 @@ public class ApplicationDao {
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

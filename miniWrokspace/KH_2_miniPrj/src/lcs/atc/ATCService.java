@@ -81,7 +81,7 @@ public class ATCService {
 		else {
 			System.out.println("번호입력을 잘못하셨습니다.");
 		}
-		System.out.println(cityName);
+		
 		List<ATCVo> ATCVoList = null;
 		Connection conn = null;
 		try {
