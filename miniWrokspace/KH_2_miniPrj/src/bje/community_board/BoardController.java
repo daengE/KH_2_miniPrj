@@ -24,12 +24,6 @@ public class BoardController {
     */
    public void write() {//여기! 디폴트 아닌것들 모두 작성받는것으로 수정해야함
       
-      //로그인 체크
-      if(Main_bje.loginMember == null) {
-         System.out.println("로그인 먼저 해주세요");
-         return; //다음 진행 하면 안되니까 return
-      }
-      
       System.out.println("----- 게시글 작성 -----");
       
       System.out.print("제목 : ");
@@ -59,6 +53,11 @@ public class BoardController {
 
    public void showList() {
       
+//	  if(Main_bje.loginMember == null) {
+//	        System.out.println("로그인 먼저 해주세요");
+//	        return; //다음 진행 하면 안되니까 return
+//	     } 
+	   
       List<BoardVo> boardVoList = new BoardService().showList();
       
       System.out.println("----- 게시판 글 목록-----");
@@ -107,7 +106,7 @@ public class BoardController {
 
       //2:댓글작성
       if(comment == 2) {
-         new BcommentController().write();
+         new BcommentController().write(num);
       }
       
       else {
