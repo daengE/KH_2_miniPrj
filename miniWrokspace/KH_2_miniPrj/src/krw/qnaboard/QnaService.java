@@ -25,6 +25,25 @@ public class QnaService {
 		return QnaBoardList;
 
 	}
+	
+	public List<QnaVo> listUpMyQna() {
+		
+		Connection conn = null;
+		List<QnaVo> QnaBoardList = null;
+
+		try {
+			conn = JDBCTemplate.getConnection();
+			QnaBoardList = new QnaDao().listUpMyQna(conn);
+		} catch (Exception e) {
+			System.out.println("커넥션, 리스트업 서비스중 예외발생");
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+
+		return QnaBoardList;
+		
+	}
 
 	public int writeQna(QnaVo vo) {
 
@@ -117,5 +136,7 @@ public class QnaService {
 		return result;
 
 	}
+
+	
 
 }
