@@ -19,7 +19,7 @@ public class QnaVo {
 		this.content = content;
 		this.enrollDate = enrollDate;
 		this.complete = complete;
-		this.delete = delete;
+		this.disabled = delete;
 	}
 
 	private int qnaNo;
@@ -30,7 +30,7 @@ public class QnaVo {
 	private String content;
 	private Timestamp enrollDate;
 	private String complete;
-	private String delete;
+	private String disabled;
 	
 	public int getQnaNo() {
 		return qnaNo;
@@ -81,17 +81,17 @@ public class QnaVo {
 		this.complete = complete;
 	}
 	public String getDelete() {
-		return delete;
+		return disabled;
 	}
 	public void setDelete(String delete) {
-		this.delete = delete;
+		this.disabled = delete;
 	}
 
 	@Override
 	public String toString() {
 		return "QnaVo [qnaNo=" + qnaNo + ", memberNo=" + memberNo + ", type=" + type + ", writer=" + writer + ", title="
 				+ title + ", content=" + content + ", enrollDate=" + enrollDate + ", complete=" + complete + ", delete="
-				+ delete + "]";
+				+ disabled + "]";
 	}
 	
 
