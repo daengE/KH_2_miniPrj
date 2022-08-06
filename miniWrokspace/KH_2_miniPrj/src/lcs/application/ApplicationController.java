@@ -39,7 +39,7 @@ public class ApplicationController {
 		String phone = InputUtil.sc.nextLine();
 		System.out.println();
 		
-		System.out.println("\n 입소가능한 날짜를 알려주세요(형식 예 : 220802");
+		System.out.println("\n 입소가능한 날짜를 알려주세요(형식 예 : 220802)");
 		System.out.print("입소가능일자 : ");
 		String psbDate = InputUtil.sc.nextLine();
 		System.out.println();
@@ -59,6 +59,8 @@ public class ApplicationController {
 			if(result == 1) {
 				System.out.println("입소상담 신청서를 완료하였습니다.");
 				System.out.println("빠른시일내에 <"+atcvo.getName()+">에서 <" + aplyVo.getPhone()+ ">으로 연락드리겠습니다.");
+				System.out.println();
+				System.out.println("메인메뉴로 돌아가겠습니다. \n");
 			}
 		
 		
