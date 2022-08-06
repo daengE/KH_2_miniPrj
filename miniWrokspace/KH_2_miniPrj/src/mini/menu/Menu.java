@@ -1,5 +1,7 @@
 package mini.menu;
 
+import bje.BcommentController;
+import bje.community_board.BoardController;
 import mini.main.Main;
 import mini.member.MemberController;
 import mini.util.InputUtil;
@@ -101,11 +103,10 @@ public class Menu {
 			} else {
 				System.out.println("잘못 입력 하셨습니다..!");
 			}
-		}
-		
+		}//while
 		return input;
-		
-	}
+	}//showMyPageMenu
+	
 	
 	public void showMenu1() {
 		
@@ -122,14 +123,13 @@ public class Menu {
 				new Adandoned().search();
 				showMenu1();
 			
-		}else 
-				{new Adandoned().detail(num);
-			
+		}else {
+			new Adandoned().detail(num);
 		}		
 //		InputUtil.sc.nextLine();
 //		return InputUtil.getInt();
-		
-	}
+	}//showMenu1
+	
 	
 	public int showMenu2() {
 		
@@ -166,8 +166,9 @@ public class Menu {
 		
 	}//showMenu2
 	
+	
    public void showMenu6() {
-         
+	   
 		System.out.println("\n\n0. 태그별 검색");
 		System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====" );
 		System.out.print( " : " );
@@ -175,16 +176,81 @@ public class Menu {
 		int num = InputUtil.getInt();
 		
 		if(num == 0) {
-			System.out.println("\n\n==== 태그별 검색 ====");
-			System.out.println(" 후원요청 | 자랑 | 질문 | 자유 | 뉴스데스크 ");
+			new BoardController().showTagList();
+				showMenu6();
+		}else {
+			new BoardController().showBoardDetailMenu(num);
+		}
 		
-				new Adandoned().search();
-				showMenu1();
-			
-		}else 
-				{new Adandoned().detail(num);
-			
+		System.out.println("\n 댓글을 작성하시겠습니까?");
+	    System.out.println("1. 네 작성작하겠습니다.");
+	    System.out.println("2. 아니요 작성하지않겠습니다.");
+	   
+	    int numcom = InputUtil.getInt();
+	    if(numcom == 1) {
+		    new BcommentController().write(numcom);
+		    new BoardController().showBoardDetailMenu(num);
+	    }else {
+	    	return;
+ 	    }
+   }//showMenu6  
+   
+   
+   public int returnMain() {
+	   
+	   System.out.println("메인메뉴로 돌아가시겠습니까?");
+	   System.out.println("1. 네 돌아갑니다.");
+	   System.out.println("2. 아니요. ");
+	   int returnMain = InputUtil.getInt();
+	   if(returnMain == 1) {
+		   return 1;
+	   }
+	   return 0;
+	   
+   }//returnMain
+   
+   
+   public void allComments() {
+	   
+		int num = InputUtil.getInt();
+		
+		if(num == 0) {
+			new BoardController().showTagList();
+				showMenu6();
+		}else {
+			new BoardController().showBoardDetailMenu(num);
 		}		
-   }//showMenu6
+   }//showMenu6  
+   
+   
+   public void showMenuComment() {
+	   
+		System.out.println("\n\n댓글");
+		System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====" );
+		System.out.print( " : " );
+		
+		int num = InputUtil.getInt();
+		
+		if(num == 0) {
+			new BoardController().showTagList();
+				showMenu6();
+		}else {
+			new BoardController().showBoardDetailMenu(num);
+		}		
+   }//showMenu6 
 
-}
+}//class
+
+
+
+
+
+
+
+
+
+
+
+
+
+

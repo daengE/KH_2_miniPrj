@@ -27,15 +27,24 @@ public class Menu {
     * 게시판 상세조회 관련 메뉴
     */
    public int showBoardDetailMenu() {
-	  
-      System.out.println("조회할 글 번호 (0번은 메인메뉴) : ");
-      return InputUtil.getInt();
+//      System.out.println("조회할 글 번호 (0번은 메인메뉴) : ");
+	  return InputUtil.getInt();
    }
    
    public int choiceBcommentMenu() {
-	   System.out.println("\n1. 댓글을 조회하시겠습니까?  or 2. 댓글을 작성하시겠습니까?");
+	   System.out.println("\n 댓글을 작성하시겠습니까?");
+	   System.out.println("1. 네 작성작하겠습니다.");
+	   System.out.println("2. 아니요 작성하지않겠습니다.");
 	   return InputUtil.getInt();
    }
+   
+   public String choiceBoardTag() {
+	   System.out.print("\n어떤 태그의 글을 보고싶으십니까?");
+	   System.out.print("\n| 후원요청 | 자랑 | 질문 | 자유 | 뉴스데스크 |");
+	   return InputUtil.sc.nextLine();
+   }
+   
+   
    
    
    
