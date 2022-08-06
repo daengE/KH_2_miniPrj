@@ -36,10 +36,8 @@ public class Main {
 
 			case 1:
 				if (loginMember == null) {
-					//로그인
 					new MemberController().login();
 				} else {
-					//로그아웃
 					loginMember = null;
 					System.out.println("정상적으로 로그아웃 되었습니다..!");
 				}
@@ -47,10 +45,8 @@ public class Main {
 				
 			case 2:
 				if (loginMember == null) {
-					//회원가입
 					new MemberController().join();
 				} else {
-					//마이페이지
 					new MemberController().myPage();
 				}
 				break;
@@ -121,29 +117,28 @@ public class Main {
                }
                break;	
                
-           case 6:
-        	   while(true) {
-        		   new BoardController().showList();
-        		   
-        		   new Menu().showMenu6();
-        		   
-        		   if(new Menu().returnMain() == 1) {
-        			   break;
-        		   }else {
-        			   continue;
-        		   }
-        		   
-        	   }//while
-        	   break;
+            case 6:
+                while(true) {
+                   new BoardController().showList();
+                   
+                   new Menu().showMenu6();
+                   
+                   if(new Menu().returnMain() == 1) {
+                      break;
+                   }else {
+                      continue;
+                   }
+                   
+                }//while
+                break;
+              
 				
 			case 7:
 				new NotiController().handleNotiMenu();
-				// TODO 공지 수정 및 삭제(물론 권한은 관리자만)
 				break;
 				
 			case 8:
 				new QnaController().handleQnaMenu();
-				// TODO 질문 글 들어가서 답변하기(답변 할 때 정해진 포멧)
 				break;
 				
 			case 9:
@@ -151,7 +146,6 @@ public class Main {
 				return;
 				
 			case 0:
-				// TODO 관리자할까말까();
 				System.out.println("잘못 입력 하셨군요..!!");
 				break;
 				

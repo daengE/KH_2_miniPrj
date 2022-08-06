@@ -51,15 +51,10 @@ public class Adandoned {
 				vo.setGender(gender);
 				vo.setAge(age);
 				
-				System.out.print(vo.getAd_no() + "| ");
-				System.out.print(vo.getAd_adopt() + " / ");
-				System.out.print(vo.getAnimal() + " / ");
-				System.out.print(vo.getType()+" / ");
-				System.out.print(vo.getCity()+" / ");
-				System.out.print(vo.getKill()+" / ");
-				System.out.print(vo.getGender()+" / ");
-				System.out.println(vo.getAge());
-			}} catch (Exception e) {
+				System.out.println(ad_no + "|" + adopt + "/"+ animal + "/"+ type + "/"+ city + "/"+ kill + "/"+ gender + "/"+ age + "/");
+			
+			}//while
+		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 	         JDBCTemplate.close(rs);
@@ -83,8 +78,7 @@ public class Adandoned {
 			
 			ResultSet rs = pstmt.executeQuery();
 			
-			if(rs.next())	
-			{
+			if(rs.next()) {
 				int ad_no = rs.getInt("AD_NO");
 				String adopt = rs.getString("AD_ADOPT");
 				String animal = rs.getString("AD_ANIMAL");
@@ -114,34 +108,49 @@ public class Adandoned {
 				
 				System.out.println(" 입양유무 / 축종 / 세부종류 / 지역 / 안락사일정 / 성별 / 나이 ");
 
-				System.out.print(vo.getAd_no() + "| ");
-				System.out.print(vo.getAd_adopt() + " / ");
-				System.out.print(vo.getAnimal() + " / ");
-				System.out.print(vo.getType()+" / ");
-				System.out.print(vo.getCity()+" / ");
-				System.out.print(vo.getKill()+" / ");
-				System.out.print(vo.getGender()+" / ");
-				System.out.println(vo.getAge()+" / ");
+				System.out.println(ad_no + "|" + adopt + "/"+ animal + "/"+ type + "/"+ city + "/"+ kill + "/"+ gender + "/"+ age + "/");
 				System.out.print("보호장소 : " + vo.getShelter()+" / ");
 				System.out.println(vo.getAddress());
 				System.out.println("특이사항 : " +vo.getFeature());
 				System.out.print("중성화여부 : " +vo.getNt());
 				mini.main.Main.selected = vo;
-		}} catch (Exception e) {
+			}//if
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 	         JDBCTemplate.close(pstmt);
-	      }
+	    }
 		
 //		return vo;
 	}
 	
-	public void search(){
-
+	public void search() {
+		System.out.println(" 서울 | 경기도 | 경상도 | 전라도 | 제주도 | 충청도 | 강원도 ");
 		System.out.print("지역명을 입력하세요 : ");
 //		JDBCTemplate_ad.sc.nextLine();
 		String search = InputUtil.sc.nextLine();
 		
+			if(search.equals("서울시")) {
+				
+			}
+			else if(search.equals("경기도")) {
+//				 cityName = "경기도";
+			}
+			else if(search.equals("경상도")) {
+			}
+			else if(search.equals("전라도")){
+			}
+			else if(search.equals("제주도")) {
+			}
+			else if(search.equals("충청도")){
+			}
+			else if(search.equals("강원도")){
+			}
+			else {
+				System.out.println("번호입력을 잘못하셨습니다.");
+			}
+			
 		Connection conn = null;
 		AdVo vo = null;
 		ResultSet rs = null;
@@ -182,27 +191,21 @@ public class Adandoned {
 				vo.setGender(gender);
 				vo.setAge(age);
 				
-				System.out.print(vo.getAd_no() + "| ");
-				System.out.print(vo.getAd_adopt() + " / ");
-				System.out.print(vo.getAnimal() + " / ");
-				System.out.print(vo.getType()+" / ");
-				System.out.print(vo.getCity()+" / ");
-				System.out.print(vo.getKill()+" / ");
-				System.out.print(vo.getGender()+" / ");
-				System.out.println(vo.getAge());
+				System.out.println(ad_no + "|" + adopt + "/"+ animal + "/"+ type + "/"+ city + "/"+ kill + "/"+ gender + "/"+ age + "/");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 	         JDBCTemplate.close(rs);
 //	         JDBCTemplate.close(pstmt);
-	      }
-	}
+	    }
+	}//search
 	
-	public void ADOPT_YN(){
+	
+	public void ADOPT_YN() {
 		
-		System.out.print("1. 입양된 동물 조회하기 : ");
-		System.out.print("2. 입양되지 않은 동물 조회하기 : ");
+		System.out.println("1. 입양된 동물 조회하기  ");
+		System.out.println("2. 입양되지 않은 동물 조회하기 ");
 		
 		String adopt1 = null;
 		int search = InputUtil.getInt();
@@ -251,22 +254,14 @@ public class Adandoned {
 				vo.setGender(gender);
 				vo.setAge(age);
 				
-				System.out.print(vo.getAd_no() + "| ");
-				System.out.print(vo.getAd_adopt() + " / ");
-				System.out.print(vo.getAnimal() + " / ");
-				System.out.print(vo.getType()+" / ");
-				System.out.print(vo.getCity()+" / ");
-				System.out.print(vo.getKill()+" / ");
-				System.out.print(vo.getGender()+" / ");
-				System.out.println(vo.getAge());
+				System.out.println(ad_no + "|" + adopt + "/"+ animal + "/"+ type + "/"+ city + "/"+ kill + "/"+ gender + "/"+ age + "/");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 	         JDBCTemplate.close(rs);
 //	         JDBCTemplate.close(pstmt);
-	      }
-		
-	}
+	    }
+	}//ADOPT_YN
 	
 }
