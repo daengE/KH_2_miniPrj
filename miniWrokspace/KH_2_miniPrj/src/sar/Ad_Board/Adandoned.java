@@ -226,8 +226,7 @@ public class Adandoned {
 				e.printStackTrace();
 			}
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,adopt1);//int
-			
+			pstmt.setString(1,adopt1);
 			rs = pstmt.executeQuery();
 			
 			System.out.println("입양유무 / 축종 / 세부종류 / 지역 / 안락사일정 / 성별 / 나이 ");
