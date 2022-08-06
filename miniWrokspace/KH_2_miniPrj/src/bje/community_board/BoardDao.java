@@ -105,7 +105,7 @@ public class BoardDao {
       //connection 준비
       
       //SQL 준비
-      String sql = "SELECT B_NO , B_TITLE , B_CONTENTS , B_NICK , B_ENROLL_DATE FROM COMMUNITY_BOARD WHERE B_NO = ?";
+      String sql = "SELECT B_TAG , B_NO , B_TITLE , B_CONTENTS , B_NICK , B_ENROLL_DATE FROM COMMUNITY_BOARD WHERE B_NO = ?";
       
       PreparedStatement pstmt = null;
       ResultSet rs = null;
@@ -121,6 +121,7 @@ public class BoardDao {
          
          //ResultSet -> 자바객체
          if(rs.next()) {
+        	String tag = rs.getString("B_TAG");
             int no = rs.getInt("B_NO");
             String title = rs.getString("B_TITLE");
             String content = rs.getString("B_CONTENTS");
@@ -128,6 +129,7 @@ public class BoardDao {
             Timestamp enrollDate = rs.getTimestamp("B_ENROLL_DATE");
             
             vo = new BoardVo();
+            vo.setTag(tag);
             vo.setB_no(no);
             vo.setTitle(title);
             vo.setContent(content);
