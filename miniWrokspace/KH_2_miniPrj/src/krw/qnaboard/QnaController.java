@@ -3,10 +3,10 @@ package krw.qnaboard;
 import java.sql.Timestamp;
 import java.util.List;
 
-import krw.notificationboard.NotiService;
 import mini.main.Main;
 import mini.menu.Menu;
 import mini.util.InputUtil;
+import mini.util.StringTest;
 
 public class QnaController {
 
@@ -39,10 +39,12 @@ public class QnaController {
 		List<QnaVo> qnaBoardList = new QnaService().listUpQna();
 
 		// VO를 토대로 리스트업 !!
-		System.out.println("===== QnA 게시판 =====");
+		System.out.println("============================= QnA 게시판 ==============================\n");
+		System.out.println("+------+-------------------------+---------------+---------------------+");
+		System.out.println("|글번호|------  제     목  ------|----작 성 자---|-----작 성 시 간-----|");
+		System.out.println("+------+-------------------------+---------------+---------------------+");
 
 		// 게시판 목록에 나올 필드들 뽑아오기
-
 		for (int i = 0; i < qnaBoardList.size(); ++i) {
 
 			QnaVo qnaVo = qnaBoardList.get(i);
@@ -51,13 +53,22 @@ public class QnaController {
 			String title = qnaVo.getTitle();
 			String writer = qnaVo.getWriter();
 			Timestamp enrollDate = qnaVo.getEnrollDate();
+			
+			int titleLength = new StringTest().getStrLength(25, title);
+			int writerLength = new StringTest().getStrLength(15, writer);
+			
 			if (qnaVo.getType().equals("Q")) {
-				System.out.println(qnaNo + "|" + title + "|" + writer + "|" + enrollDate);
+				System.out.println("|" + String.format("%6s", qnaNo) + "|" + String.format("%-"+ titleLength +"s", title) + "|"
+						+ String.format("%-"+ writerLength +"s", writer) + "|" + enrollDate + "|");
+
 			} else {
-				System.out.println("( ˙▿˙ )" + title + "|" + writer + "|" + enrollDate);
+				System.out.println("|" + String.format("%6s", "Reply") + "|" + String.format("%-"+ titleLength +"s", title) + "|"
+						+ String.format("%-"+ writerLength +"s", writer) + "|" + enrollDate + "|");
 			}
 
 		}
+		System.out.println("+------+-------------------------+---------------+---------------------+");
+
 		int num = showQnaContentMenu();
 
 		if (num == 0) {
@@ -112,10 +123,9 @@ public class QnaController {
 				String title = InputUtil.sc.nextLine();
 				System.out.print("내용 : ");
 				String content = InputUtil.sc.nextLine();
-				
-				
+
 				QnaVo qnaVo = new QnaVo();
-				
+
 				qnaVo.setQnaNo(vo.getQnaNo());
 				qnaVo.setMemberNo(Main.loginMember.getNo());
 				qnaVo.setType("A");
@@ -124,14 +134,13 @@ public class QnaController {
 				qnaVo.setContent(content);
 //				
 				int result = new QnaService().replyQna(qnaVo);
-				
-				if(result == 1) {
+
+				if (result == 1) {
 					System.out.println("답변이 작성 되었습니다.");
-				}else {
+				} else {
 					System.out.println("답변 작성 실패..");
 				}
-				
-				
+
 			} else {
 				return;
 			}
@@ -177,6 +186,8 @@ public class QnaController {
 
 		// DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
 		int result = new QnaService().writeQna(vo);
+
+		System.out.println(result);
 
 		// insert 결과에 따라 로직 처리
 		if (result == 1) {
