@@ -47,7 +47,7 @@ public class LcsMenu {
 	public String showATCAply() {
 		
 		
-		System.out.println("\n \n 위의 훈련소에 입소상담을 신청하시겠습니까?");
+		System.out.println("위의 훈련소에 입소상담을 신청하시겠습니까?");
 		System.out.println("Y / N");
 		
 		return InputUtil.sc.nextLine();

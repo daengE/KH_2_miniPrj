@@ -16,8 +16,8 @@ public class Menu {
 			System.out.println("1. 로그인");
 			System.out.println("2. 회원가입");
 			System.out.println("3. 유기동물 게시판 조회");
-			System.out.println("4. 찬선님");
-			System.out.println("5. 화이팅");
+			System.out.println("4. 동물관련 TIP");
+			System.out.println("5. 동물훈련소 보기");
 			System.out.println("6. 커뮤니티 게시판 조회");
 			System.out.println("7. 공지사항 게시판");
 			System.out.println("8. QnA 게시판");
@@ -26,8 +26,8 @@ public class Menu {
 			System.out.println("1. 로그아웃");
 			System.out.println("2. 마이페이지");
 			System.out.println("3. 유기동물 게시판 조회");
-			System.out.println("4. 찬선님");
-			System.out.println("5. 화이팅");
+			System.out.println("4. 동물관련 TIP");
+			System.out.println("5. 동물훈련소 보기");
 			System.out.println("6. 커뮤니티 게시판 조회");
 			System.out.println("7. 공지사항 게시판");
 			System.out.println("8. QnA 게시판");
@@ -168,32 +168,39 @@ public class Menu {
 	
 	
    public void showMenu6() {
-	   
-		System.out.println("\n\n0. 태그별 검색");
-		System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====" );
-		System.out.print( " : " );
-		
-		int num = InputUtil.getInt();
-		
-		if(num == 0) {
-			new BoardController().showTagList();
-				showMenu6();
-		}else {
-			new BoardController().showBoardDetailMenu(num);
-		}
-		
-		System.out.println("\n 댓글을 작성하시겠습니까?");
-	    System.out.println("1. 네 작성작하겠습니다.");
-	    System.out.println("2. 아니요 작성하지않겠습니다.");
-	   
-	    int numcom = InputUtil.getInt();
-	    if(numcom == 1) {
-		    new BcommentController().write(numcom);
-		    new BoardController().showBoardDetailMenu(num);
-	    }else {
-	    	return;
- 	    }
-   }//showMenu6  
+	      
+	      System.out.println("\n\n0. 태그별 검색");
+	      System.out.println("1. 글 작성");
+	      System.out.print("2. 상세 글 조회" );
+	      System.out.print( " : " );
+	      
+	      int num = InputUtil.getInt();
+	      
+	      if(num == 0) {
+	         new BoardController().showTagList();
+	         showMenu6();
+	      }
+	      if(num == 1) {
+	         new BoardController().write();
+	         showMenu6();
+	      }
+	      else {
+	         new BoardController().showBoardDetailMenu(num);
+	      }
+	      
+	      System.out.println("\n 댓글을 작성하시겠습니까?");
+	      System.out.println("1. 네 작성작하겠습니다.");
+	      System.out.println("2. 아니요 작성하지않겠습니다.");
+	      
+	      int numcom = InputUtil.getInt();
+	      if(numcom == 1) {
+	          new BcommentController().write(numcom);
+	          new BoardController().showBoardDetailMenu(num);
+	       }
+	      else {
+	          return;
+	        }
+	   }//showMenu6
    
    
    public int returnMain() {

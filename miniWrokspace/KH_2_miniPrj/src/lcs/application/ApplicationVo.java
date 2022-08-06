@@ -80,9 +80,7 @@ public class ApplicationVo {
 	@Override
 	public String toString() {
 		System.out.println("작성하신 내용 확인 부탁드립니다.");
-		return " [훈려=" + atcName + ", animalType=" + animalType
-				+ ", phone=" + phone + ", aplyDate=" + aplyDate + ", psbDate=" + psbDate + ", postType=" + postType
-				+ "]";
+		return ("훈려소 이름 :" + atcName + ", 신청한 동물=" + animalType + ", 신청한 번호=" + phone + ", 입소가능일자=" + psbDate );
 	}
 	
 	
