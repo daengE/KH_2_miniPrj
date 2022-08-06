@@ -204,11 +204,12 @@ public class Adandoned {
 		System.out.print("1. 입양된 동물 조회하기 : ");
 		System.out.print("2. 입양되지 않은 동물 조회하기 : ");
 		
+		String adopt1 = null;
 		int search = InputUtil.getInt();
 		if(search == 1) {
-			System.out.println();
+			adopt1 = "Y";
 		}else {
-			
+			adopt1 = "N";
 		}
 		
 		Connection conn = null;
@@ -225,7 +226,7 @@ public class Adandoned {
 				e.printStackTrace();
 			}
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,search);//int
+			pstmt.setString(1,adopt1);//int
 			
 			rs = pstmt.executeQuery();
 			
