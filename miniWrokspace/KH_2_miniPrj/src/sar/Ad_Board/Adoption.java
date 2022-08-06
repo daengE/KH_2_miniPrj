@@ -54,7 +54,6 @@ public class Adoption {
 				System.out.println("신청서 작성 실패...");
 				conn.rollback();
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			JDBCTemplate.rollback(conn);
@@ -83,8 +82,8 @@ public class Adoption {
 			System.out.println(result);
 			
 			if(result >= 1) {
-				System.out.println("입양 업뎃완료!");
-				System.out.println("입양 신청 후 철회가 불가능합니다");
+				System.out.println("신청서 작성 완료!");
+				System.out.println("입양 신청 후 철회가 불가능합니다. 정말 입양 하시겠습니까?");
 				System.out.println("1. 확인");
 				System.out.println("2. 취소");
 				int num2 = InputUtil.getInt();
@@ -110,7 +109,8 @@ public class Adoption {
 			if(num3 == 1) {
 				new Adandoned().list();
 			}else if(num3 == 2) {
-				new Menu().showMenu();
+				mini.main.Main.main(null);
+//				new Menu().showMenu();
 			}else if(num3 == 3) {
 				System.out.println("시스템을 종료 합니다...!");
 			}
