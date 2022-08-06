@@ -14,7 +14,6 @@ public class Adandoned {
 
 	public AdVo list() {
 
-//		System.out.println("\n\n====[유기동물 게시판]====");
 //		System.out.println("====[전체 글 조회]====");
 
 		String sql = "SELECT AD_NO, AD_ADOPT, AD_ANIMAL, AD_TYPE, AD_CITY, AD_KILL, AD_GENDER, AD_AGE FROM ADANDONED_BOARD";
@@ -27,11 +26,10 @@ public class Adandoned {
 			conn = JDBCTemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			System.out.println("=======================================유기동물 게시판======================================\n");
-			System.out.println("+------+-------+-------+------------+----------------------------------------+-------------------------+");
-			System.out.println("|-번호-|--입양-|-품 종-|--세부종류--|--지역--|---안락사일정---|성별|나이|");
-			System.out.println("+------+-------+-------+------------+----------------------------------------+-------------------------+");
-			
+			System.out.println("==============================유기동물 게시판===================================\n");
+			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+			System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|--지 역--|안락사일정|성별|---나 이---|");
+			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
 
 			while (rs.next()) {
 
@@ -54,26 +52,22 @@ public class Adandoned {
 				vo.setGender(gender);
 				vo.setAge(age);
 				
-				
-				
-				int animalLength = new StringTest().getStrLength(5, animal);
-				int typeLength = new StringTest().getStrLength(10, type);
-				int ageLength = new StringTest().getStrLength(2, age);
+				int animalLength = new StringTest().getStrLength(8, animal);
+				int typeLength = new StringTest().getStrLength(14, type);
+				int ageLength = new StringTest().getStrLength(10, age);
+				int killLength = new StringTest().getStrLength(9, kill);
 				
 				System.out.println(
 						  "|" + String.format("%4s", ad_no) + "  "
 					    + "|" + " "+ String.format("%3s", adopt)+ "   "
-						+ "|" + " "+ String.format("%" + animalLength + "s", animal) + " "
+						+ "|" + " "+ String.format("%-" + animalLength + "s", animal) + " "
 						+ "|"  +" "+ String.format("%-"+ typeLength + "s", type)
-						+ "|"  +" "+ String.format("%4s", city)
-						+ "|"  +" "+ String.format("%5s", kill)
-						+ "|"  +" "+ String.format("%5s", gender)
-						+ "|" + " " +String.format("%2s", age)
+						+ "|"  +" "+ String.format("%5s", city)
+						+ "|"  +" "+ String.format("%-"+ killLength + "s", kill)
+						+ "|"  +" "+ String.format("%3s", gender)
+						+ "|"  +" "+ String.format("%-"+ ageLength + "s", age)
 						+ "|");
-				System.out.println("+------+-------------------------+---------------------------------+------------+-------------------------+");
-				
-//				System.out.println(ad_no + "|" + adopt + "/" + animal + "/" + type + "/" + city + "/" + kill + "/"
-//						+ gender + "/" + age + "/");
+				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
 
 			} // while
 		} catch (Exception e) {
@@ -151,12 +145,12 @@ public class Adandoned {
 	}
 
 	public void search() {
-		System.out.println(" 서울 | 경기도 | 경상도 | 전라도 | 제주도 | 충청도 | 강원도 ");
+		System.out.println(" 서울시 | 경기도 | 경상도 | 전라도 | 제주도 | 충청도 | 강원도 ");
 		System.out.print("지역명을 입력하세요 : ");
 //		JDBCTemplate_ad.sc.nextLine();
 		String search = InputUtil.sc.nextLine();
 
-		if (search.equals("서울")) {
+		if (search.equals("서울시")) {
 			search2(search);
 		} else if (search.equals("경기도")) {
 			search2(search);
@@ -196,7 +190,9 @@ public class Adandoned {
 
 			rs = pstmt.executeQuery();
 
-			System.out.println("입양유무 / 축종 / 세부종류 / 지역 / 안락사일정 / 성별 / 나이 ");
+			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+			System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|--지 역--|안락사일정|성별|---나 이---|");
+			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
 
 			while (rs.next()) {
 				int ad_no = rs.getInt("AD_NO");
@@ -217,9 +213,24 @@ public class Adandoned {
 				vo.setKill(kill);
 				vo.setGender(gender);
 				vo.setAge(age);
+				
+				int animalLength = new StringTest().getStrLength(8, animal);
+				int typeLength = new StringTest().getStrLength(14, type);
+				int ageLength = new StringTest().getStrLength(10, age);
+				int killLength = new StringTest().getStrLength(9, kill);
+				
+				System.out.println(
+						  "|" + String.format("%4s", ad_no) + "  "
+					    + "|" + " "+ String.format("%3s", adopt)+ "   "
+						+ "|" + " "+ String.format("%-" + animalLength + "s", animal) + " "
+						+ "|"  +" "+ String.format("%-"+ typeLength + "s", type)
+						+ "|"  +" "+ String.format("%5s", city)
+						+ "|"  +" "+ String.format("%-"+ killLength + "s", kill)
+						+ "|"  +" "+ String.format("%3s", gender)
+						+ "|"  +" "+ String.format("%-"+ ageLength + "s", age)
+						+ "|");
+				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
 
-				System.out.println(ad_no + "|" + adopt + "/" + animal + "/" + type + "/" + city + "/" + kill + "/"
-						+ gender + "/" + age + "/");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -259,7 +270,9 @@ public class Adandoned {
 			pstmt.setString(1, adopt1);
 			rs = pstmt.executeQuery();
 
-			System.out.println("입양유무 / 축종 / 세부종류 / 지역 / 안락사일정 / 성별 / 나이 ");
+			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+			System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|--지 역--|안락사일정|성별|---나 이---|");
+			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
 
 			while (rs.next()) {
 				int ad_no = rs.getInt("AD_NO");
@@ -281,8 +294,23 @@ public class Adandoned {
 				vo.setGender(gender);
 				vo.setAge(age);
 
-				System.out.println(ad_no + "|" + adopt + "/" + animal + "/" + type + "/" + city + "/" + kill + "/"
-						+ gender + "/" + age + "/");
+				int animalLength = new StringTest().getStrLength(8, animal);
+				int typeLength = new StringTest().getStrLength(14, type);
+				int ageLength = new StringTest().getStrLength(10, age);
+				int killLength = new StringTest().getStrLength(9, kill);
+				
+				System.out.println(
+						  "|" + String.format("%4s", ad_no) + "  "
+					    + "|" + " "+ String.format("%3s", adopt)+ "   "
+						+ "|" + " "+ String.format("%-" + animalLength + "s", animal) + " "
+						+ "|"  +" "+ String.format("%-"+ typeLength + "s", type)
+						+ "|"  +" "+ String.format("%5s", city)
+						+ "|"  +" "+ String.format("%-"+ killLength + "s", kill)
+						+ "|"  +" "+ String.format("%3s", gender)
+						+ "|"  +" "+ String.format("%-"+ ageLength + "s", age)
+						+ "|");
+				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
