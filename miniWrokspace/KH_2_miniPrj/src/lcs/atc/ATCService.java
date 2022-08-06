@@ -48,9 +48,7 @@ public class ATCService {
 			JDBCTemplate.close(conn);
 		}
 		
-		
-		
-		
+
 		return atcvo;
 	}
 
