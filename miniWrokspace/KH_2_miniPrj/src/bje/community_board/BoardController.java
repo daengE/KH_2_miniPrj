@@ -10,6 +10,7 @@ import bje.Main_bje;
 import bje.menu.Menu;
 import mini.main.Main;
 import mini.util.InputUtil;
+import mini.util.StringTest;
 
 public class BoardController {
 
@@ -26,15 +27,34 @@ public class BoardController {
       
       System.out.println("----- 게시글 작성 -----");
       
+      System.out.print("태그 : 1. 후원요청, 2. 자랑, 3. 질문, 4. 자유, 5. 뉴스데스크");
+      int intTag = InputUtil.getInt();
+      String tag = "";
+      while(true) {
+    	  if(intTag == 1) {
+    		  tag = "후원요청"; break;
+    	  }else if(intTag == 2) {
+    		  tag = "자랑"; break;
+    	  }else if(intTag == 3) {
+    		  tag = "질문"; break;
+    	  }else if(intTag == 4) {
+    		  tag = "자유"; break;
+    	  }else if(intTag == 5) {
+    		  tag = "뉴스데스크"; break;
+    	  }else {
+    		  System.out.println("번호를 잘못입력했습니다."); continue;
+    	  }
+      }//while
       System.out.print("제목 : ");
       String title = InputUtil.sc.nextLine();
       System.out.print("내용 : ");
       String content = InputUtil.sc.nextLine();
       
-      int memberNo = Main_bje.loginMember.getNo();
+      int memberNo = mini.main.Main.loginMember.getNo();
       
       //데이터 뭉치기
       BoardVo vo = new BoardVo();
+      vo.setTag(tag);
       vo.setTitle(title);
       vo.setContent(content);
       vo.setM_no(memberNo);
@@ -53,25 +73,32 @@ public class BoardController {
 
    public void showList() {
       
-//	  if(Main_bje.loginMember == null) {
-//	        System.out.println("로그인 먼저 해주세요");
-//	        return; //다음 진행 하면 안되니까 return
-//	     } 
-	   
       List<BoardVo> boardVoList = new BoardService().showList();
       
-      System.out.println("----- 게시판 글 목록-----");
-      
-      for(int i = 0 ; i < boardVoList.size(); ++i) {
-         BoardVo temp = boardVoList.get(i);
-      
-         int no = temp.getB_no();
-         String title = temp.getTitle();
-         String writer = temp.getWriter();
-         Timestamp enrollDate = temp.getEnrollDate();
-         
-         System.out.println(no + " | " + title + " | " + writer + " | " + enrollDate);
-      }
+		System.out.println("=================================== 커뮤니티  게시판 ====================================\n");
+		System.out.println("+----------------+------+-------------------------+---------------+---------------------+");
+		System.out.println("|------태그------|글번호|------  제     목  ------|----작 성 자---|-----작 성 시 간-----|");
+		System.out.println("+----------------+------+-------------------------+---------------+---------------------+");    
+
+		for(int i = 0 ; i < boardVoList.size(); ++i) {
+			
+			BoardVo temp = boardVoList.get(i);
+	      
+			String tag = temp.getTag();
+			int no = temp.getB_no();
+	        String title = temp.getTitle();
+	        String writer = temp.getWriter();
+	        Timestamp enrollDate = temp.getEnrollDate();
+	         
+	        int titleLength = new StringTest().getStrLength(25, title);
+			int writerLength = new StringTest().getStrLength(15, writer);
+			int tagLength = new StringTest().getStrLength(16, tag);
+			
+			System.out.println("|" + String.format("%-" + tagLength + "s", tag) + "|" + String.format("%6s", no)
+								+ "|" + String.format("%-" + titleLength + "s", title) + "|"
+								+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
+			System.out.println("+----------------+------+-------------------------+---------------+---------------------+");
+		}
    
    }
    
