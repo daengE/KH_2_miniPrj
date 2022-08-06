@@ -36,12 +36,14 @@ public class BoardDao {
          
          //SQL 작성
          String sql = "INSERT INTO COMMUNITY_BOARD (B_NO, M_NO, POST_TYPE, B_TAG, B_TITLE, B_CONTENTS, B_ENROLL_DATE, B_NICK, B_DELETE_YN, B_MODIFY, B_MDATE) "
-               + "      VALUES(SEQ_COMMUNITY_BOARD_B_NO.NEXTVAL, 1 , 'CB' , '[자유]' , ? , ? , DEFAULT, '누굴까' , 'N' , 'N' , DEFAULT)";
+               + "      VALUES(SEQ_COMMUNITY_BOARD_B_NO.NEXTVAL, ? , 'CB' , ? , ? , ? , DEFAULT, '누굴까' , 'N' , 'N' , DEFAULT)";
          
          //SQL 객체에 담기 및 완성(물음표 채우기)
          pstmt = conn.prepareStatement(sql);
-         pstmt.setString(1, vo.getTitle());
-         pstmt.setString(2, vo.getContent());
+         pstmt.setInt(1, vo.getM_no());
+         pstmt.setString(2, vo.getTag());
+         pstmt.setString(3, vo.getTitle());
+         pstmt.setString(4, vo.getContent());
          
          //SQL 실행 및 결과 저장
          result = pstmt.executeUpdate();
@@ -58,7 +60,7 @@ public class BoardDao {
       //CONN 준비
       
       //SQL 준비
-      String sql = "SELECT B_NO , B_TITLE , B_CONTENTS , B_NICK , B_ENROLL_DATE FROM COMMUNITY_BOARD WHERE B_DELETE_YN = 'N' ORDER BY B_ENROLL_DATE DESC";
+      String sql = "SELECT B_TAG , B_NO , B_TITLE , B_CONTENTS , B_NICK , B_ENROLL_DATE FROM COMMUNITY_BOARD WHERE B_DELETE_YN = 'N' ORDER BY B_NO";
       
       PreparedStatement pstmt = null;
       ResultSet rs = null;
@@ -75,18 +77,20 @@ public class BoardDao {
          // rs.next, rs.getXXX("칼럼명"), vo.setXXX
          
          while(rs.next()) {
-            int no = rs.getInt("B_NO");
-            String title = rs.getString("B_TITLE");
-            Timestamp enrollDate = rs.getTimestamp("B_ENROLL_DATE");
-            String writer = rs.getString("B_NICK");
+        	 String tag = rs.getString("B_TAG");
+        	 int no = rs.getInt("B_NO");
+             String title = rs.getString("B_TITLE");
+             Timestamp enrollDate = rs.getTimestamp("B_ENROLL_DATE");
+             String writer = rs.getString("B_NICK");
             
-            BoardVo vo = new BoardVo();
-            vo.setB_no(no);
-            vo.setTitle(title);
-            vo.setEnrollDate(enrollDate);
-            vo.setWriter(writer);
+             BoardVo vo = new BoardVo();
+             vo.setTag(tag);
+             vo.setB_no(no);
+             vo.setTitle(title);
+             vo.setEnrollDate(enrollDate);
+             vo.setWriter(writer);
             
-            boardVoList.add(vo);
+             boardVoList.add(vo);
          }
       } finally {
          JDBCTemplate.close(rs);
