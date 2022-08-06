@@ -1,17 +1,16 @@
 package mini.main;
 
-import bje.BcommentController;
 import bje.community_board.BoardController;
 import krw.notificationboard.NotiController;
 import krw.qnaboard.QnaController;
 import lcs.atc.ATCController;
+import lcs.menu.LcsMenu;
 import lcs.ps.PSController;
 import mini.member.MemberController;
 import mini.member.MemberVo;
 import mini.menu.Menu;
 import sar.Ad_Board.Adandoned;
 import sar.Util.AdVo;
-import lcs.menu.LcsMenu;
 
 
 public class Main {
@@ -72,6 +71,7 @@ public class Main {
 				break;
 				
 			case 4:
+				
                /*동물문제 & 해결 보여준다*/
                while(true) {
             	   
@@ -86,7 +86,16 @@ public class Main {
 	               String connect = new PSController().connectATC();
 	               
                //Y라고 하면 동물훈련소 메소드 그대로 실행
-
+	               if(connect.equalsIgnoreCase("Y")) {
+	            	   
+	            	   new ATCController().sum();
+	            	   break;
+	               }
+	               else {
+	            	   System.out.println("문제행동으로 돌아갑니다.");
+	               }
+               }
+               break;
                
             case 5:
                //동물 보호소를 전체볼래? 지역별로 볼래?

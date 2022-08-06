@@ -109,8 +109,9 @@ public class ATCController {
 			}
 			else {
 				atcvo = new ATCService().showDetailByNo(num);
-			
+				System.out.println();
 				System.out.println("--------------게시글 상세조회--------------");
+				System.out.println();
 				System.out.println("훈련소 이  름 :::" + atcvo.getName());
 				System.out.println("훈련소 전화번호 :::" + atcvo.getCall());
 				System.out.println("훈련소 위   치 :::" + atcvo.getLoc());
@@ -125,7 +126,7 @@ public class ATCController {
 				new ApplicationController().write(atcvo);
 			}
 			else if(input.equalsIgnoreCase("N")) {
-				System.out.println("\n 훈련소 목록으로 돌아갑니다.");
+				
 				showCityATCList();
 			}
 			return 0;

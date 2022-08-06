@@ -33,13 +33,13 @@ public class ApplicationController {
 		String animalType = InputUtil.sc.nextLine();
 		System.out.println();
 		
-		System.out.println("\n 연락가능한 핸드폰 번호를 작성해주세요(훈련소와 연결 시 필요합니다.)");
+		System.out.println("연락가능한 핸드폰 번호를 작성해주세요(훈련소와 연결 시 필요합니다.)");
 		System.out.println("하이픈 제외하고 숫자만 작성해주세요.");
 		System.out.print("핸드폰번호 : ");
 		String phone = InputUtil.sc.nextLine();
 		System.out.println();
 		
-		System.out.println("\n 입소가능한 날짜를 알려주세요(형식 예 : 220802)");
+		System.out.println("입소가능한 날짜를 알려주세요(형식 예 : 220802)");
 		System.out.print("입소가능일자 : ");
 		String psbDate = InputUtil.sc.nextLine();
 		System.out.println();
@@ -51,6 +51,7 @@ public class ApplicationController {
 		aplyVo.setPhone(phone);
 		aplyVo.setPsbDate(psbDate);
 		System.out.println(aplyVo);
+		System.out.println();
 		
 		//DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
 		
