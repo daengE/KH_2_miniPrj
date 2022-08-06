@@ -2,20 +2,26 @@ package lcs.ps;
 
 import java.util.List;
 
-import mini.menu.Menu;
 import mini.util.InputUtil;
+import mini.util.StringTest;
 
 public class PSController {
 	
 	public int showPSList() {
 		
-		System.out.println("어떤 문제가 있으신가요? ");
-		System.out.println("궁금하신 문제의 번호를 작성해주세요.(0번 메인메뉴로갑니다.)\n");
+		
 		
 		List<PSVo> PSVoList = new PSService().showPSList();
 		
 		PSVo psvo = null;
 		int cnt = 0;
+		
+		System.out.println("====================== 어떤 문제를 해결하고 싶나요?  =======================");
+		System.out.println("      *궁금한 문제를 선택해주세요.(0번 입력시 메인으로 돌아갑니다.)*\n");
+		System.out.println("+-----+---------------------------------------+");
+		System.out.println("|번 호|------------- 제      목  -------------|");
+		System.out.println("+-----+---------------------------------------+");
+		
 		for(int i = 0 ; i < PSVoList.size(); ++i) {
 			 psvo = PSVoList.get(i);
 			
@@ -24,8 +30,13 @@ public class PSController {
 			String q = psvo.getQ();
 			String a = psvo.getA();
 			
-		
-			System.out.println(no + " | " + q  );
+			int qLength = new StringTest().getStrLength(38, q);
+			
+			System.out.println(
+					  "|" + String.format("%3s", no) + "  "
+					+ "|" + " "+ String.format("%-" + qLength + "s", q) 
+					+ "|");
+			System.out.println("+-----+---------------------------------------+");
 		}	
 			
 			//상세조회
@@ -40,9 +51,17 @@ public class PSController {
 			else if(num <= PSVoList.size()) {
 				PSVo selectpsvo = new PSService().showDetailPS(num);
 			
-				System.out.println("--------------문제점 상세조회--------------");
-				System.out.println("문제점 :::" + selectpsvo.getQ());
-				System.out.println("해결법 :::" + selectpsvo.getA());
+				System.out.println("+-----+---------------------------------------+");
+				System.out.println("|번 호|------------- 제      목  -------------|");
+				System.out.println("+-----+---------------------------------------+");
+				System.out.println("|  "+selectpsvo.getNo()+"  |"+selectpsvo.getQ()); // string set 써야할것같음
+				System.out.println("+-----+---------------------------------------+");
+				System.out.println("|                   내      용                |");
+				System.out.println("+---------------------------------------------+");
+				System.out.println("|" + selectpsvo.getA());  //Stringset 써야할 것같음
+				System.out.println("+-----+---------------------------------------+");
+				
+				
 				System.out.println();
 				break;
 			}
