@@ -79,7 +79,8 @@ public class ApplicationVo {
 	
 	@Override
 	public String toString() {
-		return "Application_Vo [no=" + no + ", userNo=" + userNo + ", atcName=" + atcName + ", animalType=" + animalType
+		System.out.println("작성하신 내용 확인 부탁드립니다.");
+		return " [훈려=" + atcName + ", animalType=" + animalType
 				+ ", phone=" + phone + ", aplyDate=" + aplyDate + ", psbDate=" + psbDate + ", postType=" + postType
 				+ "]";
 	}

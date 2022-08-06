@@ -75,27 +75,31 @@ public class Main {
                while(true) {
             	   
                
-			   new PSController().showPSList();
-               
+				   int gotoMain = new PSController().showPSList();
+	               
+				   if(gotoMain==-1) {
+					   break;
+				   }
+				   
                //문제행동을 고칠 수 있는 보호소를 보여주는지 물어본다.
-               String connect = new PSController().connectATC();
-               
+	               String connect = new PSController().connectATC();
+	               
                //Y라고 하면 동물훈련소 메소드 그대로 실행
-               if(connect.equalsIgnoreCase("Y")) {
-            	   
-            	   new ATCController().sum();
-            	   break;
+	               if(connect.equalsIgnoreCase("Y")) {
+	            	   
+	            	   new ATCController().sum();
+	            	   break;
+	               }
+	               else {
+	            	   System.out.println("문제행동으로 돌아갑니다.");
+	               }
                }
-               else {
-            	   System.out.println("문제행동으로 돌아갑니다.");
-               }
-               }
-               
+               break;
                
             case 5:
                //동물 보호소를 전체볼래? 지역별로 볼래?
                int selectATCMenu = new LcsMenu().showATCSelectMenu();
-               
+              
                //동물보호소 전체를 보여준다.
                if(selectATCMenu == 1) {
                   new ATCController().showATCList();                  
@@ -104,7 +108,10 @@ public class Main {
                //지역별 동물 보호소를 보여준다.
                else if(selectATCMenu == 2) {
                   
-                  new ATCController().showCityATCList();
+                  int gotoMain = new ATCController().showCityATCList();
+                  if(gotoMain == -1) {
+                	  break;
+                  }
                }
                else {
                   System.out.println();

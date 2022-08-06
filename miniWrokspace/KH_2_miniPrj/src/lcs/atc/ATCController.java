@@ -37,7 +37,7 @@ public class ATCController {
 			int num = new LcsMenu().showATCDetailMenu();
 			if(num == 0) {
 				System.out.println();
-				System.out.println("이전 메뉴로 돌아갑니다.");
+				System.out.println("메인 메뉴로 돌아갑니다.");
 				return;
 			}
 			else {
@@ -68,7 +68,7 @@ public class ATCController {
 			}
 		}
 
-	public void showCityATCList() {
+	public int showCityATCList() {
 		int writeCity = 10;
 		do {
 			
@@ -104,7 +104,8 @@ public class ATCController {
 			//출력문, 입력받기
 			int num = new LcsMenu().showATCDetailMenu();
 			if(num == 0) {
-				return;
+//			메인메뉴나 목록으로 돌아가고싶어요,,,,	
+			return -1;
 			}
 			else {
 				atcvo = new ATCService().showDetailByNo(num);
@@ -127,11 +128,12 @@ public class ATCController {
 				System.out.println("\n 훈련소 목록으로 돌아갑니다.");
 				showCityATCList();
 			}
+			return 0;
 	}
 
 	public void sum() {
 		//
-		int selectATCMenu = new LcsMenu().showATCSelectMenu();
+		int selectATCMenu = new LcsMenu().showATCSelectMenu2();
 		//동물보호소 전체를 보여준다.
 		if(selectATCMenu == 1) {
 			new ATCController().showATCList();						
@@ -141,13 +143,6 @@ public class ATCController {
 			
 			new ATCController().showCityATCList();
 		}
-		else if(selectATCMenu == 0) {
-			
-			System.out.println();
-			System.out.println("문제행동목록을 보여드립니다.");
-			 new PSController().showPSList();
-		}
-		
 		
 	}	
 	

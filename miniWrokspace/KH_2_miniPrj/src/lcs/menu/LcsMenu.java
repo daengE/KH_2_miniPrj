@@ -36,6 +36,7 @@ public class LcsMenu {
 
 	public int showATCSelectMenu() {
 		System.out.println();
+		
 		System.out.println("0. 메인메뉴로 돌아가기");
 		System.out.println("1. 모든 동물 보호소 보기");
 		System.out.println("2. 지역별 동물 보호소 보기");
@@ -64,6 +65,15 @@ public class LcsMenu {
 		System.out.println("6. 경상도");
 		System.out.println("7. 제주도");
 
+		return InputUtil.getInt();
+	}
+
+	public int showATCSelectMenu2() {
+		System.out.println();
+		
+		System.out.println("1. 모든 동물 보호소 보기");
+		System.out.println("2. 지역별 동물 보호소 보기");
+		
 		return InputUtil.getInt();
 	}
 
