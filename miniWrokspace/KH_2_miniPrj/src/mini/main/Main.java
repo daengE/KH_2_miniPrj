@@ -1,5 +1,6 @@
 package mini.main;
 
+import bje.BcommentController;
 import bje.community_board.BoardController;
 import krw.notificationboard.NotiController;
 import krw.qnaboard.QnaController;
@@ -85,16 +86,7 @@ public class Main {
 	               String connect = new PSController().connectATC();
 	               
                //Y라고 하면 동물훈련소 메소드 그대로 실행
-	               if(connect.equalsIgnoreCase("Y")) {
-	            	   
-	            	   new ATCController().sum();
-	            	   break;
-	               }
-	               else {
-	            	   System.out.println("문제행동으로 돌아갑니다.");
-	               }
-               }
-               break;
+
                
             case 5:
                //동물 보호소를 전체볼래? 지역별로 볼래?
@@ -121,8 +113,18 @@ public class Main {
                break;	
                
            case 6:
-        	   new BoardController().showList();
-        	   new BoardController().showBoardDetailMenu();
+        	   while(true) {
+        		   new BoardController().showList();
+        		   
+        		   new Menu().showMenu6();
+        		   
+        		   if(new Menu().returnMain() == 1) {
+        			   break;
+        		   }else {
+        			   continue;
+        		   }
+        		   
+        	   }//while
         	   break;
 				
 			case 7:

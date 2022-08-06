@@ -142,6 +142,54 @@ public class BoardDao {
       return vo;
    }
    
+   
+   public BoardVo choiceBoardTag(Connection conn, String tag) throws Exception {
+	      //connection 준비
+	      
+	      //SQL 준비
+	      String sql = "SELECT B_TAG, B_NO , B_TITLE , B_CONTENTS , B_NICK , B_ENROLL_DATE FROM COMMUNITY_BOARD WHERE B_TAG = ?";
+	      
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      BoardVo vo = null;
+	      
+	      try {
+	         //SQL 객체에 담기 및 쿼리 완성하기
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, tag);
+	         
+	         //SQL 실행 및 결과 저장
+	         rs = pstmt.executeQuery();
+	         
+	         //ResultSet -> 자바객체
+	         if(rs.next()) {
+	        	String b_tag = rs.getString("B_TAG");
+	            int no = rs.getInt("B_NO");
+	            String title = rs.getString("B_TITLE");
+	            String content = rs.getString("B_CONTENTS");
+	            String nick = rs.getString("B_NICK");
+	            Timestamp enrollDate = rs.getTimestamp("B_ENROLL_DATE");
+	            
+	            vo = new BoardVo();
+	            vo.setTag(b_tag);
+	            vo.setB_no(no);
+	            vo.setTitle(title);
+	            vo.setContent(content);
+	            vo.setWriter(nick);
+	            vo.setEnrollDate(enrollDate);
+	         }
+	      }catch(Exception e) {
+	         e.printStackTrace();
+	         throw e;
+	      }finally {
+	         mini.common.JDBCTemplate.close(pstmt);
+	         mini.common.JDBCTemplate.close(rs);
+	      }
+	      
+	      //실행결과(자바객체) 리턴
+	      return vo;
+	   }   
+   
 }//class
 
 

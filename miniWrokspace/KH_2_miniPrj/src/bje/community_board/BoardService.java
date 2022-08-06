@@ -98,71 +98,27 @@ public class BoardService {
       return vo;
    }
    
-//	public void selectTag() {
-//
-//		System.out.print("게시판 태그를 입력하세요 : ");
-//		String search = InputUtil.sc.nextLine();
-//		
-//		Connection conn = null;
-//		BoardVo vo = null;
-//		ResultSet rs = null;
-//		
-//		String sql = "SELECT B_TAG, B_NO , B_TITLE , B_CONTENTS , B_NICK , B_ENROLL_DATE FROM COMMUNITY_BOARD WHERE B_TAG = ?";
-//				
-//		PreparedStatement pstmt;
-//		try {
-//			try {
-//				conn = JDBCTemplate.getConnection();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1,search);
-//			
-//			rs = pstmt.executeQuery();
-//			
-//			System.out.println("글 태그 / 글번호 / 제목 / 내용 / 닉네임 / 작성일자");
-//
-//			while(rs.next()) {
-//				String b_tag = rs.get
-//				
-//				
-//				int ad_no = rs.getInt("AD_NO");
-//				String adopt = rs.getString("AD_ADOPT");
-//				String animal = rs.getString("AD_ANIMAL");
-//				String type = rs.getString("AD_TYPE");
-//				String city = rs.getString("AD_CITY");
-//				String kill = rs.getString("AD_KILL");
-//				String gender = rs.getString("AD_GENDER");
-//				String age = rs.getString("AD_AGE");
-//				
-//				vo = new AdVo();
-//				vo.setAd_no(ad_no);
-//				vo.setAd_adopt(adopt);
-//				vo.setAnimal(animal);
-//				vo.setType(type);
-//				vo.setCity(city);
-//				vo.setKill(kill);
-//				vo.setGender(gender);
-//				vo.setAge(age);
-//				
-//				System.out.print(vo.getAd_no() + "| ");
-//				System.out.print(vo.getAd_adopt() + " / ");
-//				System.out.print(vo.getAnimal() + " / ");
-//				System.out.print(vo.getType()+" / ");
-//				System.out.print(vo.getCity()+" / ");
-//				System.out.print(vo.getKill()+" / ");
-//				System.out.print(vo.getGender()+" / ");
-//				System.out.println(vo.getAge());
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//	         JDBCTemplate.close(rs);
-////	         JDBCTemplate.close(pstmt);
-//	      }
-//		
-//	}
+   /*
+    * 태그별 글 조회
+    */
+   public BoardVo choiceBoardTag(String tag) {
+      
+      Connection conn = null;
+      BoardVo vo = null;
+      
+      try {
+         conn = getConnection();
+         vo = new BoardDao().choiceBoardTag(conn, tag);
+      }catch(Exception e) {
+         System.out.println("[ERROR] 태그별 글 조회 중 예외 발생 !!!");
+         e.printStackTrace();
+      }finally {
+         close(conn);
+      }
+      
+      return vo;
+   }
+
    
 }//class
 

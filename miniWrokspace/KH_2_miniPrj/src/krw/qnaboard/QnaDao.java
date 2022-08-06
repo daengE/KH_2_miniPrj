@@ -7,7 +7,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import krw.notificationboard.NotiVo;
 import mini.common.JDBCTemplate;
 
 public class QnaDao {
@@ -91,7 +90,7 @@ public class QnaDao {
 
 	// SQL
 
-	public int writeQna(QnaVo vo, Connection conn) {
+	public int writeQna(QnaVo vo, Connection conn) throws Exception {
 
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -108,16 +107,11 @@ public class QnaDao {
 			pstmt.setString(3, vo.getTitle());
 			pstmt.setString(4, vo.getContent());
 			
-			System.out.println(vo);
-			
-
-			// sql 실행 및 결과 저장
 			result = pstmt.executeUpdate();
-			
 			System.out.println(result);
 
 		} catch (Exception e) {
-
+			throw e;
 		} finally {
 			JDBCTemplate.close(pstmt);
 
