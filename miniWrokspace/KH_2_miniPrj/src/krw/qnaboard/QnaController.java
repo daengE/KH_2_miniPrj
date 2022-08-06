@@ -53,17 +53,19 @@ public class QnaController {
 			String title = qnaVo.getTitle();
 			String writer = qnaVo.getWriter();
 			Timestamp enrollDate = qnaVo.getEnrollDate();
-			
+
 			int titleLength = new StringTest().getStrLength(25, title);
 			int writerLength = new StringTest().getStrLength(15, writer);
-			
+
 			if (qnaVo.getType().equals("Q")) {
-				System.out.println("|" + String.format("%6s", qnaNo) + "|" + String.format("%-"+ titleLength +"s", title) + "|"
-						+ String.format("%-"+ writerLength +"s", writer) + "|" + enrollDate + "|");
+				System.out.println(
+						"|" + String.format("%6s", qnaNo) + "|" + String.format("%-" + titleLength + "s", title) + "|"
+								+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
 
 			} else {
-				System.out.println("|" + String.format("%6s", "Reply") + "|" + String.format("%-"+ titleLength +"s", title) + "|"
-						+ String.format("%-"+ writerLength +"s", writer) + "|" + enrollDate + "|");
+				System.out.println(
+						"|" + String.format("%6s", "Reply") + "|" + String.format("%-" + titleLength + "s",">>"+ title) + "|"
+								+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
 			}
 
 		}
