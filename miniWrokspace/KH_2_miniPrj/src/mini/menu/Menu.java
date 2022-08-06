@@ -176,7 +176,10 @@ public class Menu {
 				continue;
 			
 		case 2 : 
-			new Adoption().apply(Main.loginMember.getNo());
+			if (Main.loginMember == null) {
+			System.out.println("로그인 먼저 해주세요");
+			new MemberController().login();
+			} else {	new Adoption().apply(Main.loginMember.getNo());}
 	
 		default : System.out.println("잘못 누르셨습니다");
 			continue;

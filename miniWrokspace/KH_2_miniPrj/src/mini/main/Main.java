@@ -52,18 +52,10 @@ public class Main {
 				break;
 				
 			case 3:
-				if (loginMember == null) {
-					System.out.println("로그인먼저해주세요");
-					new MemberController().login();
-				} else {
-					try {
-						new Adandoned().list();
-						menu.showMenu1();
-						menu.showMenu2();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
+				new Adandoned().list();
+				menu.showMenu1();
+				menu.showMenu2();
+
 				break;
 				
 			case 4:
