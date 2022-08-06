@@ -25,9 +25,93 @@ public class QnaController {
 			writeQna();
 			break;
 		case 3:
-			// qna 질문 답변
-			// 글번호 받고
-			// 답변 등록 하고 !
+			if (Main.loginMember == null) {
+				System.out.println("로그인을 먼저 해주세요.");
+			} else {
+				listUpMyQna();
+			}
+		default:
+			System.out.println("잘못 입력 하셨습니다.");
+			break;
+		// 내 문의내역
+		// 리스트 받아오기
+		}
+
+	}
+
+	private void listUpMyQna() {
+		List<QnaVo> qnaBoardList = new QnaService().listUpMyQna();
+
+		// VO를 토대로 리스트업 !!
+		System.out.println("============================= QnA 게시판 ==============================\n");
+		System.out.println("+------+----------+-------------------------+---------------------+");
+		System.out.println("|글번호| 답변여부 |------  제     목  ------|---- 작 성 시 간 ----|");
+		System.out.println("+------+----------+-------------------------+---------------------+");
+
+		// 게시판 목록에 나올 필드들 뽑아오기
+		for (int i = 0; i < qnaBoardList.size(); ++i) {
+
+			QnaVo qnaVo = qnaBoardList.get(i);
+
+			int qnaNo = qnaVo.getQnaNo();
+			String title = qnaVo.getTitle();
+			String writer = qnaVo.getWriter();
+			Timestamp enrollDate = qnaVo.getEnrollDate();
+
+			int titleLength = new StringTest().getStrLength(25, title);
+
+			if (qnaVo.getComplete().equals("Y")) {
+				System.out.println("|" + String.format("%6s", qnaNo) + "| 답변완료 |"
+						+ String.format("%-" + titleLength + "s", title) + "|" + enrollDate + "|");
+				System.out.println("+------+----------+-------------------------+---------------------+");
+
+			} else {
+				System.out.println("|" + String.format("%6s", qnaNo) + "|  대기중  |"
+						+ String.format("%-" + titleLength + "s", title) + "|" + enrollDate + "|");
+				System.out.println("+------+----------+-------------------------+---------------------+");
+			}
+
+		}
+
+		int num = showQnaContentMenu();
+
+		if (num == 0) {
+			System.out.println("메인메뉴로 돌아갑니다.");
+			return;
+		}
+		// 게시글 상세보기
+		System.out.println("게시글 타입을 선택해주세요.");
+		System.out.println("1. 질문 2. 답변");
+		int typeInput = InputUtil.getInt();
+		String type = null;
+		if (typeInput == 1) {
+			type = "Q";
+		} else {
+			type = "A";
+		}
+
+		// 글번호랑 타입 전달후 객체 받기
+		QnaVo vo = new QnaService().showQnaContenByNo(num, type);
+
+		// 객체 통해 상세글 출력
+		if (vo != null) {
+			String title = vo.getTitle();
+			String writer = vo.getWriter();
+
+			int titleLength = new StringTest().getStrLength(25, title);
+			int writerLength = new StringTest().getStrLength(15, writer);
+
+			System.out.println("+-----+----------------------------------+-----------------+");
+			System.out.println("|" + String.format("%5s", vo.getQnaNo()) + "|"
+					+ String.format("%-" + titleLength + "s", title) + "|" + "작성 시간 : " + vo.getEnrollDate() + "|");
+			System.out.println("+-----+----------------------------------+-----------------+");
+			System.out.println(String.format("%" + writerLength + "s", "| 작성자 : " + writer));
+			System.out.println("===========================================================");
+			System.out.println(vo.getContent());
+			System.out.println("===========================================================");
+		} else {
+			System.out.println("게시글이 없습니다.");
+			return;
 
 		}
 
@@ -41,7 +125,7 @@ public class QnaController {
 		// VO를 토대로 리스트업 !!
 		System.out.println("============================= QnA 게시판 ==============================\n");
 		System.out.println("+------+-------------------------+---------------+---------------------+");
-		System.out.println("|글번호|------  제     목  ------|----작 성 자---|-----작 성 시 간-----|");
+		System.out.println("|글번호|------  제     목  ------|--- 작 성 자 --|---- 작 성 시 간 ----|");
 		System.out.println("+------+-------------------------+---------------+---------------------+");
 
 		// 게시판 목록에 나올 필드들 뽑아오기
@@ -63,9 +147,9 @@ public class QnaController {
 								+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
 
 			} else {
-				System.out.println(
-						"|" + String.format("%6s", "Reply") + "|" + String.format("%-" + titleLength + "s",">>"+ title) + "|"
-								+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
+				System.out.println("|" + String.format("%6s", "Reply") + "|"
+						+ String.format("%-" + titleLength + "s", ">>" + title) + "|"
+						+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
 			}
 
 		}

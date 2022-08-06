@@ -92,6 +92,7 @@ public class NotiController {
 		// 대충 입력 받아 수정하고, 삭제 하는 반복문 .... if든 switch든..
 		
 		//3은 메인메뉴로 가기..
+		listUpNoti();
 
 	}
 
