@@ -63,6 +63,32 @@ public class NotiService {
 		return result;
 
 	}
+	
+	public int deleteNoti(int input) {
+		
+		int result = 0;
+		Connection conn = null;
+
+		// 커넥션 만들고 NotiDao 에서 DB작업 진행 해주기
+
+		try {
+			
+			conn = JDBCTemplate.getConnection();
+			result = new NotiDao().deleteNoti(input, conn);
+
+			if (result == 1) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+
+		} catch (Exception e) {
+
+		} finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+	}
 
 	public NotiVo showNotiContentByNo(int num) {
 
@@ -80,5 +106,6 @@ public class NotiService {
 
 		return vo;
 	}
+
 
 }

@@ -26,12 +26,15 @@ public class QnaController {
 			break;
 		case 3:
 			if (Main.loginMember == null) {
-				System.out.println("로그인을 먼저 해주세요.");
+				System.out.println("로그인을 먼저 해주세요.\n");
 			} else {
 				listUpMyQna();
 			}
+		case 0:
+			System.out.println("메인메뉴로 갑니다.\n");
+			return;
 		default:
-			System.out.println("잘못 입력 하셨습니다.");
+			System.out.println("잘못 입력 하셨습니다.\n");
 			break;
 		// 내 문의내역
 		// 리스트 받아오기
@@ -100,15 +103,13 @@ public class QnaController {
 
 			int titleLength = new StringTest().getStrLength(25, title);
 			int writerLength = new StringTest().getStrLength(15, writer);
-
-			System.out.println("+-----+----------------------------------+-----------------+");
-			System.out.println("|" + String.format("%5s", vo.getQnaNo()) + "|"
-					+ String.format("%-" + titleLength + "s", title) + "|" + "작성 시간 : " + vo.getEnrollDate() + "|");
-			System.out.println("+-----+----------------------------------+-----------------+");
-			System.out.println(String.format("%" + writerLength + "s", "| 작성자 : " + writer));
-			System.out.println("===========================================================");
+			System.out.println("+------+-------------------------+---------------+---------------------+");
+			System.out.println("|" + String.format("%6s", vo.getQnaNo()+" ") + "|"
+					+ String.format("%-" + titleLength + "s", title) + "|"
+					+ String.format("%-" + writerLength + "s", writer) + "|" + vo.getEnrollDate() + "|");
+			System.out.println("+------+-------------------------+---------------+---------------------+");
 			System.out.println(vo.getContent());
-			System.out.println("===========================================================");
+			System.out.println("+----------------------------------------------------------------------+");
 		} else {
 			System.out.println("게시글이 없습니다.");
 			return;
@@ -145,15 +146,16 @@ public class QnaController {
 				System.out.println(
 						"|" + String.format("%6s", qnaNo) + "|" + String.format("%-" + titleLength + "s", title) + "|"
 								+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
+				System.out.println("+------+-------------------------+---------------+---------------------+");
 
 			} else {
 				System.out.println("|" + String.format("%6s", "Reply") + "|"
 						+ String.format("%-" + titleLength + "s", ">>" + title) + "|"
 						+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
+				System.out.println("+------+-------------------------+---------------+---------------------+");
 			}
 
 		}
-		System.out.println("+------+-------------------------+---------------+---------------------+");
 
 		int num = showQnaContentMenu();
 
@@ -177,9 +179,20 @@ public class QnaController {
 
 		// 객체 통해 상세글 출력
 		if (vo != null) {
-			System.out.println(vo.getQnaNo() + "|" + "제목 : " + vo.getTitle() + "|" + "작성 시간 : " + vo.getEnrollDate());
-			System.out.println("작성자 : " + vo.getWriter());
-			System.out.println("내용 : " + vo.getContent());
+			String title = vo.getTitle();
+			String writer = vo.getWriter();
+
+			int titleLength = new StringTest().getStrLength(25, title);
+			int writerLength = new StringTest().getStrLength(50, writer);
+
+			System.out.println("+-----+-------------------------+---------------------+");
+			System.out.println("|" + String.format("%5s", vo.getQnaNo()) + "|"
+					+ String.format("%-" + titleLength + "s", title) + "|" + vo.getEnrollDate() + "|");
+			System.out.println("+-----+-------------------------+---------------------+");
+			System.out.println("|" + String.format("%-" + writerLength + "s", " 작성자 : " + writer) + "|");
+			System.out.println("+-----------------------------------------------------+");
+			System.out.println(vo.getContent());
+			System.out.println("+-----------------------------------------------------+");
 		} else {
 			System.out.println("게시글이 없습니다.");
 			return;

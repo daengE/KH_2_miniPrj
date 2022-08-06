@@ -228,10 +228,12 @@ public class QnaDao {
 
 		int result = 0;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 
 		try {
 			// sql 작성
 			String sql = "INSERT INTO ANSWER_BOARD(QNA_NO, M_NO_ADMIN, A_NICK, A_TITLE, A_CONTENT) VALUES(?, ?, ?, ?, ?)";
+			String sql2 ="UPDATE QNA_BOARD SET Q_REPLY_YN = 'Y' WHERE QNA_NO = ?";
 
 			// sql 객체에 담기
 			pstmt = conn.prepareStatement(sql);
@@ -241,8 +243,14 @@ public class QnaDao {
 			pstmt.setString(4, qnaVo.getTitle());
 			pstmt.setString(5, qnaVo.getContent());
 
+			pstmt2 = conn.prepareStatement(sql2);
+			pstmt2 .setInt(1, qnaVo.getQnaNo());
+			
 			// sql 실행 및 결과 저장
 			result = pstmt.executeUpdate();
+			pstmt2.executeUpdate();
+			
+			
 
 		} catch (Exception e) {
 

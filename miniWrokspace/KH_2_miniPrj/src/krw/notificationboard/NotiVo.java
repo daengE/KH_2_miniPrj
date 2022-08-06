@@ -10,7 +10,7 @@ public class NotiVo {
 	}
 	
 	public NotiVo(int notiNo, int memberNo, String writer, String title, String content, Timestamp enrollDate,
-			Timestamp modifyDate, Timestamp deleteDate, String usable) {
+			Timestamp modifyDate, Timestamp deleteDate, String disabled) {
 		super();
 		this.notiNo = notiNo;
 		this.memberNo = memberNo;
@@ -20,7 +20,7 @@ public class NotiVo {
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.deleteDate = deleteDate;
-		this.usable = usable;
+		this.disabled = disabled;
 	}
 	
 	//field
@@ -32,7 +32,7 @@ public class NotiVo {
 	private Timestamp enrollDate;
 	private Timestamp modifyDate;
 	private Timestamp deleteDate;
-	private String usable;
+	private String disabled;
 	
 	//getter, setter
 	public int getNotiNo() {
@@ -100,18 +100,18 @@ public class NotiVo {
 	}
 
 	public String getUsable() {
-		return usable;
+		return disabled;
 	}
 
 	public void setUsable(String usable) {
-		this.usable = usable;
+		this.disabled = usable;
 	}
 
 	//toString
 	public String toString() {
 		return "NotiVO [notiNo=" + notiNo + ", memberNo=" + memberNo + ", writer=" + writer + ", title=" + title
 				+ ", content=" + content + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", deleteDate="
-				+ deleteDate + ", usable=" + usable + "]";
+				+ deleteDate + ", usable=" + disabled + "]";
 	}
 	
 	

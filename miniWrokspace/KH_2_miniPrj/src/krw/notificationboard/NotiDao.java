@@ -14,7 +14,7 @@ public class NotiDao {
 	public List<NotiVo> listUpNoti(Connection conn) throws Exception {
 
 		// sql 준비
-		String sql = "SELECT NO_NO, M_NO, NO_NICK, NO_TITLE, NO_CONTENT, NO_ENROLL_DATE, NO_MODIFY_DATE, NO_DELETE_DATE, NO_DELETE_YN FROM NOTIFICATION_BOARD ORDER BY NO_ENROLL_DATE";
+		String sql = "SELECT NO_NO, M_NO, NO_NICK, NO_TITLE, NO_CONTENT, NO_ENROLL_DATE, NO_MODIFY_DATE, NO_DELETE_DATE, NO_DELETE_YN FROM NOTIFICATION_BOARD WHERE NO_DELETE_YN = 'N' ORDER BY NO_NO DESC";
 
 		// sql 담을 객체 준비 및 sql 완성
 		PreparedStatement pstmt = null;
@@ -65,13 +65,10 @@ public class NotiDao {
 			}
 
 		} finally {
-			// pstmt, rs 닫아주기 위해서 try 블럭 생성
 			JDBCTemplate.close(pstmt);
 			JDBCTemplate.close(rs);
-
 		}
 
-		System.out.println(NotiBoardList.size());
 
 		return NotiBoardList;
 
@@ -105,6 +102,34 @@ public class NotiDao {
 		}
 		return result;
 
+	}
+	
+	public int deleteNoti(int input, Connection conn) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			// sql 작성
+			String sql = "UPDATE NOTIFICATION_BOARD SET NO_DELETE_YN = 'Y' WHERE NO_NO = ?";
+
+			// sql 객체에 담기
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, input);
+
+			// sql 실행 및 결과 저장
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+
+		} finally {
+			JDBCTemplate.close(pstmt);
+
+		}
+		
+		
+		return result;
 	}
 
 	public NotiVo showNotiContentByNo(Connection conn, int num) throws Exception {
@@ -157,6 +182,7 @@ public class NotiDao {
 		}
 		return vo;
 	}
+
 	
 }
 
