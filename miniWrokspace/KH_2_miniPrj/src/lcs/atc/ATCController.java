@@ -45,13 +45,16 @@ public class ATCController {
 		}
 			//상세조회 할건지 물어보기
 			//출력문, 입력받기
+			while(true) {
+				
 			int num = new LcsMenu().showATCDetailMenu();
 			if(num == 0) {
 				System.out.println();
 				System.out.println("메인 메뉴로 돌아갑니다.");
-				return;
+				break;
 			}
-			else {
+			else if(num <= ATCVoList.size() ){
+				
 				ATCVo atcvo = new ATCService().showDetailByNo(num);
 				
 				System.out.println("+----+----------------------------------------------------------+");
@@ -79,20 +82,14 @@ public class ATCController {
 				System.out.println("|훈련소 특이사항 : "+ String.format("%-" + atcSkillLength + "s", atcvo.getSkill())+"|");
 				System.out.println("|훈련소 가능동물 : "+ String.format("%-" + atcAnimalLength + "s", atcvo.getAnimal())+"|");
 				System.out.println("+---------------------------------------------------------------+");
-				
-				
-				
-				
-				
-				
-				
-				//훈련소 신청하시겠습니까? 
+					//훈련소 신청하시겠습니까? 
 				
 				String input = new lcs.menu.LcsMenu().showATCAply();
 				
 				if(input.equalsIgnoreCase("Y")) {
 					
 					new ApplicationController().write(atcvo);
+					break;
 				}
 				else if(input.equalsIgnoreCase("N")) {
 					System.out.println();
@@ -100,6 +97,11 @@ public class ATCController {
 					showATCList();
 					
 				}
+			}
+			else {
+				System.out.println("번호를 잘못 입력하셨습니다. 다시 입력해주세요.");
+				
+			}
 			}
 		}
 
@@ -179,7 +181,7 @@ public class ATCController {
 			int num = new LcsMenu().showATCDetailMenu();
 			if(num == 0) {
 //			메인메뉴나 목록으로 돌아가고싶어요,,,,	
-			return -1;
+			return -1 ;
 			}
 			else {
 				System.out.println("+----+----------------------------------------------------------+");

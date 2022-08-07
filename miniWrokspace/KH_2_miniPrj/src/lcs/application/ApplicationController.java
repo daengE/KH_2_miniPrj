@@ -13,9 +13,12 @@ public class ApplicationController {
 		
 	
 		if (Main.loginMember == null) {
-			System.out.println();
-			System.out.println("먼저 로그인을 해주세요.");
-			new MemberController().login();
+			
+			while(Main.loginMember == null) {
+				System.out.println();
+				System.out.println("로그인을 해주세요.");
+				new MemberController().login();
+			}
 		}
 		
 		//회원번호로 닉네임 받고 닉네임님 작성해주세요.
