@@ -48,17 +48,20 @@ public class MemberController {
 	}// login
 
 	public void join() {
-
-		System.out.println("============= 회원가입 ==============");
-
+		
 		String id = null;
 		String nick = null;
+		String pwd = null;
+		String pwd2 = null;
 		boolean resultName = false;
 		boolean resultNick = false;
 		boolean isFinishName = true;
 		boolean isFinishNick = true;
+		boolean isFinishPwd = true;
 
 		MemberDao md = new MemberDao();
+
+		System.out.println("============= 회원가입 ==============");
 
 		// 기본정보
 		while (isFinishName) {
@@ -81,14 +84,29 @@ public class MemberController {
 
 		}
 
-		System.out.print("비밀번호 : ");
-		String pwd = InputUtil.sc.nextLine();
+		while (isFinishPwd) {
+			System.out.print("비밀번호(특수문자포함) : ");
+			pwd = InputUtil.sc.nextLine();
 
-		System.out.print("비밀번호 확인 : ");
-		String pwd2 = InputUtil.sc.nextLine();
+			System.out.print("비밀번호 확인(특수문자포함) : ");
+			pwd2 = InputUtil.sc.nextLine();
+			
+			if(!pwd.equals(pwd2)) {
+				System.out.println("비밀번호가 일치 하지 않습니다.");
+				pwd = null;
+				pwd2 = null;
+			}else if(!(pwd.contains("!")||pwd.contains("@")||pwd.contains("#")||pwd.contains("$")||pwd2.contains("!")||pwd2.contains("@")||pwd2.contains("#")||pwd2.contains("$"))) {
+				System.out.println("비밀번호의 형식이 올바르지 않습니다.");
+				pwd = null;
+				pwd2 = null;
+			}else {
+				isFinishPwd = false;
+			}
+		}
 
 		System.out.print("이름 : ");
 		String name = InputUtil.sc.nextLine();
+		
 		while (nick == null) {
 			System.out.print("닉네임 : ");
 			nick = InputUtil.sc.nextLine();
@@ -207,15 +225,12 @@ public class MemberController {
 			// 내가 작성한글 조회
 			break;
 		case 3:
-			// TODO
-			// 나의 관심글 조회
-			// 게시판 선택 해서 글번호만 조회 할지
-			// 모두 조회하고 게시판, 글 번호 조회 할지
+			// 신청서 조회
+			mp.showMyApply();
 			break;
 		case 4:
 			// 내 반려동물 보기 및 추가, 삭제
 			mp.showMyPet();
-
 			break;
 		case 5:
 			// 탈퇴
