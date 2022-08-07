@@ -195,4 +195,31 @@ public class MyPage {
 
 	}
 
+	public void showMyApply() {
+		
+		if(Main.loginMember == null) {
+			System.out.println("로그인을 먼저 해주세요.");
+			return;
+		}
+		
+		System.out.println("신청서 종류를 선택하세요.");
+		System.out.println("1. 입양 신청서");
+		System.out.println("2. 훈련소 신청서");
+		int typeInput = InputUtil.getInt();
+		if(typeInput == 1) {
+			//adoption
+			new Application().showAdoptionList();
+			
+		}else if(typeInput == 2) {
+			//application
+			System.out.println("훈련소신청 메소드 만들거임..");
+			
+			
+		}else {
+			System.out.println("메인메뉴로 돌아갑니다.");
+			return;
+		}
+		
+	}
+
 }

@@ -250,7 +250,6 @@ public class QnaController {
 	}
 
 	private int showQnaContentMenu() {
-		// TODO 메뉴로 옮길거야..
 		System.out.println("글 번호를 입력해 주세요 (0번은 메인메뉴로 돌아갑니다)");
 		int input = InputUtil.getInt();
 		return input;
@@ -264,7 +263,6 @@ public class QnaController {
 			return;
 		}
 
-		// 커넥트
 		System.out.println("===== QnA 게시글 작성 =====");
 
 		System.out.println("제목 : ");
@@ -275,19 +273,14 @@ public class QnaController {
 		int memberNo = Main.loginMember.getNo();
 		String writer = Main.loginMember.getNick();
 
-		// 데이터 뭉치기
-
 		QnaVo vo = new QnaVo();
 		vo.setTitle(title);
 		vo.setContent(content);
 		vo.setMemberNo(memberNo);
 		vo.setWriter(writer);
 
-		// DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
 		int result = new QnaService().writeQna(vo);
 
-
-		// insert 결과에 따라 로직 처리
 		if (result == 1) {
 			// 글 작성 성공
 			System.out.println("게시글 작성 성공!");

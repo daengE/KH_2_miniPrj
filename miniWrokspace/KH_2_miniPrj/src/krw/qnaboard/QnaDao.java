@@ -190,7 +190,6 @@ public class QnaDao {
 
 			while (rs.next()) {
 
-				// TODO-first
 				// 대충 rs.get 칼럼으로 데이터 받아와서
 				int no = rs.getInt("QNA_NO");
 				int memberNo = rs.getInt("M_NO");
