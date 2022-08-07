@@ -14,7 +14,9 @@ import mini.util.StringTest;
 
 public class BoardController {
 
-   /*
+   private String tag;
+
+/*
     * 게시글 작성
     * 
     * 데이터 받기 (컨트롤러)
@@ -51,6 +53,7 @@ public class BoardController {
       String content = InputUtil.sc.nextLine();
       
       int memberNo = mini.main.Main.loginMember.getNo();
+      String nick = mini.main.Main.loginMember.getNick();
       
       //데이터 뭉치기
       BoardVo vo = new BoardVo();
@@ -58,6 +61,7 @@ public class BoardController {
       vo.setTitle(title);
       vo.setContent(content);
       vo.setM_no(memberNo);
+      vo.setWriter(nick);
       
       //DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
       int result = new BoardService().write(vo);
@@ -75,10 +79,10 @@ public class BoardController {
       
       List<BoardVo> boardVoList = new BoardService().showList();
       
-		System.out.println("=================================== 커뮤니티  게시판 ====================================\n");
-		System.out.println("+----------------+------+-------------------------+---------------+---------------------+");
-		System.out.println("|------태그------|글번호|------  제     목  ------|----작 성 자---|-----작 성 시 간-----|");
-		System.out.println("+----------------+------+-------------------------+---------------+---------------------+");    
+		System.out.println("=========================================== 커뮤니티 게시판 ============================================\n");
+		System.out.println("+----------------+------+----------------------------------------+---------------+---------------------+");
+		System.out.println("|------태그------|글번호|-------------  제      목  -------------|----작 성 자---|-----작 성 시 간-----|");
+		System.out.println("+----------------+------+----------------------------------------+---------------+---------------------+");
 
 		for(int i = 0 ; i < boardVoList.size(); ++i) {
 			
@@ -90,17 +94,50 @@ public class BoardController {
 	        String writer = temp.getWriter();
 	        Timestamp enrollDate = temp.getEnrollDate();
 	         
-	        int titleLength = new StringTest().getStrLength(25, title);
+	        int titleLength = new StringTest().getStrLength(40, title);
 			int writerLength = new StringTest().getStrLength(15, writer);
 			int tagLength = new StringTest().getStrLength(16, tag);
 			
 			System.out.println("|" + String.format("%-" + tagLength + "s", tag) + "|" + String.format("%6s", no)
 								+ "|" + String.format("%-" + titleLength + "s", title) + "|"
 								+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
-			System.out.println("+----------------+------+-------------------------+---------------+---------------------+");
+			System.out.println("+----------------+------+----------------------------------------+---------------+---------------------+");
 		}
    
    }
+   
+   public void showTagList() {
+	      
+	   String tag = new Menu().choiceBoardTag();
+	   List<BoardVo> boardVoList = new BoardService().choiceBoardTag(tag);
+      
+       System.out.println("=========================================== 커뮤니티 게시판 ============================================\n");
+       System.out.println("+----------------+------+----------------------------------------+---------------+---------------------+");
+       System.out.println("|------태그------|글번호|-------------  제      목  -------------|----작 성 자---|-----작 성 시 간-----|");
+       System.out.println("+----------------+------+----------------------------------------+---------------+---------------------+");
+
+       for(int i = 0 ; i < boardVoList.size(); ++i) {
+    	   BoardVo temp = boardVoList.get(i);
+	      
+    	   tag = temp.getTag();
+    	   int no = temp.getB_no();
+	       String title = temp.getTitle();
+	       String writer = temp.getWriter();
+	       Timestamp enrollDate = temp.getEnrollDate();
+	         
+	       int titleLength = new StringTest().getStrLength(40, title);
+	       int writerLength = new StringTest().getStrLength(15, writer);
+	       int tagLength = new StringTest().getStrLength(16, tag);
+			
+	       System.out.println("|" + String.format("%-" + tagLength + "s", tag) + "|" + String.format("%6s", no)
+								+ "|" + String.format("%-" + titleLength + "s", title) + "|"
+								+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
+	       System.out.println("+----------------+------+----------------------------------------+---------------+---------------------+");
+		}
+   
+   }//showTagList   
+   
+   
    
 //망하면 이걸로 복귀   
 //   public void showBoardDetailMenu(int num) {
@@ -146,18 +183,11 @@ public class BoardController {
 //      }
 //   }//showBoardDetailMenu
    
+   
    public void showBoardDetailMenu(int num) {
 	   
       //글번호 받으면 ? -> 해당 글 상세조회 //새로운 service 호출
       BoardVo vo = new BoardService().showDetailByNo(num);
-      
-//      //실행결과(게시글 객체) 화면에 보여주기
-//      System.out.println("\n----- 게시글 상세조회 -----");
-//      System.out.print("제목 : " + vo.getTitle() + " | ");
-//      System.out.print("작성자 : " + vo.getWriter() + " | ");
-//      System.out.print("작성일 : " + vo.getEnrollDate());
-//      System.out.println();//줄바꿈
-//      System.out.println("내용 : " + vo.getContent());
       
       String title = vo.getTitle();
       String writer = vo.getWriter();
@@ -166,13 +196,16 @@ public class BoardController {
       int titleLength = new StringTest().getStrLength(24, title);
       int writerLength = new StringTest().getStrLength(15, writer);
       int tagLength = new StringTest().getStrLength(16, tag);
+      int contentLength = new StringTest().getStrLength(79, vo.getContent());
+      System.out.println("+------+----------------+------------------------+---------------+---------------------+");
+      System.out.println("|글번호+      태그      +         글제목         +     닉네임    +       작성시간      |");
       System.out.println("+------+----------------+------------------------+---------------+---------------------+");
       System.out.println("|" + String.format("%6s", vo.getB_no()+" ") + "|" 
     		+ String.format("%-" + tagLength + "s", tag) + "|"
             + String.format("%-" + titleLength + "s", title) + "|"
             + String.format("%-" + writerLength + "s", writer) + "|" + vo.getEnrollDate() + "|");
       System.out.println("+------+----------------+------------------------+---------------+---------------------+");
-      System.out.println("내용 : " + vo.getContent());
+      System.out.println("|내용 : " +  String.format("%-" + contentLength + "s", vo.getContent()) + "|");
       System.out.println("+--------------------------------------------------------------------------------------+");
       
       
@@ -180,39 +213,8 @@ public class BoardController {
       //댓글조회
       new BcommentController().showCommentList(num);
       
-//      int comment = new Menu().choiceBcommentMenu();
-      
-      //2:댓글작성
-//      if(comment == 2) {
-//         new BcommentController().write(num);
-//      }
-      
-//      else {
          return;
-//      }
    }//showBoardDetailMenu   
-   
-   
-   public void showTagList() {
-	   
-      //태그조회
-      //출력문, 입력받기
-      String tag = new Menu().choiceBoardTag();
-      
-      //태그를 받으면 ? -> 해당 글 상세조회 //새로운 service 호출
-      BoardVo vo = new BoardService().choiceBoardTag(tag);
-      
-      //실행결과(게시글 객체) 화면에 보여주기
-      System.out.println("\n----- 게시글 상세조회 -----");
-      System.out.print("태그 : [" + vo.getTag() + "] | ");
-      System.out.print("글번호 : " + vo.getB_no() + " | ");
-      System.out.print("제목 : " + vo.getTitle() + " | ");
-      System.out.print("작성자 : " + vo.getWriter() + " | ");
-      System.out.print("작성일 : " + vo.getEnrollDate());
-      System.out.println();//줄바꿈
-      System.out.println("내용 : " + vo.getContent());
-      
-   }//showTagList
    
 }//class
 

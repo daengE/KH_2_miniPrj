@@ -32,12 +32,13 @@ public class BcommentDao {
       try {
          
          //SQL 작성
-         String sql = "INSERT INTO BCOMMENT VALUES(SEQ_BCOMMENT_COM_NO.NEXTVAL , ? , '누구게' , ? , DEFAULT , 'N' , DEFAULT)";
+         String sql = "INSERT INTO BCOMMENT VALUES(SEQ_BCOMMENT_COM_NO.NEXTVAL , ? , ? , ? , DEFAULT , DEFAULT , DEFAULT)";
          
          //SQL 객체에 담기 및 완성(물음표 채우기)
          pstmt = conn.prepareStatement(sql);
          pstmt.setInt(1, num);
-         pstmt.setString(2, vocom.getContent());
+         pstmt.setString(2, vocom.getWriter());
+         pstmt.setString(3, vocom.getContent());
          
          //SQL 실행 및 결과 저장
          result = pstmt.executeUpdate();
@@ -68,8 +69,6 @@ public class BcommentDao {
          rs = pstmt.executeQuery();
          
          //커서 내리고, 칼럼별로 읽어오기, 객체로 ㄱ만들기   << 반복
-         // rs.next, rs.getXXX("칼럼명"), vo.setXXX
-//         System.out.println(rs.next()); //->>> 왜 false..???
          while(rs.next()) {
             int no = rs.getInt("COM_NO");
             String nick = rs.getString("COM_NICK");

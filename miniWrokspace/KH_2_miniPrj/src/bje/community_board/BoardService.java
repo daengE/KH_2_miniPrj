@@ -77,6 +77,26 @@ public class BoardService {
       return boardVoList;
    }//showList
    
+   public List<BoardVo> choiceBoardTag(String tag) {
+	      
+	      Connection conn = null;
+	      List<BoardVo> boardVoList = null;
+	      
+	      try{
+	         conn = JDBCTemplate.getConnection();
+	         boardVoList = new BoardDao().choiceBoardTag(conn, tag);
+	         
+	      } catch(Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         JDBCTemplate.close(conn);
+	      }
+	      
+	      return boardVoList;
+   }//choiceBoardTag   
+   
+   
+   
    /*
     * 게시글 상세조회
     */
@@ -97,27 +117,30 @@ public class BoardService {
       
       return vo;
    }
+ 
    
-   /*
-    * 태그별 글 조회
-    */
-   public BoardVo choiceBoardTag(String tag) {
-      
-      Connection conn = null;
-      BoardVo vo = null;
-      
-      try {
-         conn = getConnection();
-         vo = new BoardDao().choiceBoardTag(conn, tag);
-      }catch(Exception e) {
-         System.out.println("[ERROR] 태그별 글 조회 중 예외 발생 !!!");
-         e.printStackTrace();
-      }finally {
-         close(conn);
-      }
-      
-      return vo;
-   }
+   
+   //초이스보드태그 이거~
+//   /*
+//    * 태그별 글 조회
+//    */
+//   public BoardVo choiceBoardTag(String tag) {
+//      
+//      Connection conn = null;
+//      BoardVo vo = null;
+//      
+//      try {
+//         conn = getConnection();
+//         vo = new BoardDao().choiceBoardTag(conn, tag);
+//      }catch(Exception e) {
+//         System.out.println("[ERROR] 태그별 글 조회 중 예외 발생 !!!");
+//         e.printStackTrace();
+//      }finally {
+//         close(conn);
+//      }
+//      
+//      return vo;
+//   }
 
    
 }//class
