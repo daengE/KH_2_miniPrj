@@ -15,10 +15,10 @@ public class ATCController {
 		
 		List<ATCVo> ATCVoList = new ATCService().showATCList();
 		
-		System.out.println("============================= 동물훈련소 ==================================\n");
-		System.out.println("+------+-------------------------+---------------+-------------------------+");
-		System.out.println("|글번호|------ 훈련소이름  ------|----지    역---|----- 훈 련 소 특 징 ----|");
-		System.out.println("+------+-------------------------+---------------+-------------------------+");
+		System.out.println("============================= 동물훈련소 =================================\n");
+		System.out.println("+------+-------------------------+-------------+-------------------------+");
+		System.out.println("|글번호|------ 훈련소이름  ------|---지   역---|----- 훈 련 소 특 징 ----|");
+		System.out.println("+------+-------------------------+-------------+-------------------------+");
 		
 		for(int i = 0 ; i < ATCVoList.size(); ++i) {
 			
@@ -38,10 +38,10 @@ public class ATCController {
 			System.out.println(
 					  "|" + String.format("%4s", no) + "  "
 					+ "|" + " "+ String.format("%-" + atcLength + "s", name) 
-					+ "|"  + String.format("%8s", city) + "    "
+					+ "|"  + String.format("%6s", city) + "    "
 					+ "|" + " " +String.format("%-" + skillLength + "s", skill)
 					+ "|");
-			System.out.println("+------+-------------------------+---------------+-------------------------+");
+			System.out.println("+------+-------------------------+-------------+-------------------------+");
 		}
 			//상세조회 할건지 물어보기
 			//출력문, 입력받기
@@ -54,33 +54,36 @@ public class ATCController {
 			else {
 				ATCVo atcvo = new ATCService().showDetailByNo(num);
 				
-				System.out.println("+-----+---------------------------------------+");
-				System.out.println("|번 호|------------- 훈련소 이름 -------------|");
-				System.out.println("+-----+---------------------------------------+");
+				System.out.println("+----+---------------------------------------+");
+				System.out.println("|번호|------------- 훈련소 이름 -------------|");
+				System.out.println("+----+---------------------------------------+");
 				
-				int atcNameLength = new StringTest().getStrLength(24, atcvo.getName());
+				int atcNameLength = new StringTest().getStrLength(37, atcvo.getName());
 				
+				int atcCallLength = new StringTest().getStrLength(27, atcvo.getCall());
+				int atcLocLength = new StringTest().getStrLength(27, atcvo.getLoc());
+				int atcSkillLength = new StringTest().getStrLength(27, atcvo.getSkill());
+				int atcAnimalLength = new StringTest().getStrLength(27, atcvo.getAnimal());
 				
 				System.out.println(
-						  "|" + String.format("%4s", atcvo.getNo()) + "  "
-						+ "| "+ String.format("%-" + atcNameLength + "s", atcvo.getName()));
+						  "|" + String.format("%3s", atcvo.getNo()) + " "
+						+ "| "+ String.format("%-" + atcNameLength + "s", atcvo.getName())+" |");
 			
+				
+				
 				System.out.println("+---------------------------------------------+");
 				System.out.println("|-------------- 훈련소 상세 정보 -------------|");
+				System.out.println("+---------------------------------------------+");
+				System.out.println("|훈련소 전화번호 : "+ String.format("%-" + atcCallLength + "s", atcvo.getCall())+"|");
+				System.out.println("|훈련소 위    치 : "+ String.format("%-" + atcLocLength + "s", atcvo.getLoc())+"|");
+				System.out.println("|훈련소 특이사항 : "+ String.format("%-" + atcSkillLength + "s", atcvo.getSkill())+"|");
+				System.out.println("|훈련소 가능동물 : "+ String.format("%-" + atcAnimalLength + "s", atcvo.getAnimal())+"|");
+				System.out.println("+---------------------------------------------+");
 				
-				System.out.println("+---------------------------------------------+");
-				System.out.println("|훈련소 이    름 : "+ atcvo.getName());   // setString해야함
-				System.out.println("+---------------------------------------------+");
-				System.out.println("+---------------------------------------------+");
-				System.out.println("|훈련소 전화번호 : "+ atcvo.getCall());   // setString해야함
-				System.out.println("+---------------------------------------------+");
 				
 				
-				System.out.println(" 훈련소 이    름 :::" + atcvo.getName());
-				System.out.println(" 훈련소 전화번호 :::" + atcvo.getCall());
-				System.out.println(" 훈련소 위    치 :::" + atcvo.getLoc());
-				System.out.println(" 훈련소 주력스킬 :::" + atcvo.getSkill());
-				System.out.println(" 훈련소 가능동물 :::"+ atcvo.getAnimal());
+				
+				
 				
 				
 				//훈련소 신청하시겠습니까? 
@@ -141,7 +144,7 @@ public class ATCController {
 		
 	
 		
-		System.out.println("======================================="+selectcity+ " 동물훈련소 ======================================\n");
+		System.out.println("============================================"+selectcity+ " 동물훈련소 ===========================================\n");
 		System.out.println("+------+-------------------------+---------------------------------------------+-------------------------+");
 		System.out.println("|글번호|------ 훈련소이름  ------|--------------- 주          소 --------------|----- 훈 련 소 특 징 ----|");
 		System.out.println("+------+-------------------------+---------------------------------------------+-------------------------+");
@@ -180,14 +183,31 @@ public class ATCController {
 			}
 			else {
 				atcvo = new ATCService().showDetailByNo(num);
-				System.out.println();
-				System.out.println("--------------게시글 상세조회--------------");
-				System.out.println();
-				System.out.println("훈련소 이  름 :::" + atcvo.getName());
-				System.out.println("훈련소 전화번호 :::" + atcvo.getCall());
-				System.out.println("훈련소 위   치 :::" + atcvo.getLoc());
-				System.out.println("훈련소 주력스킬 :::" + atcvo.getSkill());
-				System.out.println("훈련소 신청가능 동물 :::"+ atcvo.getAnimal());
+				
+				int atcNameLength = new StringTest().getStrLength(37, atcvo.getName());
+				int atcCallLength = new StringTest().getStrLength(27, atcvo.getCall());
+				int atcLocLength = new StringTest().getStrLength(27, atcvo.getLoc());
+				int atcSkillLength = new StringTest().getStrLength(27, atcvo.getSkill());
+				int atcAnimalLength = new StringTest().getStrLength(27, atcvo.getAnimal());
+				
+				System.out.println("+----+----------------------------------------+");
+				System.out.println("|번호|------------- 훈련소 이름 --------------|");
+				System.out.println("+----+----------------------------------------+");
+				
+				System.out.println(
+						  "|" + String.format("%3s", atcvo.getNo()) + " "
+						+ "| "+ String.format("%-" + atcNameLength + "s", atcvo.getName())+" |");
+			
+				
+				
+				System.out.println("+---------------------------------------------+");
+				System.out.println("|-------------- 훈련소 상세 정보 -------------|");
+				System.out.println("+---------------------------------------------+");
+				System.out.println("|훈련소 전화번호 : "+ String.format("%-" + atcCallLength + "s", atcvo.getCall())+"|");
+				System.out.println("|훈련소 위    치 : "+ String.format("%-" + atcLocLength + "s", atcvo.getLoc())+"|");
+				System.out.println("|훈련소 특이사항 : "+ String.format("%-" + atcSkillLength + "s", atcvo.getSkill())+"|");
+				System.out.println("|훈련소 가능동물 : "+ String.format("%-" + atcAnimalLength + "s", atcvo.getAnimal())+"|");
+				System.out.println("+---------------------------------------------+");
 			}
 			//훈련소 신청하시겠습니까? 
 			
