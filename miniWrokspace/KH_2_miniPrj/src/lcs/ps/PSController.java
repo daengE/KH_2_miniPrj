@@ -19,7 +19,7 @@ public class PSController {
 		System.out.println("====================== 어떤 문제를 해결하고 싶나요?  =======================");
 		System.out.println("      *궁금한 문제를 선택해주세요.(0번 입력시 메인으로 돌아갑니다.)*\n");
 		System.out.println("+-----+---------------------------------------+");
-		System.out.println("|번 호|------------- 제      목  -------------|");
+		System.out.println("|번 호|------------- 문 제 이 름 -------------|");
 		System.out.println("+-----+---------------------------------------+");
 		
 		for(int i = 0 ; i < PSVoList.size(); ++i) {
@@ -50,16 +50,19 @@ public class PSController {
 			}
 			else if(num <= PSVoList.size()) {
 				PSVo selectpsvo = new PSService().showDetailPS(num);
+				
+				int qLength = new StringTest().getStrLength(58, selectpsvo.getQ());
+				
 			
-				System.out.println("+-----+---------------------------------------+");
-				System.out.println("|번 호|------------- 제      목  -------------|");
-				System.out.println("+-----+---------------------------------------+");
-				System.out.println("|  "+selectpsvo.getNo()+"  |"+selectpsvo.getQ()); // string set 써야할것같음
-				System.out.println("+-----+---------------------------------------+");
-				System.out.println("|                   내      용                |");
-				System.out.println("+---------------------------------------------+");
-				System.out.println("|" + selectpsvo.getA());  //Stringset 써야할 것같음
-				System.out.println("+-----+---------------------------------------+");
+				System.out.println("+-----+------------------------------------------------------------+");
+				System.out.println("|번 호|-------------------- 문  제  이  름  -----------------------|");
+				System.out.println("+-----+------------------------------------------------------------+");
+				System.out.println("|  "+num+"  |"+String.format("%-" + qLength + "s", selectpsvo.getQ())+"  |"); // string set 써야할것같음
+				System.out.println("+------------------------------------------------------------------+");
+				System.out.println("|--------------------------  T  I  P  -----------------------------|");
+				System.out.println("+------------------------------------------------------------------+");
+				System.out.println(  selectpsvo.getA());
+				System.out.println("+------------------------------------------------------------------+");
 				
 				
 				System.out.println();

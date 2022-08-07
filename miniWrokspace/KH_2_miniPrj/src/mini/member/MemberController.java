@@ -28,9 +28,9 @@ public class MemberController {
 			if (vo != null && vo.getDisaled() == 0) {
 				// 로그인 성공
 				System.out.println("로그인 성공 !\n\n");
-				System.out.println("====================================");
+				System.out.println("=====================================");
 				System.out.println("    " + vo.getNick() + "님 환영합니다 !!");
-				System.out.println("====================================\n");
+				System.out.println("=====================================\n");
 				Main.loginMember = vo;
 			} else if (vo != null && vo.getDisaled() == 1) {
 				// 로그인 실패(탈퇴한회원)
