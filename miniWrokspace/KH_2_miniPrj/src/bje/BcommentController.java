@@ -36,7 +36,7 @@ public class BcommentController {
       vo.setContent(content);
       
       //DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
-      int result = new BcommentService().write(vo, num);
+      int result = new BcommentService().write(vo, boardnum);
       
       //insert 결과에 따라 로직 처리
       if(result == 1) {
