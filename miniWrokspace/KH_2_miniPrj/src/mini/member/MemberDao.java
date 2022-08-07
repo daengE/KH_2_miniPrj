@@ -286,25 +286,81 @@ public class MemberDao {
 	public int deleteMyPet(String petName, Connection conn) throws Exception {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		
-		
+
 		try {
-			String sql ="DELETE FROM ANIMAL WHERE ANI_NAME = ? AND USER_NO = ?";
-			
+			String sql = "DELETE FROM ANIMAL WHERE ANI_NAME = ? AND USER_NO = ?";
+
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, petName);
 			pstmt.setInt(2, Main.loginMember.getNo());
-			
+
 			result = pstmt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			throw e;
-		}finally {
+		} finally {
 			JDBCTemplate.close(pstmt);
 		}
-		
+
 		return result;
+	}
+
+	public boolean checkDupId(String id) throws Exception {
+
+		String sql = "SELECT M_NAME FROM MEMBER WHERE M_ID = ?";
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+		
+		conn = JDBCTemplate.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, id);
+
+		rs = pstmt.executeQuery();
+
+		result = rs.next();
+		
+		}finally {
+			JDBCTemplate.close(conn);
+			JDBCTemplate.close(conn);
+			JDBCTemplate.close(conn);
+		}
+
+		return result;
+
+	}
+
+	public boolean checkDupNick(String nick) throws Exception {
+
+		String sql = "SELECT M_NAME FROM MEMBER WHERE M_NICK = ?";
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+		
+		conn = JDBCTemplate.getConnection();
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, nick);
+
+		rs = pstmt.executeQuery();
+
+		result = rs.next();
+		
+		}finally {
+			JDBCTemplate.close(conn);
+			JDBCTemplate.close(conn);
+			JDBCTemplate.close(conn);
+			
+		}
+
+		return result;
+
 	}
 
 }// class

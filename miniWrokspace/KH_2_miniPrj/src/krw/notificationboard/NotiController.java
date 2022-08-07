@@ -3,8 +3,6 @@ package krw.notificationboard;
 import java.sql.Timestamp;
 import java.util.List;
 
-import krw.qnaboard.QnaService;
-import krw.qnaboard.QnaVo;
 import mini.main.Main;
 import mini.menu.Menu;
 import mini.util.InputUtil;
@@ -24,6 +22,9 @@ public class NotiController {
 		case 2:
 			writeNoti();
 			break;
+		case 0:
+			System.out.println("메인메뉴로 돌아갑니다.\n");
+			return;
 		default:
 			System.out.println("잘못 입력 하셨습니다.");
 			break;
@@ -90,18 +91,18 @@ public class NotiController {
 		int titleLength = new StringTest().getStrLength(35, title);
 		int writerLength = new StringTest().getStrLength(15, writer);
 		System.out.println("+------+-----------------------------------+---------------+---------------------+");
-		System.out.println("|" + String.format("%6s", vo.getNotiNo()+" ") + "|"
-				+ String.format("%-" + titleLength + "s", title) + "|"
-				+ String.format("%-" + writerLength + "s", writer) + "|" + vo.getEnrollDate() + "|");
+		System.out.println(
+				"|" + String.format("%6s", vo.getNotiNo() + " ") + "|" + String.format("%-" + titleLength + "s", title)
+						+ "|" + String.format("%-" + writerLength + "s", writer) + "|" + vo.getEnrollDate() + "|");
 		System.out.println("+------+-----------------------------------+---------------+---------------------+");
 		System.out.println(vo.getContent());
 		System.out.println("+------+-----------------------------------+---------------+---------------------+");
-		
+
 		// 상세보기 후
 
 		if (Main.loginMember == null || Main.loginMember.getMbRight() == 0) {
 			System.out.println("1. 게시글로 가기");
-			System.out.println("0. 메인 메뉴로\n");
+			System.out.println("0. 메인 메뉴로");
 			int input = InputUtil.getInt();
 			if (input == 1) {
 				listUpNoti();
@@ -142,39 +143,42 @@ public class NotiController {
 		}
 
 		// 권한 확인 //이게 스트링이던가..
-		if (Main.loginMember.getNo() != 99999) {
+		if (Main.loginMember.getMbRight() != 1) {
 			System.out.println("권한이 없습니다.\n");
-			return;
-		}
-		// 커넥트
-		System.out.println("===== 공지사항 게시글 작성 =====");
-
-		System.out.println("제목 : ");
-		String title = InputUtil.sc.nextLine();
-		System.out.println("내용 : ");
-		String content = InputUtil.sc.nextLine();
-
-		int memberNo = Main.loginMember.getNo();
-		String writer = Main.loginMember.getNick();
-
-		// 데이터 뭉치기
-
-		NotiVo vo = new NotiVo();
-		vo.setTitle(title);
-		vo.setContent(content);
-		vo.setMemberNo(memberNo);
-		vo.setWriter(writer);
-
-		// DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
-		int result = new NotiService().writeNoti(vo);
-
-		// insert 결과에 따라 로직 처리
-		if (result == 1) {
-			// 글 작성 성공
-			System.out.println("게시글 작성 성공!\n");
+			new NotiController().handleNotiMenu();
 		} else {
-			// 글 작성 실패
-			System.out.println("게시글 작성 실패...!\n");
+			// 커넥트
+			System.out.println("===== 공지사항 게시글 작성 =====");
+
+			System.out.println("제목 : ");
+			String title = InputUtil.sc.nextLine();
+			System.out.println("내용 : ");
+			String content = InputUtil.sc.nextLine();
+
+			int memberNo = Main.loginMember.getNo();
+			String writer = Main.loginMember.getNick();
+
+			// 데이터 뭉치기
+
+			NotiVo vo = new NotiVo();
+			vo.setTitle(title);
+			vo.setContent(content);
+			vo.setMemberNo(memberNo);
+			vo.setWriter(writer);
+
+			// DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
+			int result = new NotiService().writeNoti(vo);
+
+			// insert 결과에 따라 로직 처리
+			if (result == 1) {
+				// 글 작성 성공
+				System.out.println("게시글 작성 성공!\n");
+			} else {
+				// 글 작성 실패
+				System.out.println("게시글 작성 실패...!\n");
+			}
+			
+			handleNotiMenu();
 		}
 	}
 

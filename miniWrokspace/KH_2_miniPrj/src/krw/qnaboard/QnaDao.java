@@ -156,7 +156,6 @@ public class QnaDao {
 			pstmt.setString(4, vo.getContent());
 
 			result = pstmt.executeUpdate();
-			System.out.println(result);
 
 		} catch (Exception e) {
 			throw e;
