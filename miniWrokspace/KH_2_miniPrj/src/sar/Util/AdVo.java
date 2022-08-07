@@ -1,5 +1,7 @@
 package sar.Util;
 
+import java.sql.Timestamp;
+
 public class AdVo {
 	
 	public AdVo() {
@@ -23,7 +25,7 @@ public class AdVo {
 		this.nt = nt;
 	}
 
-	public AdVo(String ap_no, String adpot, String ad_name, String ad_phone, String ad_date, int m_no) {
+	public AdVo(String ap_no, String adpot, String ad_name, String ad_phone, Timestamp ad_date, int m_no) {
 		super();
 		this.ap_no = ap_no;
 		this.adpot = adpot;
@@ -51,7 +53,7 @@ public class AdVo {
 	private String adpot;
 	private String ad_name;
 	private String ad_phone;
-	private String ad_date;
+	private Timestamp ad_date;
 	private int m_no;
 	
 	public int getAd_no() {
@@ -156,10 +158,10 @@ public class AdVo {
 	public void setAd_phone(String ad_phone) {
 		this.ad_phone = ad_phone;
 	}
-	public String getAd_date() {
+	public Timestamp getAd_date() {
 		return ad_date;
 	}
-	public void setAd_date(String ad_date) {
+	public void setAd_date(Timestamp ad_date) {
 		this.ad_date = ad_date;
 	}
 	public int getM_no() {
