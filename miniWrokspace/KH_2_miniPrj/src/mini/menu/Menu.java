@@ -146,7 +146,7 @@ public class Menu {
 	         System.out.println("잘못 누르셨습니다");
 	         }
 	         showMenu1();
-	      }else if(num >= 23) {
+	      }else if(num >= 24) {
 	         System.out.println("잘못 누르셨습니다");
 	         showMenu1();
 	      }
@@ -156,51 +156,56 @@ public class Menu {
 	   }//showMenu1
 	
 	
-	public int showMenu2() {
-		
-		while(true) {
-			if(Main.selected.getAd_adopt().equalsIgnoreCase("y")) {
-				System.out.println("\n\n0. 검색하기");
-				System.out.println("1. 뒤로가기");
-			}else{
+		public int showMenu2() {
+
+			while (true) {
+				if (Main.selected.getAd_adopt().equalsIgnoreCase("y")) {
+					System.out.println("\n\n0. 검색하기");
+					System.out.println("1. 뒤로가기");
+				} else {
 					System.out.println("\n\n0. 검색하기");
 					System.out.println("1. 뒤로가기");
 					System.out.println("2. 해당 동물 입양하기");
-			}
-		
-		int num2 = InputUtil.getInt();
-		
-		switch(num2) {
-		case 0 : 
-			System.out.println("\n\n1.입양상태로 검색하기");
-			System.out.println("2.지역으로 검색하기");
-			int num = InputUtil.getInt();
-			if(num == 1) {
-				new Adandoned().ADOPT_YN();
-			}else if(num == 2) {
-				new Adandoned().search();
-			}else if (num >= 3) {
-				System.out.println("잘못 누르셨습니다");
-			}
-			continue;
+				}
 
-		case 1 : 
-				new Adandoned().list();
-				showMenu1();
-				continue;
-			
-		case 2 : 
-			if (Main.loginMember == null) {
-			System.out.println("로그인 먼저 해주세요");
-			new MemberController().login();
-			} else {	new Adoption().apply(Main.loginMember.getNo());}
-	
-		default : System.out.println("잘못 누르셨습니다");
-			continue;
-		}//switch
-//		return InputUtil.getInt();	
-		}//while
-	}//showMenu2
+				int num2 = InputUtil.getInt();
+
+				switch (num2) {
+				case 0:
+					System.out.println("\n\n1.입양상태로 검색하기");
+					System.out.println("2.지역으로 검색하기");
+					int num = InputUtil.getInt();
+					if (num == 1) {
+						new Adandoned().ADOPT_YN();
+					} else if (num == 2) {
+						new Adandoned().search();
+					} else if (num >= 3) {
+						System.out.println("잘못 누르셨습니다");
+					}
+					continue;
+
+				case 1:
+					new Adandoned().list();
+					showMenu1();
+					continue;
+
+				case 2:
+					if (Main.loginMember == null) {
+						System.out.println("로그인 먼저 해주세요");
+						new MemberController().login();
+						new Adoption().apply(Main.loginMember.getNo());
+
+					} else {
+						new Adoption().apply(Main.loginMember.getNo());
+						break;
+					}
+
+				default:
+					System.out.println("잘못 누르셨습니다");
+					continue;
+				}// switch
+			} // while
+		}// showMenu2
 	
 	
 	   public void showMenu6() {
