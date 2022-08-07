@@ -78,7 +78,6 @@ public class Adoption {
 			pstmt.setInt(2, mini.main.Main.selected.getAd_no());
 
 			int result = pstmt.executeUpdate();
-			System.out.println(result);
 
 			if (result >= 1) {
 				System.out.println("신청서 작성 완료!");
@@ -102,22 +101,23 @@ public class Adoption {
 			System.out.println("돌아가실 메뉴를 선택하세요");
 			System.out.println("1. 유기동물 게시판");
 			System.out.println("2. 처음으로 돌아가기");
-			System.out.println("3. 프로그램 종료");
+//			System.out.println("3. 프로그램 종료");
 
 			int num3 = InputUtil.getInt();
 			if (num3 == 1) {
 				new Adandoned().list();
 			} else if (num3 == 2) {
 				mini.main.Main.main(null);
-//				new Menu().showMenu();
-			} else if (num3 == 3) {
-				System.out.println("시스템을 종료 합니다...!");
-//				return;
-			mini.main.Main.main(null);
 				
-			}
+				}
+//			} else if (num3 == 3) {
+//	
+//				System.out.println("시스템을 종료 합니다...!");
+////				return;
+////			mini.main.Main.main(null);
+//			}
 
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
 			JDBCTemplate.rollback(conn);
 

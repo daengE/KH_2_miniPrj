@@ -110,7 +110,7 @@ public class Menu {
 		while (true) {
 			System.out.println("1. 내 정보 보기 및 수정");
 			System.out.println("2. 내가 작성한 글");
-			System.out.println("3. 나의 관심 글");
+			System.out.println("3. 나의 신청 목록");
 			System.out.println("4. 내 반려동물 보기");
 			System.out.println("5. 탈퇴하기");
 			
@@ -127,85 +127,88 @@ public class Menu {
 	
 	
 	public void showMenu1() {
-	      
-	      System.out.println("\n\n0. 검색하기");
-	      System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====" );
-	      System.out.print( " : " );
-	      
-	      int num = InputUtil.getInt();
-	      
-	      if(num == 0) {
-	         System.out.println("\n\n1.입양상태로 검색하기");
-	         System.out.println("2.지역으로 검색하기");
-	         int num1 = InputUtil.getInt();
-	         if(num1 == 1) {
-	            new Adandoned().ADOPT_YN();
-	         }else if(num1 == 2) {
-	            new Adandoned().search();
-	         }else if (num1 >= 3) {
-	         System.out.println("잘못 누르셨습니다");
-	         }
-	         showMenu1();
-	      }else if(num >= 24) {
-	         System.out.println("잘못 누르셨습니다");
-	         showMenu1();
-	      }
-	      else {
-	         new Adandoned().detail(num);
-	      }   
-	   }//showMenu1
+        
+        System.out.println("\n\n0. 검색하기");
+        System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====" );
+        System.out.print( " : " );
+        
+        int num = InputUtil.getInt();
+        
+        if(num == 0) {
+           System.out.println("\n\n1.입양상태로 검색하기");
+           System.out.println("2.지역으로 검색하기");
+           int num1 = InputUtil.getInt();
+           if(num1 == 1) {
+              new Adandoned().ADOPT_YN();
+              
+           }else if(num1 == 2) {
+              new Adandoned().search();
+            
+           }else if (num1 >= 3) {
+           System.out.println("잘못 누르셨습니다");
+           
+           }
+           showMenu1();
+        }else if(num >= 24) {
+           System.out.println("잘못 누르셨습니다");
+           showMenu1();
+        }
+        else {
+           new Adandoned().detail(num);
+        }   
+     }//showMenu1
 	
 	
-		public int showMenu2() {
+    public int showMenu2() {
 
-			while (true) {
-				if (Main.selected.getAd_adopt().equalsIgnoreCase("y")) {
-					System.out.println("\n\n0. 검색하기");
-					System.out.println("1. 뒤로가기");
-				} else {
-					System.out.println("\n\n0. 검색하기");
-					System.out.println("1. 뒤로가기");
-					System.out.println("2. 해당 동물 입양하기");
-				}
+        while (true) {
+           if (Main.selected.getAd_adopt().equalsIgnoreCase("y")) {
+              System.out.println("\n\n0. 검색하기");
+              System.out.println("1. 뒤로가기");
+           } else {
+              System.out.println("\n\n0. 검색하기");
+              System.out.println("1. 뒤로가기");
+              System.out.println("2. 해당 동물 입양하기");
+           }
 
-				int num2 = InputUtil.getInt();
+           int num2 = InputUtil.getInt();
 
-				switch (num2) {
-				case 0:
-					System.out.println("\n\n1.입양상태로 검색하기");
-					System.out.println("2.지역으로 검색하기");
-					int num = InputUtil.getInt();
-					if (num == 1) {
-						new Adandoned().ADOPT_YN();
-					} else if (num == 2) {
-						new Adandoned().search();
-					} else if (num >= 3) {
-						System.out.println("잘못 누르셨습니다");
-					}
-					continue;
+           switch (num2) {
+           case 0:
+              System.out.println("\n\n1.입양상태로 검색하기");
+              System.out.println("2.지역으로 검색하기");
+              int num = InputUtil.getInt();
+              if (num == 1) {
+                 new Adandoned().ADOPT_YN();
+              } else if (num == 2) {
+                 new Adandoned().search();
+              } else if (num >= 3) {
+                 System.out.println("잘못 누르셨습니다");
+              }
+              continue;
 
-				case 1:
-					new Adandoned().list();
-					showMenu1();
-					continue;
+           case 1:
+              new Adandoned().list();
+              showMenu1();
+              continue;
 
-				case 2:
-					if (Main.loginMember == null) {
-						System.out.println("로그인 먼저 해주세요");
-						new MemberController().login();
-						new Adoption().apply(Main.loginMember.getNo());
+           case 2:
+              if (Main.loginMember == null) {
+                 System.out.println("로그인 먼저 해주세요");
+                 new MemberController().login();
+                 new Adoption().apply(Main.loginMember.getNo());
 
-					} else {
-						new Adoption().apply(Main.loginMember.getNo());
-						break;
-					}
+              } else {
+                 new Adoption().apply(Main.loginMember.getNo());
+                 break;
+              }
 
-				default:
-					System.out.println("잘못 누르셨습니다");
-					continue;
-				}// switch
-			} // while
-		}// showMenu2
+           default:
+              System.out.println("잘못 누르셨습니다");
+              continue;
+           }// switch
+        } // while
+     }// showMenu2
 	
 	
 	   public void showMenu6() {

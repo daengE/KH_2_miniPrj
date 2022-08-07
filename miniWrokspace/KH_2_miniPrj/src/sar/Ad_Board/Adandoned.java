@@ -14,8 +14,6 @@ public class Adandoned {
 
 	public AdVo list() {
 
-//		System.out.println("====[전체 글 조회]====");
-
 		String sql = "SELECT AD_NO, AD_ADOPT, AD_ANIMAL, AD_TYPE, AD_CITY, AD_KILL, AD_GENDER, AD_AGE FROM ADANDONED_BOARD";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -26,10 +24,10 @@ public class Adandoned {
 			conn = JDBCTemplate.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			System.out.println("==============================유기동물 게시판===================================\n");
-			System.out.println("+------+-------+----------+---------------+----------|----------|----|-----------+");
-			System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|---지역---|안락사일정|성별|---나 이---|");
-			System.out.println("+------+-------+----------+---------------+----------|----------|----|-----------+");
+			System.out.println("==============================유기동물 게시판======================================");
+			System.out.println("+------+-------+----------+---------------+----------|----------|-----|-----------+");
+			System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|---지역---|안락사일정|성 별|---나 이---|");
+			System.out.println("+------+-------+----------+---------------+----------|----------|-----|-----------+");
 
 			while (rs.next()) {
 
@@ -51,23 +49,18 @@ public class Adandoned {
 				vo.setKill(kill);
 				vo.setGender(gender);
 				vo.setAge(age);
-				
+
 				int animalLength = new StringTest().getStrLength(8, animal);
 				int typeLength = new StringTest().getStrLength(14, type);
 				int ageLength = new StringTest().getStrLength(10, age);
-				int killLength = new StringTest().getStrLength(9, kill);
-				
-				System.out.println(
-						  "|" + String.format("%4s", ad_no) + "  "
-					    + "|" + " "+ String.format("%3s", adopt)+ "   "
-						+ "|" + " "+ String.format("%-" + animalLength + "s", animal) + " "
-						+ "|"  +" "+ String.format("%-"+ typeLength + "s", type)
-						+ "|"  + String.format("%10s", city)+ " "
-						+ "|"  +" "+ String.format("%-"+ killLength + "s", kill)
-						+ "|"  +" "+ String.format("%3s", gender) + " "
-						+ "|"  +" "+ String.format("%-"+ ageLength + "s", age)
-						+ "|");
-				System.out.println("+------+-------+----------+---------------+----------|----------|----|-----------+");
+				int killLength = new StringTest().getStrLength(8, kill);
+
+				System.out.println("|" + String.format("%4s", ad_no) + "  " + "|" + " " + String.format("%3s", adopt)
+						+ "   " + "|" + " " + String.format("%-" + animalLength + "s", animal) + " " + "|" + " "
+						+ String.format("%-" + typeLength + "s", type) + "|" + String.format("%5s", city) + "  " + "|"
+						+ "  " + String.format("%-" + killLength + "s", kill) + "|" + String.format("%3s", gender) + "  "
+						+ "|" + " " + String.format("%-" + ageLength + "s", age) + "|");
+				System.out.println("+------+-------+----------+---------------+----------|----------|-----|-----------+");
 
 			} // while
 		} catch (Exception e) {
@@ -122,50 +115,34 @@ public class Adandoned {
 				vo.setAddress(address);
 				vo.setFeature(feature);
 				vo.setNt(nt);
-//
-//				System.out.println(" 입양유무 / 축종 / 세부종류 / 지역 / 안락사일정 / 성별 / 나이 ");
-//
-//				System.out.println(ad_no + "|" + adopt + "/" + animal + "/" + type + "/" + city + "/" + kill + "/"
-//						+ gender + "/" + age + "/");
-//				System.out.print("보호장소 : " + vo.getShelter() + " / ");
-//				System.out.println(vo.getAddress());
-//				System.out.println("특이사항 : " + vo.getFeature());
-//				System.out.print("중성화여부 : " + vo.getNt());
-				
-				System.out.println("\n==============================유기동물 게시판===================================");
-				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
-				System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|--지 역--|안락사일정|성별|---나 이---|");
-				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
-				
+
+				System.out.println("==============================유기동물 게시판======================================");
+				System.out.println("+------+-------+----------+---------------+----------|----------|-----|-----------+");
+				System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|---지역---|안락사일정|성 별|---나 이---|");
+				System.out.println("+------+-------+----------+---------------+----------|----------|-----|-----------+");
 
 				int animalLength = new StringTest().getStrLength(8, animal);
 				int typeLength = new StringTest().getStrLength(14, type);
 				int ageLength = new StringTest().getStrLength(10, age);
-				int killLength = new StringTest().getStrLength(9, kill);
-				
-				System.out.println(
-						  "|" + String.format("%4s", ad_no) + "  "
-					    + "|" + " "+ String.format("%3s", adopt)+ "   "
-						+ "|" + " "+ String.format("%-" + animalLength + "s", animal) + " "
-						+ "|"  +" "+ String.format("%-"+ typeLength + "s", type)
-						+ "|"  +" "+ String.format("%5s", city)
-						+ "|"  +" "+ String.format("%-"+ killLength + "s", kill)
-						+ "|"  +" "+ String.format("%3s", gender)
-						+ "|"  +" "+ String.format("%-"+ ageLength + "s", age)
-						+ "|");
-				
+				int killLength = new StringTest().getStrLength(8, kill);
+
+				System.out.println("|" + String.format("%4s", ad_no) + "  " + "|" + " " + String.format("%3s", adopt)
+						+ "   " + "|" + " " + String.format("%-" + animalLength + "s", animal) + " " + "|" + " "
+						+ String.format("%-" + typeLength + "s", type) + "|" + String.format("%5s", city) + "  " + "|"
+						+ "  " + String.format("%-" + killLength + "s", kill) + "|" + String.format("%3s", gender) + "  "
+						+ "|" + " " + String.format("%-" + ageLength + "s", age) + "|");
+			
 				int sheltersLength = new StringTest().getStrLength(67, shelter);
-				int addressLength = new StringTest().getStrLength(65, address);
-				int featureLength = new StringTest().getStrLength(66, feature);
-				int ntLength = new StringTest().getStrLength(64, nt);
-				
-				System.out.println(
-						"| 보호소명 : " + String.format("%-" + sheltersLength + "s", shelter) + "|"
-						+ "\n| 보호소주소 : " + String.format("%-" + addressLength + "s", address) + "|" 
-						+ "\n| 특이 사항 : " + String.format("%-" + featureLength + "s", feature) + "|" 
-						+ "\n| 중성화 여부 : " + String.format("%-" + ntLength + "s", nt) + "|" );
-				
-				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+				int addressLength = new StringTest().getStrLength(66, address);
+				int featureLength = new StringTest().getStrLength(67, feature);
+				int ntLength = new StringTest().getStrLength(66, nt);
+
+				System.out.println("| 보호소명   : " + String.format("%-" + sheltersLength + "s", shelter) + "|"
+						+ "\n| 보호소 주소 : " + String.format("%-" + addressLength + "s", address) + "|" + "\n| 특이 사항  : "
+						+ String.format("%-" + featureLength + "s", feature) + "|" + "\n| 중성화 여부 : "
+						+ String.format("%-" + ntLength + "s", nt) + "|");
+
+						System.out.println("+---------------------------------------------------------------------------------+");
 				mini.main.Main.selected = vo;
 			} // if
 
@@ -175,14 +152,11 @@ public class Adandoned {
 			JDBCTemplate.close(pstmt);
 			JDBCTemplate.close(rs);
 		}
-
-//		return vo;
 	}
 
 	public void search() {
 		System.out.println(" 서울시 | 경기도 | 경상도 | 전라도 | 제주도 | 충청도 | 강원도 ");
 		System.out.print("지역명을 입력하세요 : ");
-//		JDBCTemplate_ad.sc.nextLine();
 		String search = InputUtil.sc.nextLine();
 
 		if (search.equals("서울시")) {
@@ -224,10 +198,10 @@ public class Adandoned {
 			pstmt.setString(1, search);
 
 			rs = pstmt.executeQuery();
-
-			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
-			System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|--지 역--|안락사일정|성별|---나 이---|");
-			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+			
+			System.out.println("+------+-------+----------+---------------+----------|----------|-----|-----------+");
+			System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|---지역---|안락사일정|성 별|---나 이---|");
+			System.out.println("+------+-------+----------+---------------+----------|----------|-----|-----------+");
 
 			while (rs.next()) {
 				int ad_no = rs.getInt("AD_NO");
@@ -248,24 +222,18 @@ public class Adandoned {
 				vo.setKill(kill);
 				vo.setGender(gender);
 				vo.setAge(age);
-				
+
 				int animalLength = new StringTest().getStrLength(8, animal);
 				int typeLength = new StringTest().getStrLength(14, type);
 				int ageLength = new StringTest().getStrLength(10, age);
-				int killLength = new StringTest().getStrLength(9, kill);
-				
-				System.out.println(
-						  "|" + String.format("%4s", ad_no) + "  "
-					    + "|" + " "+ String.format("%3s", adopt)+ "   "
-						+ "|" + " "+ String.format("%-" + animalLength + "s", animal) + " "
-						+ "|"  +" "+ String.format("%-"+ typeLength + "s", type)
-						+ "|"  +" "+ String.format("%5s", city)
-						+ "|"  +" "+ String.format("%-"+ killLength + "s", kill)
-						+ "|"  +" "+ String.format("%3s", gender)
-						+ "|"  +" "+ String.format("%-"+ ageLength + "s", age)
-						+ "|");
-				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+				int killLength = new StringTest().getStrLength(8, kill);
 
+				System.out.println("|" + String.format("%4s", ad_no) + "  " + "|" + " " + String.format("%3s", adopt)
+				+ "   " + "|" + " " + String.format("%-" + animalLength + "s", animal) + " " + "|" + " "
+				+ String.format("%-" + typeLength + "s", type) + "|" + String.format("%5s", city) + "  " + "|"
+				+ "  " + String.format("%-" + killLength + "s", kill) + "|" + String.format("%3s", gender) + "  "
+				+ "|" + " " + String.format("%-" + ageLength + "s", age) + "|");
+				System.out.println("+------+-------+----------+---------------+----------|----------|-----|-----------+");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -305,9 +273,10 @@ public class Adandoned {
 			pstmt.setString(1, adopt1);
 			rs = pstmt.executeQuery();
 
-			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
-			System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|--지 역--|안락사일정|성별|---나 이---|");
-			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+
+			System.out.println("+------+-------+----------+---------------+----------|----------|-----|-----------+");
+			System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|---지역---|안락사일정|성 별|---나 이---|");
+			System.out.println("+------+-------+----------+---------------+----------|----------|-----|-----------+");
 
 			while (rs.next()) {
 				int ad_no = rs.getInt("AD_NO");
@@ -332,20 +301,15 @@ public class Adandoned {
 				int animalLength = new StringTest().getStrLength(8, animal);
 				int typeLength = new StringTest().getStrLength(14, type);
 				int ageLength = new StringTest().getStrLength(10, age);
-				int killLength = new StringTest().getStrLength(9, kill);
-				
-				System.out.println(
-						  "|" + String.format("%4s", ad_no) + "  "
-					    + "|" + " "+ String.format("%3s", adopt)+ "   "
-						+ "|" + " "+ String.format("%-" + animalLength + "s", animal) + " "
-						+ "|"  +" "+ String.format("%-"+ typeLength + "s", type)
-						+ "|"  +" "+ String.format("%5s", city)
-						+ "|"  +" "+ String.format("%-"+ killLength + "s", kill)
-						+ "|"  +" "+ String.format("%3s", gender)
-						+ "|"  +" "+ String.format("%-"+ ageLength + "s", age)
-						+ "|");
-				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+				int killLength = new StringTest().getStrLength(8, kill);
 
+				System.out.println("|" + String.format("%4s", ad_no) + "  " + "|" + " " + String.format("%3s", adopt)
+				+ "   " + "|" + " " + String.format("%-" + animalLength + "s", animal) + " " + "|" + " "
+				+ String.format("%-" + typeLength + "s", type) + "|" + String.format("%5s", city) + "  " + "|"
+				+ "  " + String.format("%-" + killLength + "s", kill) + "|" + String.format("%3s", gender) + "  "
+				+ "|" + " " + String.format("%-" + ageLength + "s", age) + "|");
+				System.out.println("+------+-------+----------+---------------+----------|----------|-----|-----------+");
+		
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
