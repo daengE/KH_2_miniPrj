@@ -210,7 +210,6 @@ public class MemberController {
 
 	public void myPage() {
 
-		System.out.println("마이페이지 아직 완성 안됨..");
 		// myPage 메뉴 출력
 		MyPage mp = new MyPage();
 		int result = new Menu().showMyPageMenu();
@@ -218,7 +217,6 @@ public class MemberController {
 		case 1:
 			// 정보보기 및 수정
 			mp.showMyInfo();
-
 			break;
 		case 2:
 			// TODO
