@@ -44,20 +44,6 @@ public class Main_bje {
             /*게시판 리스트 조회*/
             new BoardController().showList();
             
-            /*이어서 선택한 글 + 댓글 모두 조회*/
-//            new BcommentController().showCommentList();
-            
-            //메인으로 들어갑니다
-//		case 3:
-//			if(loginMember == null) {
-//			new MemberController().join();
-//			}else {
-//				new Adandoned().list();
-//				new BoardController().write();
-//				new BoardController().showList();
-//			}
-//            
-//            break;   
          case 9:
             /*프로그램 종료*/
             System.out.println("프로그램을 종료합니다.");
