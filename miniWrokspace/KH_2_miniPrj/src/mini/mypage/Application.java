@@ -25,8 +25,9 @@ public class Application {
 				String type = adVo.getType();
 				String shelter = adVo.getShelter();
 				String address = adVo.getAddress();
+				Timestamp ad_Date = adVo.getAd_date();
 
-				System.out.println(i + 1 + " ) 동물타입 : " + animal + "| 종 : " + type + "| 보호소 : " + shelter + "| 주소 : " + address);
+				System.out.println(i + 1 + " ) 동물타입 : " + animal + "| 종 : " + type + "| 보호소 : " + shelter + "| 주소 : " + address+ "| 신청날짜 : "+ad_Date);
 
 			}
 		}
