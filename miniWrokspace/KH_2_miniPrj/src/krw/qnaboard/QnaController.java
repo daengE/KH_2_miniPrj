@@ -46,10 +46,10 @@ public class QnaController {
 		List<QnaVo> qnaBoardList = new QnaService().listUpMyQna();
 
 		// VO를 토대로 리스트업 !!
-		System.out.println("============================= QnA 게시판 ==============================\n");
-		System.out.println("+------+----------+-------------------------+---------------------+");
-		System.out.println("|글번호| 답변여부 |------  제     목  ------|---- 작 성 시 간 ----|");
-		System.out.println("+------+----------+-------------------------+---------------------+");
+		System.out.println("=========================== 내가 작성한 QnA ================================\n");
+		System.out.println("+------+----------+-----------------------------------+---------------------+");
+		System.out.println("|글번호| 답변여부 |-----------  제     목  -----------|---- 작 성 시 간 ----|");
+		System.out.println("+------+----------+-----------------------------------+---------------------+");
 
 		// 게시판 목록에 나올 필드들 뽑아오기
 		for (int i = 0; i < qnaBoardList.size(); ++i) {
@@ -61,17 +61,17 @@ public class QnaController {
 			String writer = qnaVo.getWriter();
 			Timestamp enrollDate = qnaVo.getEnrollDate();
 
-			int titleLength = new StringTest().getStrLength(25, title);
+			int titleLength = new StringTest().getStrLength(35, title);
 
 			if (qnaVo.getComplete().equals("Y")) {
 				System.out.println("|" + String.format("%6s", qnaNo) + "| 답변완료 |"
 						+ String.format("%-" + titleLength + "s", title) + "|" + enrollDate + "|");
-				System.out.println("+------+----------+-------------------------+---------------------+");
+				System.out.println("+------+----------+-----------------------------------+---------------------+");
 
 			} else {
 				System.out.println("|" + String.format("%6s", qnaNo) + "|  대기중  |"
 						+ String.format("%-" + titleLength + "s", title) + "|" + enrollDate + "|");
-				System.out.println("+------+----------+-------------------------+---------------------+");
+				System.out.println("+------+----------+-----------------------------------+---------------------+");
 			}
 
 		}
@@ -101,15 +101,15 @@ public class QnaController {
 			String title = vo.getTitle();
 			String writer = vo.getWriter();
 
-			int titleLength = new StringTest().getStrLength(25, title);
+			int titleLength = new StringTest().getStrLength(35, title);
 			int writerLength = new StringTest().getStrLength(15, writer);
-			System.out.println("+------+-------------------------+---------------+---------------------+");
+			System.out.println("+------+-----------------------------------+---------------+---------------------+");
 			System.out.println("|" + String.format("%6s", vo.getQnaNo()+" ") + "|"
 					+ String.format("%-" + titleLength + "s", title) + "|"
 					+ String.format("%-" + writerLength + "s", writer) + "|" + vo.getEnrollDate() + "|");
-			System.out.println("+------+-------------------------+---------------+---------------------+");
+			System.out.println("+------+-----------------------------------+---------------+---------------------+");
 			System.out.println(vo.getContent());
-			System.out.println("+----------------------------------------------------------------------+");
+			System.out.println("+--------------------------------------------------------------------------------+");
 		} else {
 			System.out.println("게시글이 없습니다.");
 			return;
@@ -124,10 +124,10 @@ public class QnaController {
 		List<QnaVo> qnaBoardList = new QnaService().listUpQna();
 
 		// VO를 토대로 리스트업 !!
-		System.out.println("============================= QnA 게시판 ==============================\n");
-		System.out.println("+------+-------------------------+---------------+---------------------+");
-		System.out.println("|글번호|------  제     목  ------|--- 작 성 자 --|---- 작 성 시 간 ----|");
-		System.out.println("+------+-------------------------+---------------+---------------------+");
+		System.out.println("================================== QnA 게시판 ===================================\n");
+		System.out.println("+------+-----------------------------------+---------------+---------------------+");
+		System.out.println("|글번호|-----------  제     목  -----------|--- 작 성 자 --|---- 작 성 시 간 ----|");
+		System.out.println("+------+-----------------------------------+---------------+---------------------+");
 
 		// 게시판 목록에 나올 필드들 뽑아오기
 		for (int i = 0; i < qnaBoardList.size(); ++i) {
@@ -139,20 +139,20 @@ public class QnaController {
 			String writer = qnaVo.getWriter();
 			Timestamp enrollDate = qnaVo.getEnrollDate();
 
-			int titleLength = new StringTest().getStrLength(25, title);
+			int titleLength = new StringTest().getStrLength(35, title);
 			int writerLength = new StringTest().getStrLength(15, writer);
 
 			if (qnaVo.getType().equals("Q")) {
 				System.out.println(
 						"|" + String.format("%6s", qnaNo) + "|" + String.format("%-" + titleLength + "s", title) + "|"
 								+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
-				System.out.println("+------+-------------------------+---------------+---------------------+");
+				System.out.println("+------+-----------------------------------+---------------+---------------------+");
 
 			} else {
 				System.out.println("|" + String.format("%6s", "Reply") + "|"
 						+ String.format("%-" + titleLength + "s", ">>" + title) + "|"
 						+ String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
-				System.out.println("+------+-------------------------+---------------+---------------------+");
+				System.out.println("+------+-----------------------------------+---------------+---------------------+");
 			}
 
 		}
@@ -182,17 +182,17 @@ public class QnaController {
 			String title = vo.getTitle();
 			String writer = vo.getWriter();
 
-			int titleLength = new StringTest().getStrLength(25, title);
-			int writerLength = new StringTest().getStrLength(50, writer);
+			int titleLength = new StringTest().getStrLength(35, title);
+			int writerLength = new StringTest().getStrLength(15, writer);
 
-			System.out.println("+-----+-------------------------+---------------------+");
-			System.out.println("|" + String.format("%5s", vo.getQnaNo()) + "|"
-					+ String.format("%-" + titleLength + "s", title) + "|" + vo.getEnrollDate() + "|");
-			System.out.println("+-----+-------------------------+---------------------+");
-			System.out.println("|" + String.format("%-" + writerLength + "s", " 작성자 : " + writer) + "|");
-			System.out.println("+-----------------------------------------------------+");
+			System.out.println("+------+-----------------------------------+---------------+---------------------+");
+			System.out.println(
+					"|" + String.format("%6s", vo.getQnaNo()) + "|" + String.format("%-" + titleLength + "s", title) + "|"
+							+ String.format("%-" + writerLength + "s", writer) + "|" + vo.getEnrollDate() + "|");
+			System.out.println("+------+-----------------------------------+---------------+---------------------+");
+			
 			System.out.println(vo.getContent());
-			System.out.println("+-----------------------------------------------------+");
+			System.out.println("+--------------------------------------------------------------------------------+");
 		} else {
 			System.out.println("게시글이 없습니다.");
 			return;
@@ -243,9 +243,9 @@ public class QnaController {
 			} else {
 				return;
 			}
-		} else {
-			return;
-		}
+			
+			listUpQna();
+		} 
 
 	}
 
@@ -286,7 +286,6 @@ public class QnaController {
 		// DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
 		int result = new QnaService().writeQna(vo);
 
-		System.out.println(result);
 
 		// insert 결과에 따라 로직 처리
 		if (result == 1) {

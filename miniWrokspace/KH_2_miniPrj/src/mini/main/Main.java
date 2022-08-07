@@ -20,9 +20,6 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		System.out.println("대충.. 애니멀어지지마 메인 화면..");
-		System.out.println("===== 환영합니다 =====");
-
 		// 메뉴 객체 생성
 		Menu menu = new Menu();
 
@@ -39,7 +36,7 @@ public class Main {
 					new MemberController().login();
 				} else {
 					loginMember = null;
-					System.out.println("정상적으로 로그아웃 되었습니다..!");
+					System.out.println("정상적으로 로그아웃 되었습니다..!\n");
 				}
 				break;
 				
@@ -138,11 +135,11 @@ public class Main {
 				return;
 				
 			case 0:
-				System.out.println("잘못 입력 하셨군요..!!");
+				System.out.println("잘못 입력 하셨군요..!!\n");
 				break;
 				
 			default:
-				System.out.println("잘못 입력 하셨군요..!!");
+				System.out.println("잘못 입력 하셨군요..!!\n");
 				break;
 			}
 		}

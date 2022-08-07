@@ -11,6 +11,20 @@ import sar.Ad_Board.Adoption;
 public class Menu {
 
 	public int showMenu() {
+		System.out.println("=====================================");
+		System.out.println("유기동물 구조 프로젝트");
+		System.out.println(
+		  "⠀⠀⠀⠀⣸⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
+		+ "⢀⣀⣰⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣶⣶⣶⣦⡀\r\n"
+		+ "⠙⠛⠛⠻⣿⣿⣿⣿⣿⣷⣦⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⠟⠉⠙⢿⣿⣿\r\n"
+		+ "⠀ ⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣴⡿⠟⠁\r\n"
+		+ "⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀\r\n"
+		+ "⠀⠀⠀⠀⠀⠀⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⡿⠀⠀\r\n"
+		+ "⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⡏⠉⠉⠉⠁⠀⠀ ⠀⠈⠻⣿⣿⣿⣿⣿⣧⡀⠀\r\n"
+		+ "⠀⠀⠀⠀⠀ ⠀⠀⢸⡟⠸⣿⡇⠀⠀⠀ ⠀⠀ ⠀⠀ ⠀⠀⠈⢹⣿⠉⠙⢿⣷⠀\r\n"
+		+ "⠀ 애니 ⠠⠾⠇⠠⠿⠇멀어지지마⠀⠀⠤⠿⠇⠀⠀⠼⠟⠀");
+		
+		System.out.println("=====================================");
 
 		if (Main.loginMember == null) {
 			System.out.println("1. 로그인");
@@ -22,6 +36,7 @@ public class Menu {
 			System.out.println("7. 공지사항 게시판");
 			System.out.println("8. QnA 게시판");
 			System.out.println("9. 프로그램 종료");
+			System.out.println("=====================================");
 		} else {
 			System.out.println("1. 로그아웃");
 			System.out.println("2. 마이페이지");
@@ -32,6 +47,7 @@ public class Menu {
 			System.out.println("7. 공지사항 게시판");
 			System.out.println("8. QnA 게시판");
 			System.out.println("9. 프로그램 종료");
+			System.out.println("=====================================");
 		}
 
 		int input = InputUtil.getInt();
@@ -46,10 +62,11 @@ public class Menu {
 
 			System.out.println("1. 공지사항 게시글 보기");
 			System.out.println("2. 공지사항 작성");
+			System.out.println("0. 메인메뉴로 가기");
 
 			input = InputUtil.getInt();
 
-			if (1 == input || 2 == input) {
+			if (1 == input || 2 == input || 0 == input) {
 				break;
 			} else {
 				System.out.println("잘못 입력 하셨습니다..!");
@@ -67,10 +84,11 @@ public class Menu {
 			System.out.println("1. QnA 게시글 보기");
 			System.out.println("2. QnA 게시글 작성");
 			System.out.println("3. 내 문의 내역 보기");
+			System.out.println("0. 메인메뉴로 가기");
 
 			input = InputUtil.getInt();
 
-			if (1 == input || 2 == input || 3 == input) {
+			if (1 == input || 2 == input || 3 == input || 0 == input) {
 				break;
 			} else {
 				System.out.println("잘못 입력 하셨습니다..!");
@@ -90,7 +108,7 @@ public class Menu {
 		int input = 0;
 		
 		while (true) {
-			System.out.println("1. 내 정보 보기");
+			System.out.println("1. 내 정보 보기 및 수정");
 			System.out.println("2. 내가 작성한 글");
 			System.out.println("3. 나의 관심 글");
 			System.out.println("4. 내 반려동물 보기");
@@ -109,37 +127,33 @@ public class Menu {
 	
 	
 	public void showMenu1() {
-		
-		System.out.println("\n\n0. 검색하기");
-		System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====" );
-		System.out.print( " : " );
-		
-		int num = InputUtil.getInt();
-		
-		if(num == 0) {
-			System.out.println("\n\n1.입양상태로 검색하기");
-			System.out.println("2.지역으로 검색하기");
-			int num1 = InputUtil.getInt();
-			if(num1 == 1) {
-				new Adandoned().ADOPT_YN();
-//				showMenu1();
-			}else if(num1 == 2) {
-				new Adandoned().search();
-//				showMenu1();
-			}else if (num1 >= 3) {
-			System.out.println("잘못 누르셨습니다");
-//			showMenu1();	
-			}
-			showMenu1();
-		}else if(num >= 23) {
-			System.out.println("잘못 누르셨습니다");
-		}
-		else {
-			new Adandoned().detail(num);
-		}	
-//		InputUtil.sc.nextLine();
-//		return InputUtil.getInt();
-	}//showMenu1
+	      
+	      System.out.println("\n\n0. 검색하기");
+	      System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====" );
+	      System.out.print( " : " );
+	      
+	      int num = InputUtil.getInt();
+	      
+	      if(num == 0) {
+	         System.out.println("\n\n1.입양상태로 검색하기");
+	         System.out.println("2.지역으로 검색하기");
+	         int num1 = InputUtil.getInt();
+	         if(num1 == 1) {
+	            new Adandoned().ADOPT_YN();
+	         }else if(num1 == 2) {
+	            new Adandoned().search();
+	         }else if (num1 >= 3) {
+	         System.out.println("잘못 누르셨습니다");
+	         }
+	         showMenu1();
+	      }else if(num >= 23) {
+	         System.out.println("잘못 누르셨습니다");
+	         showMenu1();
+	      }
+	      else {
+	         new Adandoned().detail(num);
+	      }   
+	   }//showMenu1
 	
 	
 	public int showMenu2() {

@@ -17,7 +17,7 @@ public class MemberController {
 //			return;
 //		}
 
-		System.out.println("----- 로그인 -----");
+		System.out.println("============== 로그인 ===============");
 		System.out.print("아이디 : ");
 		String id = InputUtil.sc.nextLine();
 		System.out.print("비밀번호 : ");
@@ -28,13 +28,13 @@ public class MemberController {
 			if (vo != null && vo.getDisaled() == 0) {
 				// 로그인 성공
 				System.out.println("로그인 성공 !\n\n");
-				System.out.println("========================");
-				System.out.println(vo.getNick() + "님 환영합니다 !!");
-				System.out.println("========================\n\n");
+				System.out.println("====================================");
+				System.out.println("    " + vo.getNick() + "님 환영합니다 !!");
+				System.out.println("====================================\n");
 				Main.loginMember = vo;
 			} else if (vo != null && vo.getDisaled() == 1) {
 				// 로그인 실패(탈퇴한회원)
-				System.out.println("탈퇴한 회원입니다.");
+				System.out.println("탈퇴한 회원입니다.\n\n");
 			} else {
 				// 로그인 실패
 				System.out.println("아이디와 비밀번호를 확인하세요..! !\n\n");
@@ -49,11 +49,37 @@ public class MemberController {
 
 	public void join() {
 
-		System.out.println("===== 회원가입 =====");
+		System.out.println("============= 회원가입 ==============");
+
+		String id = null;
+		String nick = null;
+		boolean resultName = false;
+		boolean resultNick = false;
+		boolean isFinishName = true;
+		boolean isFinishNick = true;
+
+		MemberDao md = new MemberDao();
 
 		// 기본정보
-		System.out.print("아이디 : ");
-		String id = InputUtil.sc.nextLine();
+		while (isFinishName) {
+			System.out.print("아이디 : ");
+			id = InputUtil.sc.nextLine();
+
+			// 중복 검사
+			try {
+				resultName = md.checkDupId(id);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			if (resultName == true) {
+				id = null;
+				System.out.println("이미 존재하는 아이디 입니다.");
+			} else {
+				isFinishName = false;
+			}
+
+		}
 
 		System.out.print("비밀번호 : ");
 		String pwd = InputUtil.sc.nextLine();
@@ -63,10 +89,24 @@ public class MemberController {
 
 		System.out.print("이름 : ");
 		String name = InputUtil.sc.nextLine();
+		while (nick == null) {
+			System.out.print("닉네임 : ");
+			nick = InputUtil.sc.nextLine();
 
-		System.out.print("닉네임 : ");
-		String nick = InputUtil.sc.nextLine();
+			// 중복검사
+			try {
+				resultNick = md.checkDupNick(nick);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
+			if (resultNick == true) {
+				nick = null;
+				System.out.println("이미 존재하는 닉네임 입니다.");
+			} else {
+				isFinishNick = false;
+			}
+		}
 		System.out.print("이메일 : ");
 		String email = InputUtil.sc.nextLine();
 
@@ -158,17 +198,13 @@ public class MemberController {
 		int result = new Menu().showMyPageMenu();
 		switch (result) {
 		case 1:
-			// 정보보기
+			// 정보보기 및 수정
 			mp.showMyInfo();
-			// 수정하기
-			mp.updateMyInfo();
 
 			break;
 		case 2:
 			// TODO
 			// 내가 작성한글 조회
-			// 게시판 선택 해서 글번호만 조회 할지
-			// 모두 조회하고 게시판, 글 번호 조회 할지
 			break;
 		case 3:
 			// TODO
@@ -177,11 +213,12 @@ public class MemberController {
 			// 모두 조회하고 게시판, 글 번호 조회 할지
 			break;
 		case 4:
-			// TODO 반려동물 보는거 완료, 보고 수정 하기 (추가, 삭제)
+			// 내 반려동물 보기 및 추가, 삭제
 			mp.showMyPet();
 
 			break;
 		case 5:
+			// 탈퇴
 			withdraw();
 			break;
 		default:
@@ -193,7 +230,7 @@ public class MemberController {
 
 	public void withdraw() {
 
-		System.out.println("정보 다사라지는데.. 진짜 탈퇴할래?(y/n)");
+		System.out.println("저장된 정보가 다 사라집니다. 탈퇴하시겠습니까?(y/n)");
 		String input = InputUtil.sc.nextLine();
 		int cnt = 0;
 		String pwdInput = null;
@@ -219,7 +256,7 @@ public class MemberController {
 					System.out.println("비밀번호가 일치하지 않습니다.");
 					cnt++;
 					if (cnt == 3) {
-						System.out.println("비밀번호를 3번 틀렸습니다. 메인메뉴로 돌아갑니다.");
+						System.out.println("비밀번호를 3번 틀렸습니다. 메인메뉴로 돌아갑니다.\n");
 					}
 				}
 
@@ -227,7 +264,7 @@ public class MemberController {
 		} else if ("n".equals(input)) {
 			return;
 		} else {
-			System.out.println("잘못 입력 했습니다..!");
+			System.out.println("잘못 입력 했습니다..!/n");
 		}
 	}
 }// class
