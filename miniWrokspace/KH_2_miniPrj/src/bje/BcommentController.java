@@ -6,6 +6,7 @@ import java.util.List;
 import bje.community_board.BoardService;
 import bje.community_board.BoardVo;
 import mini.util.InputUtil;
+import mini.util.StringTest;
 
 public class BcommentController {
 
@@ -20,25 +21,18 @@ public class BcommentController {
     */
    public void write(int num) {//여기! 디폴트 아닌것들 모두 작성받는것으로 수정해야함
       
-//      무시!!!!!!!!      
-//      //글 선택했는지 체크
-//      if(Main_bje.bcomment == null) {
-//         System.out.println("댓글을 작성할 글을 먼저 선택해주세요");
-//         return; //다음 진행 하면 안되니까 return
-//      }
-      
       System.out.println("----- 댓글 작성 -----");
       
       System.out.print("내용 : ");
       String content = InputUtil.sc.nextLine();
       
-
-      
       int boardnum = Main_bje.boardvovo.getB_no();
+      String nick = Main_bje.boardvovo.getWriter();
       
       //데이터 뭉치기
       BcommentVo vo = new BcommentVo();
       vo.setB_no(boardnum);
+      vo.setWriter(nick);
       vo.setContent(content);
       
       //DB에 인서트 하기 위해서, DB insert 하는 서비스 메소드 호출
@@ -57,19 +51,29 @@ public class BcommentController {
    public void showCommentList(int num) {
       List<BcommentVo> BcommentVoList = new BcommentService().showList(num);
       
-      System.out.println("+++++ 댓글 목록 +++++");
-      
       for(int i = 0 ; i < BcommentVoList.size(); ++i) {
          BcommentVo temp = BcommentVoList.get(i);
       
          int no = temp.getB_no();
-         String comcontents = temp.getContent();
+         String concontents = temp.getContent();
          String nick = temp.getWriter();
          Timestamp comenrolldate = temp.getEnrollDate();
          
-         System.out.println(no + " | " + comcontents + " | " + nick + " | " + comenrolldate);
-      }      
-   }
+         int writerLength = new StringTest().getStrLength(16, nick);
+         int contentLength = new StringTest().getStrLength(41, concontents);
+         
+         System.out.println("+--------+----------------+----------------------+");
+         System.out.println("|댓글번호+    닉 네 임    +        작성 시간     |");
+         System.out.println("+--------+----------------+----------------------+");
+         System.out.println("|" + String.format("%8s", no +" ") + "|" 
+               + String.format("%-" + writerLength + "s", nick) + "|" + temp.getEnrollDate() + " " + "|");
+         System.out.println("+--------+----------------+----------------------+");
+         System.out.println("|내용 : " + String.format("%-" + contentLength + "s", temp.getContent()) + "|");
+         System.out.println("+--------+----------------+----------------------+");
+         
+      }
+      
+   }//showCommentList
    
 }//class
 
