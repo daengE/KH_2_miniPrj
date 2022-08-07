@@ -27,9 +27,9 @@ public class Adandoned {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			System.out.println("==============================유기동물 게시판===================================\n");
-			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
-			System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|--지 역--|안락사일정|성별|---나 이---|");
-			System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+			System.out.println("+------+-------+----------+---------------+----------|----------|----|-----------+");
+			System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|---지역---|안락사일정|성별|---나 이---|");
+			System.out.println("+------+-------+----------+---------------+----------|----------|----|-----------+");
 
 			while (rs.next()) {
 
@@ -62,12 +62,12 @@ public class Adandoned {
 					    + "|" + " "+ String.format("%3s", adopt)+ "   "
 						+ "|" + " "+ String.format("%-" + animalLength + "s", animal) + " "
 						+ "|"  +" "+ String.format("%-"+ typeLength + "s", type)
-						+ "|"  +" "+ String.format("%5s", city)
+						+ "|"  + String.format("%10s", city)+ " "
 						+ "|"  +" "+ String.format("%-"+ killLength + "s", kill)
-						+ "|"  +" "+ String.format("%3s", gender)
+						+ "|"  +" "+ String.format("%3s", gender) + " "
 						+ "|"  +" "+ String.format("%-"+ ageLength + "s", age)
 						+ "|");
-				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+				System.out.println("+------+-------+----------+---------------+----------|----------|----|-----------+");
 
 			} // while
 		} catch (Exception e) {
@@ -122,15 +122,50 @@ public class Adandoned {
 				vo.setAddress(address);
 				vo.setFeature(feature);
 				vo.setNt(nt);
+//
+//				System.out.println(" 입양유무 / 축종 / 세부종류 / 지역 / 안락사일정 / 성별 / 나이 ");
+//
+//				System.out.println(ad_no + "|" + adopt + "/" + animal + "/" + type + "/" + city + "/" + kill + "/"
+//						+ gender + "/" + age + "/");
+//				System.out.print("보호장소 : " + vo.getShelter() + " / ");
+//				System.out.println(vo.getAddress());
+//				System.out.println("특이사항 : " + vo.getFeature());
+//				System.out.print("중성화여부 : " + vo.getNt());
+				
+				System.out.println("\n==============================유기동물 게시판===================================");
+				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+				System.out.println("|-번호-|-입 양-|---품종---|---세부 종류---|--지 역--|안락사일정|성별|---나 이---|");
+				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
+				
 
-				System.out.println(" 입양유무 / 축종 / 세부종류 / 지역 / 안락사일정 / 성별 / 나이 ");
-
-				System.out.println(ad_no + "|" + adopt + "/" + animal + "/" + type + "/" + city + "/" + kill + "/"
-						+ gender + "/" + age + "/");
-				System.out.print("보호장소 : " + vo.getShelter() + " / ");
-				System.out.println(vo.getAddress());
-				System.out.println("특이사항 : " + vo.getFeature());
-				System.out.print("중성화여부 : " + vo.getNt());
+				int animalLength = new StringTest().getStrLength(8, animal);
+				int typeLength = new StringTest().getStrLength(14, type);
+				int ageLength = new StringTest().getStrLength(10, age);
+				int killLength = new StringTest().getStrLength(9, kill);
+				
+				System.out.println(
+						  "|" + String.format("%4s", ad_no) + "  "
+					    + "|" + " "+ String.format("%3s", adopt)+ "   "
+						+ "|" + " "+ String.format("%-" + animalLength + "s", animal) + " "
+						+ "|"  +" "+ String.format("%-"+ typeLength + "s", type)
+						+ "|"  +" "+ String.format("%5s", city)
+						+ "|"  +" "+ String.format("%-"+ killLength + "s", kill)
+						+ "|"  +" "+ String.format("%3s", gender)
+						+ "|"  +" "+ String.format("%-"+ ageLength + "s", age)
+						+ "|");
+				
+				int sheltersLength = new StringTest().getStrLength(67, shelter);
+				int addressLength = new StringTest().getStrLength(65, address);
+				int featureLength = new StringTest().getStrLength(66, feature);
+				int ntLength = new StringTest().getStrLength(64, nt);
+				
+				System.out.println(
+						"| 보호소명 : " + String.format("%-" + sheltersLength + "s", shelter) + "|"
+						+ "\n| 보호소주소 : " + String.format("%-" + addressLength + "s", address) + "|" 
+						+ "\n| 특이 사항 : " + String.format("%-" + featureLength + "s", feature) + "|" 
+						+ "\n| 중성화 여부 : " + String.format("%-" + ntLength + "s", nt) + "|" );
+				
+				System.out.println("+------+-------+----------+---------------+---------|----------|----|-----------+");
 				mini.main.Main.selected = vo;
 			} // if
 

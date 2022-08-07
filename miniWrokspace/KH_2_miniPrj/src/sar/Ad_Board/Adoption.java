@@ -47,7 +47,6 @@ public class Adoption {
 			int result = pstmt.executeUpdate();
 
 			if (result == 1) {
-				System.out.println("신청서 작성 완료!");
 				new Adoption().AdoptOk(Main.loginMember.getNo());
 				conn.commit();
 			} else {
@@ -96,7 +95,7 @@ public class Adoption {
 					conn.rollback();
 				}
 			} else {
-				System.out.println("입양 업뎃안해");
+				System.out.println("입양 업뎃오류");
 				conn.rollback();
 			}
 
@@ -113,6 +112,9 @@ public class Adoption {
 //				new Menu().showMenu();
 			} else if (num3 == 3) {
 				System.out.println("시스템을 종료 합니다...!");
+//				return;
+			mini.main.Main.main(null);
+				
 			}
 
 		} catch (Exception e) {
