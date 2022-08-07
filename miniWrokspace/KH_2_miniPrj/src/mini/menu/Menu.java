@@ -126,7 +126,7 @@ public class Menu {
 	}//showMyPageMenu
 	
 	
-	public void showMenu1() {
+	public static void showMenu1() {
         
         System.out.println("\n\n0. 검색하기");
         System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====" );
@@ -140,15 +140,15 @@ public class Menu {
            int num1 = InputUtil.getInt();
            if(num1 == 1) {
               new Adandoned().ADOPT_YN();
-              
+             
            }else if(num1 == 2) {
               new Adandoned().search();
-            
+              
            }else if (num1 >= 3) {
            System.out.println("잘못 누르셨습니다");
-           
+//           showMenu1();
            }
-           showMenu1();
+          
         }else if(num >= 24) {
            System.out.println("잘못 누르셨습니다");
            showMenu1();
@@ -156,6 +156,7 @@ public class Menu {
         else {
            new Adandoned().detail(num);
         }   
+       
      }//showMenu1
 	
 	

@@ -132,13 +132,13 @@ public class Adandoned {
 						+ "  " + String.format("%-" + killLength + "s", kill) + "|" + String.format("%3s", gender) + "  "
 						+ "|" + " " + String.format("%-" + ageLength + "s", age) + "|");
 			
-				int sheltersLength = new StringTest().getStrLength(67, shelter);
+				int sheltersLength = new StringTest().getStrLength(66, shelter);
 				int addressLength = new StringTest().getStrLength(66, address);
-				int featureLength = new StringTest().getStrLength(67, feature);
+				int featureLength = new StringTest().getStrLength(66, feature);
 				int ntLength = new StringTest().getStrLength(66, nt);
 
-				System.out.println("| 보호소명   : " + String.format("%-" + sheltersLength + "s", shelter) + "|"
-						+ "\n| 보호소 주소 : " + String.format("%-" + addressLength + "s", address) + "|" + "\n| 특이 사항  : "
+				System.out.println("| 보호소명    : " + String.format("%-" + sheltersLength + "s", shelter) + "|"
+						+ "\n| 보호소 주소 : " + String.format("%-" + addressLength + "s", address) + "|" + "\n| 특이 사항   : "
 						+ String.format("%-" + featureLength + "s", feature) + "|" + "\n| 중성화 여부 : "
 						+ String.format("%-" + ntLength + "s", nt) + "|");
 
@@ -241,6 +241,7 @@ public class Adandoned {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(pstmt);
 		}
+		mini.menu.Menu.showMenu1();
 	}// search
 
 	public void ADOPT_YN() {
@@ -317,6 +318,7 @@ public class Adandoned {
 			JDBCTemplate.close(rs);
 			JDBCTemplate.close(pstmt);
 		}
+		mini.menu.Menu.showMenu1();
 	}// ADOPT_YN
-
+	
 }
