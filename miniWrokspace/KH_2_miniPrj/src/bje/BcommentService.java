@@ -51,6 +51,7 @@ public class BcommentService {
       return result;
    }//write
 
+   
    public List<BcommentVo> showList(int num) {
       
       Connection conn = null;
@@ -68,21 +69,5 @@ public class BcommentService {
       
       return BcommentVoList;
    }//showList
-
    
 }//class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

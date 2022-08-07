@@ -19,7 +19,7 @@ public class BcommentController {
     * 
     * DB에 insert (DAO)
     */
-   public void write(int num) {//여기! 디폴트 아닌것들 모두 작성받는것으로 수정해야함
+   public void write(int num) {
       
       System.out.println("----- 댓글 작성 -----");
       
@@ -48,6 +48,7 @@ public class BcommentController {
       }
    }//write
    
+   
    public void showCommentList(int num) {
       List<BcommentVo> BcommentVoList = new BcommentService().showList(num);
       
@@ -72,25 +73,6 @@ public class BcommentController {
          System.out.println("+--------+----------------+----------------------+");
          
       }
-      
    }//showCommentList
    
 }//class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
