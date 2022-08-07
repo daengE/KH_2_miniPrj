@@ -3,8 +3,7 @@ package mini.mypage;
 import java.sql.Timestamp;
 import java.util.List;
 
-import krw.notificationboard.NotiVo;
-import mini.util.StringTest;
+import lcs.application.ApplicationVo;
 import sar.Util.AdVo;
 
 public class Application {
@@ -16,33 +15,43 @@ public class Application {
 		if (adoptionList.size() == 0) {
 			System.out.println("입양 신청 목록이 없습니다.");
 		} else {
-			// VO를 토대로 리스트업 !!
-			System.out.println("=============================== 입양 신청 목록=================================\n");
-
-			// 게시판 목록에 나올 필드들 뽑아오기
+			System.out.println("========================== 입양 신청 목록 ============================\n");
 
 			for (int i = 0; i < adoptionList.size(); ++i) {
 
 				AdVo adVo = adoptionList.get(i);
-				
+
 				String animal = adVo.getAnimal();
 				String type = adVo.getType();
 				String shelter = adVo.getShelter();
 				String address = adVo.getAddress();
 
-//				int titleLength = new StringTest().getStrLength(35, title);
-//				int writerLength = new StringTest().getStrLength(15, writer);
-
-//				System.out.println(
-//						"|" + String.format("%6s", notiNo + " ") + "|" + String.format("%-" + titleLength + "s", title)
-//								+ "|" + String.format("%-" + writerLength + "s", writer) + "|" + enrollDate + "|");
-				System.out.println(i +" : "+ animal +"|"+ type +"|"+ shelter +"|"+ address);
-//				System.out
-//						.println("+------+-----------------------------------+---------------+---------------------+");
+				System.out.println(i + 1 + " ) 동물타입 : " + animal + "| 종 : " + type + "| 보호소 : " + shelter + "| 주소 : " + address);
 
 			}
 		}
-
 	}
 
+	public void showTrainingList() {
+
+		List<ApplicationVo> trainingList = new ApplicationService().showMyTraining();
+
+		if (trainingList.size() == 0) {
+			System.out.println("훈련 신청 목록이 없습니다.");
+		} else {
+			System.out.println("========================== 훈련 신청 목록 ============================\n");
+
+			for (int i = 0; i < trainingList.size(); ++i) {
+
+				ApplicationVo apVo = trainingList.get(i);
+
+				String atcName = apVo.getAtcName();
+				String animalType = apVo.getAnimalType();
+				String aplyDate = apVo.getAplyDate();
+
+				System.out.println(i + 1 + " ) 훈련소 : " + atcName + "| 동물타입 : " + animalType + "| 신청날짜 : " + aplyDate);
+
+			}
+		}
+	}
 }

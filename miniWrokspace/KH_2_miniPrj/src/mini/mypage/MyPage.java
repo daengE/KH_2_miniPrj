@@ -85,10 +85,10 @@ public class MyPage {
 		List<MemberPetVo> myPetList = new MemberService().showMyPet();
 
 		System.out.println("========================= 내 반려동물 List ==========================\n");
-		System.out.println("-----------------+------------+--------------------+-----------------");
 		if (myPetList.size() == 0) {
 			System.out.println("등록된 나의 반려동물이 없습니다.");
 		} else {
+			System.out.println("-----------------+------------+--------------------+-----------------");
 			for (int i = 0; i < myPetList.size(); ++i) {
 
 				MemberPetVo petVo = myPetList.get(i);
@@ -205,14 +205,19 @@ public class MyPage {
 		System.out.println("신청서 종류를 선택하세요.");
 		System.out.println("1. 입양 신청서");
 		System.out.println("2. 훈련소 신청서");
+		System.out.println("0. 메인 메뉴로 가기");
 		int typeInput = InputUtil.getInt();
 		if(typeInput == 1) {
 			//adoption
 			new Application().showAdoptionList();
+			System.out.println();
+			showMyApply();
 			
 		}else if(typeInput == 2) {
 			//application
-			System.out.println("훈련소신청 메소드 만들거임..");
+			new Application().showTrainingList();
+			System.out.println();
+			showMyApply();
 			
 			
 		}else {
