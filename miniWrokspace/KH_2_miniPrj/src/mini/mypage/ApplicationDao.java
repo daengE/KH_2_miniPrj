@@ -44,12 +44,14 @@ public class ApplicationDao {
 				String type = rs.getString("AD_TYPE");
 				String shelter = rs.getString("AD_SHELTER");
 				String address = rs.getString("AD_ADDRESS");
+				Timestamp ad_date =rs.getTimestamp("AD_DATE");
 
 				AdVo adVo = new AdVo();
 				adVo.setAnimal(animal);
 				adVo.setType(type);
 				adVo.setShelter(shelter);
 				adVo.setAddress(address);
+				adVo.setAd_date(ad_date);
 
 				// 담은 객체들 리스트에 담기
 
