@@ -38,6 +38,7 @@ public class BoardDao {
          String sql = "INSERT INTO COMMUNITY_BOARD (B_NO, M_NO, POST_TYPE, B_TAG, B_TITLE, B_CONTENTS, B_ENROLL_DATE, B_NICK, B_DELETE_YN, B_MODIFY, B_MDATE) "
                + "      VALUES(SEQ_COMMUNITY_BOARD_B_NO.NEXTVAL, ? , 'CB' , ? , ? , ? , DEFAULT, ? , 'N' , 'N' , DEFAULT)";
          
+         
          //SQL 객체에 담기 및 완성(물음표 채우기)
          pstmt = conn.prepareStatement(sql);
          pstmt.setInt(1, vo.getM_no());
