@@ -13,17 +13,12 @@ public class Menu {
 	public int showMenu() {
 		System.out.println("=====================================");
 		System.out.println("유기동물 구조 프로젝트");
-		System.out.println(
-		  "⠀⠀⠀⠀⣸⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n"
-		+ "⢀⣀⣰⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣶⣶⣶⣦⡀\r\n"
-		+ "⠙⠛⠛⠻⣿⣿⣿⣿⣿⣷⣦⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⠟⠉⠙⢿⣿⣿\r\n"
-		+ "⠀ ⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣴⡿⠟⠁\r\n"
-		+ "⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀\r\n"
-		+ "⠀⠀⠀⠀⠀⠀⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⡿⠀⠀\r\n"
-		+ "⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⡏⠉⠉⠉⠁⠀⠀ ⠀⠈⠻⣿⣿⣿⣿⣿⣧⡀⠀\r\n"
-		+ "⠀⠀⠀⠀⠀ ⠀⠀⢸⡟⠸⣿⡇⠀⠀⠀ ⠀⠀ ⠀⠀ ⠀⠀⠈⢹⣿⠉⠙⢿⣷⠀\r\n"
-		+ "⠀ 애니 ⠠⠾⠇⠠⠿⠇멀어지지마⠀⠀⠤⠿⠇⠀⠀⠼⠟⠀");
-		
+		System.out.println("⠀⠀⠀⠀⣸⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀\r\n" + "⢀⣀⣰⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣶⣶⣶⣦⡀\r\n"
+				+ "⠙⠛⠛⠻⣿⣿⣿⣿⣿⣷⣦⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⠟⠉⠙⢿⣿⣿\r\n" + "⠀ ⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣴⡿⠟⠁\r\n"
+				+ "⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀\r\n" + "⠀⠀⠀⠀⠀⠀⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⣿⣿⣿⣿⣿⣿⡿⠀⠀\r\n"
+				+ "⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⡏⠉⠉⠉⠁⠀⠀ ⠀⠈⠻⣿⣿⣿⣿⣿⣧⡀⠀\r\n" + "⠀⠀⠀⠀⠀ ⠀⠀⢸⡟⠸⣿⡇⠀⠀⠀ ⠀⠀ ⠀⠀ ⠀⠀⠈⢹⣿⠉⠙⢿⣷⠀\r\n"
+				+ "⠀ 애니 ⠠⠾⠇⠠⠿⠇멀어지지마⠀⠀⠤⠿⠇⠀⠀⠼⠟⠀");
+
 		System.out.println("=====================================");
 
 		if (Main.loginMember == null) {
@@ -96,24 +91,24 @@ public class Menu {
 		}
 		return input;
 	}
-	
+
 	public int showNotiContentMenu() {
 		System.out.println("조회할 글 번호(0번은 메인메뉴) : ");
-		
+
 		return InputUtil.getInt();
 	}
 
 	public int showMyPageMenu() {
-		
+
 		int input = 0;
-		
+
 		while (true) {
 			System.out.println("1. 내 정보 보기 및 수정");
 			System.out.println("2. 내가 작성한 글");
 			System.out.println("3. 나의 신청 목록");
 			System.out.println("4. 내 반려동물 보기");
 			System.out.println("5. 탈퇴하기");
-			
+
 			input = InputUtil.getInt();
 
 			if (1 == input || 2 == input || 3 == input || 4 == input || 5 == input) {
@@ -121,199 +116,189 @@ public class Menu {
 			} else {
 				System.out.println("잘못 입력 하셨습니다..!");
 			}
-		}//while
+		} // while
 		return input;
-	}//showMyPageMenu
-	
-	
+	}// showMyPageMenu
+
 	public static void showMenu1() {
-        
-        System.out.println("\n\n0. 검색하기");
-        System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====" );
-        System.out.print( " : " );
-        
-        int num = InputUtil.getInt();
-        
-        if(num == 0) {
-           System.out.println("\n\n1.입양상태로 검색하기");
-           System.out.println("2.지역으로 검색하기");
-           int num1 = InputUtil.getInt();
-           if(num1 == 1) {
-              new Adandoned().ADOPT_YN();
-             
-           }else if(num1 == 2) {
-              new Adandoned().search();
-              
-           }else if (num1 >= 3) {
-           System.out.println("잘못 누르셨습니다");
+
+		System.out.println("\n\n0. 검색하기");
+		System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====");
+		System.out.print(" : ");
+
+		int num = InputUtil.getInt();
+
+		if (num == 0) {
+			System.out.println("\n\n1.입양상태로 검색하기");
+			System.out.println("2.지역으로 검색하기");
+			int num1 = InputUtil.getInt();
+			if (num1 == 1) {
+				new Adandoned().ADOPT_YN();
+
+			} else if (num1 == 2) {
+				new Adandoned().search();
+
+			} else if (num1 >= 3) {
+				System.out.println("잘못 누르셨습니다");
 //           showMenu1();
-           }
-          
-        }else if(num >= 24) {
-           System.out.println("잘못 누르셨습니다");
-           showMenu1();
-        }
-        else {
-           new Adandoned().detail(num);
-        }   
-       
-     }//showMenu1
-	
-	
-    public int showMenu2() {
+			}
 
-        while (true) {
-           if (Main.selected.getAd_adopt().equalsIgnoreCase("y")) {
-              System.out.println("\n\n0. 검색하기");
-              System.out.println("1. 뒤로가기");
-           } else {
-              System.out.println("\n\n0. 검색하기");
-              System.out.println("1. 뒤로가기");
-              System.out.println("2. 해당 동물 입양하기");
-           }
+		} else if (num >= 24) {
+			System.out.println("잘못 누르셨습니다");
+			showMenu1();
+		} else {
+			new Adandoned().detail(num);
+		}
 
-           int num2 = InputUtil.getInt();
+	}// showMenu1
 
-           switch (num2) {
-           case 0:
-              System.out.println("\n\n1.입양상태로 검색하기");
-              System.out.println("2.지역으로 검색하기");
-              int num = InputUtil.getInt();
-              if (num == 1) {
-                 new Adandoned().ADOPT_YN();
-              } else if (num == 2) {
-                 new Adandoned().search();
-              } else if (num >= 3) {
-                 System.out.println("잘못 누르셨습니다");
-              }
-              continue;
+	public int showMenu2() {
 
-           case 1:
-              new Adandoned().list();
-              showMenu1();
-              continue;
+		while (true) {
+			if (Main.selected.getAd_adopt().equalsIgnoreCase("y")) {
+				System.out.println("\n\n0. 검색하기");
+				System.out.println("1. 뒤로가기");
+			} else {
+				System.out.println("\n\n0. 검색하기");
+				System.out.println("1. 뒤로가기");
+				System.out.println("2. 해당 동물 입양하기");
+			}
 
-           case 2:
-              if (Main.loginMember == null) {
-                 System.out.println("로그인 먼저 해주세요");
-                 new MemberController().login();
-                 new Adoption().apply(Main.loginMember.getNo());
+			int num2 = InputUtil.getInt();
 
-              } else {
-                 new Adoption().apply(Main.loginMember.getNo());
-                 break;
-              }
+			switch (num2) {
+			case 0:
+				System.out.println("\n\n1.입양상태로 검색하기");
+				System.out.println("2.지역으로 검색하기");
+				int num = InputUtil.getInt();
+				if (num == 1) {
+					new Adandoned().ADOPT_YN();
+				} else if (num == 2) {
+					new Adandoned().search();
+				} else if (num >= 3) {
+					System.out.println("잘못 누르셨습니다");
+				}
+				continue;
 
-           default:
-              System.out.println("잘못 누르셨습니다");
-              continue;
-           }// switch
-        } // while
-     }// showMenu2
-	
-	
-	   public void showMenu6() {
-	         
-	         System.out.println("\n\n0. 태그별 검색");
-	         System.out.println("1. 글 작성");
-	         System.out.print("2. 상세 글 조회(글번호를 입력하세요)" );
-	         System.out.print( " : " );
-	         
-	         int num = InputUtil.getInt();
-	         
-	         if(num == 0) {
-	            new BoardController().showTagList();
-	            new BoardController().showList();
-	            showMenu6();
-	         }
-	         if(num == 1) {
-	            if(Main.loginMember == null) {
-	               System.out.println("로그인을 해주세요.");
-	               new MemberController().login();
-	               new BoardController().write();
-	               new BoardController().showList();
-	               showMenu6();
-//	               return;
-	            }else {
-	               new BoardController().write();
-	               new BoardController().showList();
-	               showMenu6();
-	            }
-	         }
-	         else {
-	            new BoardController().showBoardDetailMenu(num);
-	         }
-	         
-	         System.out.println("\n 댓글을 작성하시겠습니까?");
-	         System.out.println("1. 네 작성작하겠습니다.");
-	         System.out.println("2. 아니요 작성하지않겠습니다.");
-	         
-	         int numcom = InputUtil.getInt();
-	         if(numcom == 1) {
-	             new BcommentController().write(numcom);
-	             new BoardController().showBoardDetailMenu(num);
-	          }
-	         else {
-	             return;
-	           }
-	      }//showMenu6
-   
-   
-   public int returnMain() {
-	   
-	   System.out.println("메인메뉴로 돌아가시겠습니까?");
-	   System.out.println("1. 네 돌아갑니다.");
-	   System.out.println("2. 아니요. ");
-	   int returnMain = InputUtil.getInt();
-	   if(returnMain == 1) {
-		   return 1;
-	   }
-	   return 0;
-	   
-   }//returnMain
-   
-   
-   public void allComments() {
-	   
+			case 1:
+				new Adandoned().list();
+				showMenu1();
+				continue;
+
+			case 2:
+				if (Main.loginMember == null) {
+					System.out.println("로그인 먼저 해주세요");
+					new MemberController().login();
+					new Adoption().apply(Main.loginMember.getNo());
+
+				} else {
+					new Adoption().apply(Main.loginMember.getNo());
+					break;
+				}
+
+			default:
+				System.out.println("잘못 누르셨습니다");
+				continue;
+			}// switch
+		} // while
+	}// showMenu2
+
+	public void showMenu6() {
+
+		System.out.println("\n\n0. 태그별 검색");
+		System.out.println("1. 글 작성");
+		System.out.println("2. 상세 글 조회");
+
+		int contentInput = 0;
+		// 메뉴 선택
 		int num = InputUtil.getInt();
-		
-		if(num == 0) {
+
+		// 0 선택시 태그별 조회
+		if (num == 0) {
 			new BoardController().showTagList();
+//			new BoardController().showList();
+			showMenu6();
+			// 1 선택시 로긴확인, 작성
+		} else if (num == 1) {
+			if (Main.loginMember == null) {
+				System.out.println("로그인을 해주세요.");
+				new MemberController().login();
+				new BoardController().write();
+				new BoardController().showList();
 				showMenu6();
-		}else {
+			} else {
+				//TODO 여기도문제
+				new BoardController().write();
+				new BoardController().showList();
+				showMenu6();
+			}
+			// 2 선택시 상세 글보기
+		} else if (num == 2) {
+			System.out.println("글번호를 입력하세요.");
+			contentInput = InputUtil.getInt();
+			// 상세글보기
+			new BoardController().showBoardDetailMenu(contentInput);
+
+			while (true) {
+				// 상세 글보기 후 출력되는 메세지
+				System.out.println("\n 댓글을 작성하시겠습니까?");
+				System.out.println("1. 네 작성하겠습니다.");
+				System.out.println("2. 아니요 작성하지않겠습니다.");
+
+				// TODO 고쳐야할거.....
+				int commentNum = InputUtil.getInt();
+				if (commentNum == 1) {
+					// 여기서 문제
+					new BcommentController().write(commentNum);
+					new BoardController().showBoardDetailMenu(contentInput);
+
+				} else {
+					return;
+				}
+			}
+		}
+
+	}// showMenu6
+
+	public int returnMain() {
+
+		System.out.println("메인메뉴로 돌아가시겠습니까?");
+		System.out.println("1. 네 돌아갑니다.");
+		System.out.println("2. 아니요. ");
+		int returnMain = InputUtil.getInt();
+		if (returnMain == 1) {
+			return 1;
+		}
+		return 0;
+
+	}// returnMain
+
+	public void allComments() {
+
+		int num = InputUtil.getInt();
+
+		if (num == 0) {
+			new BoardController().showTagList();
+			showMenu6();
+		} else {
 			new BoardController().showBoardDetailMenu(num);
-		}		
-   }//showMenu6  
-   
-   
-   public void showMenuComment() {
-	   
+		}
+	}// showMenu6
+
+	public void showMenuComment() {
+
 		System.out.println("\n\n댓글");
-		System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====" );
-		System.out.print( " : " );
-		
+		System.out.print("==== 상세내용을 보시려면 글번호를 선택하세요 ====");
+		System.out.print(" : ");
+
 		int num = InputUtil.getInt();
-		
-		if(num == 0) {
+
+		if (num == 0) {
 			new BoardController().showTagList();
-				showMenu6();
-		}else {
+			showMenu6();
+		} else {
 			new BoardController().showBoardDetailMenu(num);
-		}		
-   }//showMenu6 
+		}
+	}// showMenu6
 
-}//class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}// class
